@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Repaso - CSS3 Avanzado</title>
+    <style>
+        body { font-family: Arial, sans-serif; padding: 20px; background-color: #f4f4f4; }
+        .contenedor { background: white; padding: 40px; margin-bottom: 20px; border-radius: 8px; }
+
+        /* --- CSS Problema 3: Transición Skew --- */
+        .caja-skew {
+            width: 200px;
+            background-color: black;
+            color: white;
+            padding: 20px;
+            text-align: center;
+            font-weight: bold;
+            transition: all 0.5s linear 0.2s; /* 0.5s de duración, 0.2s de retraso */
+            cursor: pointer;
+        }
+
+        .caja-skew:hover {
+            background-color: red;
+            transform: skewX(-20deg); /* Deforma en el eje X */
+        }
+
+        /* --- CSS Problema 6: Animación Keyframes Alternate --- */
+        .pelota {
+            width: 50px;
+            height: 50px;
+            background-color: orange;
+            border-radius: 50%;
+            position: relative; 
+            /* Se ejecuta en bucle y va "hacia atrás" en las iteraciones pares */
+            animation: rebote 1s linear infinite alternate; 
+        }
+
+        @keyframes rebote {
+            0% { top: 0px; }
+            50% { top: 100px; }
+            100% { top: 0px; } /* Regresa por sí sola, pero 'alternate' lo hace fluido */
+        }
+    </style>
+</head>
+<body>
+
+    <div class="contenedor">
+        <h2>Problema 3: Transformaciones Complejas (Skew)</h2>
+        <div class="caja-skew">Lanzamiento Exclusivo</div>
+    </div>
+
+    <div class="contenedor" style="height: 250px;">
+        <h2>Problema 6: @keyframes con dirección alterna</h2>
+        <div class="pelota"></div>
+    </div>
+
+</body>
+</html>

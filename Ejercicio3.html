@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Animaciones Web</title>
+    <link rel="stylesheet" href="estilos-animaciones.css">
+</head>
+<body>
+    <h1>Página de Animaciones</h1>
+
+    <section>
+        <h2>1. Slider Automático CSS3</h2>
+        <div class="slider-contenedor">
+            <div class="slider-movimiento">
+                <img src="foto1.jpg" alt="Slide 1">
+                <img src="foto2.jpg" alt="Slide 2">
+                <img src="foto3.jpg" alt="Slide 3">
+            </div>
+        </div>
+    </section>
+
+    <section>
+        <h2>2. Barra de Likes (Canvas)</h2>
+        <canvas id="canvasLikes" width="400" height="50" style="border: 1px solid black;"></canvas>
+        <br>
+        <button id="btn-like" onclick="sumarLike()">👍 Dar Like</button>
+    </section>
+
+    <section>
+        <h2>3. Persecución Vectorial (SVG)</h2>
+        <svg width="600" height="300" style="border: 1px solid #ccc;">
+            <path id="ruta" d="M 50 150 Q 300 10, 550 150 T 50 150" fill="none" stroke="lightgray" stroke-width="2"/>
+            
+            <image href="coche1.png" width="40" height="40">
+                <animateMotion dur="4s" repeatCount="indefinite" rotate="auto">
+                    <mpath href="#ruta"/>
+                </animateMotion>
+            </image>
+
+            <image href="coche2.png" width="40" height="40">
+                <animateMotion dur="4s" begin="1s" repeatCount="indefinite" rotate="auto">
+                    <mpath href="#ruta"/>
+                </animateMotion>
+            </image>
+        </svg>
+    </section>
+
+    <script>
+        const canvas = document.getElementById("canvasLikes");
+        const ctx = canvas.getContext("2d");
+        let totalLikes = 0;
+        const maxLikes = 200;
+
+        function dibujarBarra() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height); // Limpiar
+            
+            // Dibujar relleno verde basado en los likes
+            ctx.fillStyle = "limegreen";
+            let anchoBarra = (totalLikes / maxLikes) * canvas.width;
+            ctx.fillRect(0, 0, anchoBarra, canvas.height);
+            
+            // Dibujar texto
+            ctx.font = "20px Arial";
+            ctx.fillStyle = "black";
+            ctx.fillText("Likes: " + totalLikes, 10, 32);
+        }
+
+        function sumarLike() {
+            if (totalLikes < maxLikes) {
+                totalLikes += 10; // Sube de 10 en 10 para no hacer 200 clicks
+                dibujarBarra();
+            }
+        }
+        
+        dibujarBarra(); // Dibujar estado inicial
+    </script>
+</body>
+</html>

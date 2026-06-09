@@ -1,0 +1,865 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CHULETA DEFINITIVA: DIW UD5</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <style>
+        body { background-color: #e0e0e0; color: #000; font-family: Arial, sans-serif; margin: 0; padding: 20px; line-height: 1.6; }
+        .container { max-width: 1200px; margin: 0 auto; background: #fff; border: 5px solid #000; padding: 40px; box-shadow: 15px 15px 0px #000; }
+        h1 { font-size: 3rem; text-transform: uppercase; border-bottom: 5px solid #000; padding-bottom: 10px; margin-top: 0; text-align: center; }
+        h2 { background: #000; color: #fff; padding: 15px; text-transform: uppercase; margin-top: 50px; font-size: 1.8rem; }
+        h3 { color: #cc0000; text-transform: uppercase; border-bottom: 2px dashed #000; padding-bottom: 5px; margin-top: 30px; }
+        pre { background: #1a1a1a; color: #00ff00; padding: 20px; overflow-x: auto; border: 3px solid #000; font-size: 14px; font-family: 'Courier New', Courier, monospace; }
+        .meta { text-align: center; font-weight: bold; text-transform: uppercase; margin-bottom: 40px; background: #ffcc00; padding: 10px; border: 3px solid #000; }
+        .preview-zone { background: #d4d4d4; border: 3px solid #333; padding: 30px 20px 20px 20px; margin: 20px 0; position: relative; overflow: hidden; }
+        .preview-zone::before { content: "VISTA PREVIA EN VIVO"; position: absolute; top: 0; left: 0; background: #333; color: #fff; padding: 5px 10px; font-size: 12px; font-weight: bold; z-index: 100; }
+        
+        .menu-ej2 { display: flex; gap: 10px; }
+        .nav-item-ej2 { display: inline-block; padding: 20px 40px; background-color: #1a1a1a; color: white; text-decoration: none; font-weight: bold; position: relative; overflow: hidden; z-index: 1; }
+        .nav-item-ej2::before { content: ""; position: absolute; top: -100%; left: 0; width: 100%; height: 100%; transition: top 0.3s ease-in-out; z-index: -1; }
+        .nav-item-ej2.futbol::before { background-color: blue; }
+        .nav-item-ej2.baloncesto::before { background-color: #ffcc00; }
+        .nav-item-ej2:hover::before { top: 0; }
+
+        .slider-contenedor { width: 600px; height: 300px; overflow: hidden; position: relative; border: 2px solid black; }
+        .slider-movimiento { display: flex; width: 300%; animation: moverSlider 10s infinite; }
+        .slider-movimiento img { width: 600px; height: 300px; object-fit: cover; }
+        @keyframes moverSlider { 0%, 25% { transform: translateX(0); } 33%, 58% { transform: translateX(-600px); } 66%, 91% { transform: translateX(-1200px); } 100% { transform: translateX(0); } }
+
+        .caja-skew { width: 200px; background-color: black; color: white; padding: 20px; text-align: center; font-weight: bold; transition: all 0.5s linear 0.2s; cursor: pointer; }
+        .caja-skew:hover { background-color: red; transform: skewX(-20deg); }
+
+        .pelota { width: 50px; height: 50px; background-color: orange; border-radius: 50%; position: relative; animation: rebote 1s linear infinite alternate; }
+        @keyframes rebote { 0% { top: 0px; } 50% { top: 100px; } 100% { top: 0px; } }
+
+        .tarjeta-contenedor { width: 200px; height: 300px; perspective: 1000px; }
+        .tarjeta-flip { width: 100%; height: 100%; position: relative; transition: transform 0.8s; transform-style: preserve-3d; }
+        .tarjeta-contenedor:hover .tarjeta-flip { transform: rotateY(180deg); }
+        .cara { width: 100%; height: 100%; position: absolute; backface-visibility: hidden; display: flex; flex-direction: column; justify-content: center; align-items: center; background: #111; color: white; font-weight: bold; border: 2px solid #000; }
+        .cara-trasera { background: #eee; color: black; transform: rotateY(180deg); }
+
+        .loader-brutalista { width: 60px; height: 60px; border: 8px solid #ccc; border-top: 8px solid #000; border-radius: 50%; animation: giro 1s linear infinite; }
+        @keyframes giro { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
+
+        .acordeon-item { border-bottom: 2px solid black; margin-bottom: 10px; background: #fff; }
+        .acordeon-titulo { background: black; color: white; padding: 15px; cursor: pointer; text-transform: uppercase; font-weight: bold; margin: 0; }
+        .acordeon-contenido { padding: 15px; background: #e0e0e0; display: none; }
+
+        .contenedor-artista-demo { position: relative; width: 400px; height: 400px; overflow: hidden; background: #000; border: 4px solid #000; }
+        .foto-filtro-demo { width: 100%; height: 100%; object-fit: cover; filter: grayscale(100%) blur(5px); transition: all 0.8s cubic-bezier(0.68, -0.55, 0.27, 1.55); }
+        .contenedor-artista-demo:hover .foto-filtro-demo { filter: grayscale(0%) blur(0px); transform: scale(1.2); }
+        .texto-fusion-demo { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); font-size: 3rem; font-weight: 900; color: white; mix-blend-mode: overlay; pointer-events: none; margin: 0; }
+    </style>
+</head>
+<body>
+
+<div class="container">
+
+    <h1>LA CHULETA MAESTRA: UD5</h1>
+    <div class="meta">HTML5 | CSS3 AVANZADO | API CANVAS | SVG | JQUERY | MULTIMEDIA JS</div>
+
+    <h2>1. HTML5: Imágenes Responsivas</h2>
+    
+    <h3>1.1. Con etiqueta &lt;picture&gt;</h3>
+    <div class="preview-zone">
+        <picture>
+            <source media="(min-width: 1024px)" srcset="https://placehold.co/800x200/0000FF/FFF?text=ESCRITORIO">
+            <source media="(min-width: 768px)" srcset="https://placehold.co/600x200/008000/FFF?text=TABLET">
+            <img src="https://placehold.co/300x200/FF0000/FFF?text=MOVIL" alt="Banner" style="width:100%; max-width:800px;">
+        </picture>
+    </div>
+<pre><code>&lt;picture&gt;
+  &lt;source media="(min-width: 1024px)" srcset="banner-pc.jpg"&gt;
+  &lt;source media="(min-width: 768px)" srcset="banner-tablet.jpg"&gt;
+  &lt;img src="banner-movil.jpg" alt="Banner promocional"&gt;
+&lt;/picture&gt;</code></pre>
+
+    <h3>1.2. Con atributos nativos (srcset y sizes)</h3>
+<pre><code>&lt;img src="imagen-1000.jpg" 
+     srcset="img-500.jpg 500w, img-1000.jpg 1000w, img-1500.jpg 1500w"
+     sizes="(max-width: 576px) 100vw, (max-width: 992px) 50vw, 33vw"
+     alt="Responsivo"&gt;</code></pre>
+
+    <h2>2. CSS3: Interfaces y Transformaciones (Ejercicio 2)</h2>
+    
+    <h3>2.1. Menú con efecto "Cortina"</h3>
+    <div class="preview-zone">
+        <nav class="menu-ej2">
+            <a href="#" class="nav-item-ej2 futbol">Opción 1</a>
+            <a href="#" class="nav-item-ej2 baloncesto">Opción 2</a>
+        </nav>
+    </div>
+<pre><code>&lt;style&gt;
+  .nav-item {
+      display: inline-block; padding: 20px 40px; background-color: #1a1a1a;
+      color: white; text-decoration: none; position: relative; overflow: hidden; z-index: 1;
+  }
+  .nav-item::before {
+      content: ""; position: absolute; top: -100%; left: 0; width: 100%; height: 100%;
+      transition: top 0.3s ease-in-out; z-index: -1;
+  }
+  .nav-item.op1::before { background-color: blue; }
+  .nav-item:hover::before { top: 0; }
+&lt;/style&gt;
+
+&lt;nav class="menu"&gt;
+    &lt;a href="#" class="nav-item op1"&gt;Opción 1&lt;/a&gt;
+&lt;/nav&gt;</code></pre>
+
+    <h3>2.2. Efectos Hover (Scale, Translate, Skew)</h3>
+    <div class="preview-zone" style="height: 120px; display: flex; gap: 50px;">
+        <div class="caja-skew" style="background: black;">Pasar ratón (SkewX)</div>
+        <div class="caja-skew" style="background: #333;" onmouseover="this.style.transform='scale(1.1)'" onmouseout="this.style.transform='scale(1)'">Pasar ratón (Scale)</div>
+        <div class="caja-skew" style="background: #555;" onmouseover="this.style.transform='translateY(-20px)'" onmouseout="this.style.transform='translateY(0)'">Pasar ratón (TranslateY)</div>
+    </div>
+<pre><code>.efecto-scale { transition: transform 0.3s; }
+.efecto-scale:hover { transform: scale(1.1); }
+
+.efecto-translate { transition: transform 0.3s; }
+.efecto-translate:hover { transform: translateY(-20px); }
+
+.efecto-skew { transition: all 0.5s linear 0.2s; }
+.efecto-skew:hover { transform: skewX(-20deg); }</code></pre>
+
+    <h2>3. CSS3: Animaciones Complejas (@keyframes)</h2>
+    
+    <h3>3.1. Slider Automático e Infinito (Ejercicio 3)</h3>
+    <div class="preview-zone">
+        <div class="slider-contenedor">
+            <div class="slider-movimiento">
+                <img src="https://placehold.co/600x300/000/FFF?text=FOTO+1">
+                <img src="https://placehold.co/600x300/444/FFF?text=FOTO+2">
+                <img src="https://placehold.co/600x300/888/FFF?text=FOTO+3">
+            </div>
+        </div>
+    </div>
+<pre><code>&lt;style&gt;
+  .slider-contenedor { width: 600px; height: 300px; overflow: hidden; }
+  .slider-movimiento { display: flex; width: 300%; animation: moverSlider 10s infinite; }
+  .slider-movimiento img { width: 600px; height: 300px; object-fit: cover; }
+  
+  @keyframes moverSlider {
+      0%, 25% { transform: translateX(0); }
+      33%, 58% { transform: translateX(-600px); }
+      66%, 91% { transform: translateX(-1200px); }
+      100% { transform: translateX(0); }
+  }
+&lt;/style&gt;
+
+&lt;div class="slider-contenedor"&gt;
+    &lt;div class="slider-movimiento"&gt;
+        &lt;img src="foto1.jpg"&gt;&lt;img src="foto2.jpg"&gt;&lt;img src="foto3.jpg"&gt;
+    &lt;/div&gt;
+&lt;/div&gt;</code></pre>
+
+    <h3>3.2. Animación con dirección alterna y Tarjeta 3D</h3>
+    <div class="preview-zone" style="display: flex; gap: 100px; height: 350px;">
+        <div>
+            <p><strong>Tarjeta Flip 3D:</strong></p>
+            <div class="tarjeta-contenedor">
+                <div class="tarjeta-flip">
+                    <div class="cara cara-frontal"><h3>FRONTAL</h3></div>
+                    <div class="cara cara-trasera"><p>TRASERA</p></div>
+                </div>
+            </div>
+        </div>
+        <div>
+            <p><strong>Bucle Alternate:</strong></p>
+            <div class="pelota"></div>
+            <br>
+            <p><strong>Loader:</strong></p>
+            <div class="loader-brutalista"></div>
+        </div>
+    </div>
+<pre><code>&lt;style&gt;
+  .tarjeta-contenedor { width: 300px; height: 400px; perspective: 1000px; }
+  .tarjeta-flip { width: 100%; height: 100%; position: relative; transition: transform 0.8s; transform-style: preserve-3d; }
+  .tarjeta-contenedor:hover .tarjeta-flip { transform: rotateY(180deg); }
+  .cara { width: 100%; height: 100%; position: absolute; backface-visibility: hidden; }
+  .cara-trasera { transform: rotateY(180deg); }
+&lt;/style&gt;
+
+&lt;style&gt;
+  .pelota { animation: rebote 1s linear infinite alternate; }
+  @keyframes rebote { 0% { top: 0px; } 50% { top: 100px; } 100% { top: 0px; } }
+&lt;/style&gt;
+
+&lt;style&gt;
+  .loader { border: 8px solid #ccc; border-top: 8px solid #000; border-radius: 50%; animation: giro 1s linear infinite; }
+  @keyframes giro { 100% { transform: rotate(360deg); } }
+&lt;/style&gt;</code></pre>
+
+    <h2>4. API HTML5: Audio, Vídeo y JavaScript</h2>
+    
+    <h3>4.1. Reproductor con Barra de Progreso Dinámica</h3>
+    <div class="preview-zone">
+        <audio controls style="margin-bottom: 20px;">
+            <source src="https://interactive-examples.mdn.mozilla.net/media/cc0-audio/t-rex-roar.mp3" type="audio/mpeg">
+        </audio>
+
+        <div style="width: 100%; max-width: 500px; background: #222; padding: 10px;">
+            <video id="vidReproductorDemo" width="100%">
+                <source src="https://interactive-examples.mdn.mozilla.net/media/cc0-videos/friday.mp4" type="video/mp4">
+            </video>
+            <div id="bg-barra-demo" style="width: 100%; height: 10px; background: gray; cursor: pointer; margin-top: 10px;">
+                <div id="progreso-demo" style="height: 100%; width: 0%; background: red;"></div>
+            </div>
+            <div style="margin-top:10px;">
+                <button onclick="document.getElementById('vidReproductorDemo').play()">Play</button>
+                <button onclick="document.getElementById('vidReproductorDemo').pause()">Pausa</button>
+                <button onclick="document.getElementById('vidReproductorDemo').currentTime = 0">Reiniciar</button>
+            </div>
+        </div>
+    </div>
+<pre><code>&lt;audio controls&gt;
+  &lt;source src="audio.mp3" type="audio/mpeg"&gt;
+&lt;/audio&gt;
+
+&lt;div style="width: 500px; background: #222; padding: 10px;"&gt;
+  &lt;video id="vidReproductor" width="100%"&gt;
+    &lt;source src="video.mp4" type="video/mp4"&gt;
+  &lt;/video&gt;
+  
+  &lt;div id="barra-fondo" style="width: 100%; height: 10px; background: gray; cursor: pointer; margin-top: 10px;"&gt;
+    &lt;div id="barra-progreso" style="height: 100%; width: 0%; background: red;"&gt;&lt;/div&gt;
+  &lt;/div&gt;
+  
+  &lt;button onclick="activarVideo()"&gt;Play&lt;/button&gt;
+  &lt;button onclick="pausarVideo()"&gt;Pausar&lt;/button&gt;
+  &lt;button onclick="reiniciarVideo()"&gt;Reiniciar&lt;/button&gt;
+&lt;/div&gt;
+
+&lt;script&gt;
+  const vid = document.getElementById("vidReproductor");
+  const barraProgreso = document.getElementById("barra-progreso");
+  const barraFondo = document.getElementById("barra-fondo");
+
+  function activarVideo() { vid.muted = false; vid.volume = 1.0; vid.play(); }
+  function pausarVideo() { vid.pause(); }
+  function reiniciarVideo() { vid.currentTime = 0; vid.play(); }
+
+  vid.addEventListener("timeupdate", () =&gt; {
+    if (!isNaN(vid.duration)) {
+        let porcentaje = (vid.currentTime / vid.duration) * 100;
+        barraProgreso.style.width = porcentaje + "%";
+    }
+  });
+
+  barraFondo.addEventListener("click", (e) =&gt; {
+    let anchoTotal = barraFondo.offsetWidth;
+    let clickX = e.offsetX;
+    vid.currentTime = (clickX / anchoTotal) * vid.duration;
+  });
+&lt;/script&gt;</code></pre>
+
+    <h2>5. Gráficos y Lógica 2D: API CANVAS</h2>
+    
+    <h3>5.1. Barra Dinámica, Array de Barras y Degradados</h3>
+    <div class="preview-zone" style="display:flex; flex-wrap:wrap; gap: 30px;">
+        <div>
+            <canvas id="cvsLikesDemo" width="300" height="50" style="border: 1px solid black; background:#fff;"></canvas><br>
+            <button onclick="sumarL()" style="margin-top:10px;">👍 Dar Like</button>
+        </div>
+        <div>
+            <canvas id="cvsGraficaDemo" width="300" height="150" style="border: 1px solid black; background: #eee;"></canvas>
+        </div>
+        <div>
+            <canvas id="cvsRadarDemo" width="150" height="150" style="background: #111; border: 1px solid black;"></canvas>
+        </div>
+    </div>
+<pre><code>&lt;canvas id="canvasLikes" width="400" height="50"&gt;&lt;/canvas&gt;
+&lt;button onclick="sumarLike()"&gt;👍 Dar Like&lt;/button&gt;
+&lt;script&gt;
+  const ctxLikes = document.getElementById("canvasLikes").getContext("2d");
+  let totalLikes = 0;
+  function dibujarBarra() {
+      ctxLikes.clearRect(0, 0, 400, 50);
+      ctxLikes.fillStyle = "limegreen";
+      ctxLikes.fillRect(0, 0, (totalLikes / 200) * 400, 50);
+      ctxLikes.fillStyle = "black";
+      ctxLikes.font = "20px Arial";
+      ctxLikes.fillText("Likes: " + totalLikes, 10, 32);
+  }
+  function sumarLike() { if (totalLikes &lt; 200) { totalLikes += 10; dibujarBarra(); } }
+&lt;/script&gt;
+
+&lt;canvas id="graficaCanvas" width="400" height="200"&gt;&lt;/canvas&gt;
+&lt;script&gt;
+  const ctxGraf = document.getElementById("graficaCanvas").getContext("2d");
+  const ventas = [50, 120, 80, 150];
+  let posX = 20;
+  for (let i = 0; i &lt; ventas.length; i++) {
+      let altoBarra = ventas[i];
+      let posY = 200 - altoBarra; 
+      ctxGraf.fillStyle = "black";
+      ctxGraf.fillRect(posX, posY, 50, altoBarra);
+      posX += 80; 
+  }
+&lt;/script&gt;
+
+&lt;canvas id="radarCanvas" width="300" height="300"&gt;&lt;/canvas&gt;
+&lt;script&gt;
+  const ctxRadar = document.getElementById("radarCanvas").getContext("2d");
+  const degradado = ctxRadar.createRadialGradient(150, 150, 10, 150, 150, 140);
+  degradado.addColorStop(0, "white");
+  degradado.addColorStop(1, "black");
+  ctxRadar.fillStyle = degradado;
+  ctxRadar.fillRect(0, 0, 300, 300);
+&lt;/script&gt;</code></pre>
+
+    <h2>6. Gráficos Vectoriales y Animación Nativa: SVG</h2>
+    
+    <h3>6.1. Trayectorias, Texto Curvo y Clip-Path</h3>
+    <div class="preview-zone" style="display:flex; flex-wrap:wrap; gap: 30px;">
+        <svg width="300" height="150" viewBox="0 0 400 200" style="background: #e0e0e0; border: 1px solid black;">
+            <path id="txtCurvaD" d="M 50,150 Q 200,50 350,150" fill="transparent" stroke="black" />
+            <text font-family="Arial Black, sans-serif" font-size="28" fill="black">
+                <textPath href="#txtCurvaD" startOffset="50%" text-anchor="middle">TEXTO CURVO SVG</textPath>
+            </text>
+        </svg>
+
+        <svg width="300" height="150" style="border: 1px solid #ccc; background:#fff;">
+            <path id="rutaSvgD" d="M 10 100 Q 150 10, 280 100" fill="none" stroke="red"/>
+            <circle cx="0" cy="0" r="10" fill="black">
+                <animateMotion dur="2s" repeatCount="indefinite" rotate="auto"><mpath href="#rutaSvgD"/></animateMotion>
+            </circle>
+        </svg>
+
+        <div>
+            <svg width="0" height="0">
+                <defs><clipPath id="recorteD"><polygon points="50,0 100,50 50,100 0,50" /></clipPath></defs>
+            </svg>
+            <img src="https://placehold.co/100x100/000/FFF?text=IMG" style="clip-path: url(#recorteD);">
+        </div>
+    </div>
+<pre><code>&lt;svg width="400" height="200" viewBox="0 0 400 200"&gt;
+  &lt;path id="curvaTexto" d="M 50,150 Q 200,50 350,150" fill="transparent" /&gt;
+  &lt;text font-family="Arial Black" font-size="28" fill="black"&gt;
+    &lt;textPath href="#curvaTexto" startOffset="50%" text-anchor="middle"&gt;QUAVEMIND&lt;/textPath&gt;
+  &lt;/text&gt;
+&lt;/svg&gt;
+
+&lt;svg width="600" height="300"&gt;
+  &lt;path id="ruta" d="M 50 150 Q 300 10, 550 150 T 50 150" fill="none" /&gt;
+  &lt;image href="coche.png" width="40" height="40"&gt;
+    &lt;animateMotion dur="4s" repeatCount="indefinite" rotate="auto"&gt;
+      &lt;mpath href="#ruta"/&gt;
+    &lt;/animateMotion&gt;
+  &lt;/image&gt;
+&lt;/svg&gt;
+
+&lt;svg width="0" height="0"&gt;
+  &lt;defs&gt;
+    &lt;clipPath id="miRecorte"&gt;
+      &lt;polygon points="100,0 200,100 100,200 0,100" /&gt;
+    &lt;/clipPath&gt;
+  &lt;/defs&gt;
+&lt;/svg&gt;
+&lt;img src="foto.jpg" style="clip-path: url(#miRecorte);"&gt;</code></pre>
+
+    <h2>7. Interactividad DOM: Vanilla JS y jQuery</h2>
+    
+    <h3>7.1. Barra Accesibilidad (Vanilla JS) y Filtros Dinámicos (jQuery)</h3>
+    <div class="preview-zone">
+        
+        <div style="background: #eee; padding: 10px; margin-bottom: 20px;">
+            <button id="btn-oscuro-demo">Modo Oscuro Toggle</button>
+            <button id="btn-fuente-demo">Aumentar Fuente</button>
+            <span id="txt-demo" style="margin-left: 10px;">Texto de prueba</span>
+        </div>
+
+        <div style="display:flex; gap: 50px;">
+            <div id="faq-demo" style="width: 250px;">
+                <div class="acordeon-item">
+                    <h3 class="acordeon-titulo">Acordeón 1</h3>
+                    <div class="acordeon-contenido">Contenido Oculto 1</div>
+                </div>
+                <div class="acordeon-item">
+                    <h3 class="acordeon-titulo">Acordeón 2</h3>
+                    <div class="acordeon-contenido">Contenido Oculto 2</div>
+                </div>
+            </div>
+
+            <div>
+                <input type="text" id="buscadorDemo" placeholder="Buscar..." style="padding: 5px;">
+                <ul id="listaDemo" style="padding-left: 0; list-style: none;">
+                    <li>Rosalía</li><li>Cruz Cafuné</li><li>Dellafuente</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+<pre><code>&lt;button id="btn-oscuro"&gt;Oscuro&lt;/button&gt;
+&lt;script&gt;
+  document.getElementById("btn-oscuro").addEventListener("click", () =&gt; {
+      document.body.style.backgroundColor = "black";
+      document.querySelectorAll("p").forEach(p =&gt; p.style.color = "white");
+  });
+&lt;/script&gt;
+
+&lt;script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"&gt;&lt;/script&gt;
+
+&lt;div class="acordeon-item"&gt;
+  &lt;h3 class="acordeon-titulo"&gt;TÍTULO&lt;/h3&gt;
+  &lt;div class="acordeon-contenido" style="display:none;"&gt;Texto...&lt;/div&gt;
+&lt;/div&gt;
+&lt;script&gt;
+  $(document).ready(function() {
+      $(".acordeon-titulo").click(function() {
+          $(".acordeon-contenido").not($(this).next()).slideUp(300);
+          $(this).next().slideToggle(300);
+      });
+  });
+&lt;/script&gt;
+
+&lt;input type="text" id="buscador"&gt;
+&lt;ul id="lista-artistas"&gt;&lt;li&gt;Rosalía&lt;/li&gt;&lt;li&gt;Cruz Cafuné&lt;/li&gt;&lt;/ul&gt;
+&lt;script&gt;
+  $(document).ready(function(){
+      $("#buscador").on("keyup", function() {
+          let valor = $(this).val().toLowerCase(); 
+          $("#lista-artistas li").filter(function() {
+              $(this).toggle($(this).text().toLowerCase().indexOf(valor) &gt; -1);
+          });
+      });
+  });
+&lt;/script&gt;</code></pre>
+
+    <h2>8. CSS3 Avanzado: Filtros, Modos de Fusión y Cubic-Bezier</h2>
+    
+    <div class="preview-zone">
+        <div class="contenedor-artista-demo">
+            <img src="https://placehold.co/400x400/888/222?text=FOTO" class="foto-filtro-demo">
+            <h2 class="texto-fusion-demo">QUAVEMIND</h2>
+        </div>
+    </div>
+<pre><code>&lt;div class="contenedor-artista"&gt;
+    &lt;img src="foto.jpg" class="foto-filtro"&gt;
+    &lt;h2 class="texto-fusion"&gt;QUAVEMIND&lt;/h2&gt;
+&lt;/div&gt;
+
+&lt;style&gt;
+    .contenedor-artista { position: relative; width: 400px; height: 400px; overflow: hidden; }
+    .foto-filtro { 
+        width: 100%; height: 100%; object-fit: cover; 
+        filter: grayscale(100%) blur(5px); 
+        transition: all 0.8s cubic-bezier(0.68, -0.55, 0.27, 1.55); 
+    }
+    .contenedor-artista:hover .foto-filtro { filter: grayscale(0%) blur(0px); transform: scale(1.2); }
+    .texto-fusion { 
+        position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); 
+        font-size: 3rem; font-weight: 900; color: white; 
+        mix-blend-mode: overlay; pointer-events: none; 
+    }
+&lt;/style&gt;</code></pre>
+
+    <h2>9. API Multimedia Avanzada: Velocidad y Tiempo Dinámico</h2>
+    
+    <div class="preview-zone">
+        <div style="background: #222; padding: 20px; color: white; display: inline-block;">
+            <video id="vidVelocidadDemo" width="400">
+                <source src="https://interactive-examples.mdn.mozilla.net/media/cc0-videos/friday.mp4" type="video/mp4">
+            </video>
+            <br><br>
+            <button onclick="document.getElementById('vidVelocidadDemo').play()">Play</button>
+            <button onclick="document.getElementById('vidVelocidadDemo').pause()">Pause</button>
+            <button onclick="document.getElementById('vidVelocidadDemo').playbackRate = 0.5">x0.5</button>
+            <button onclick="document.getElementById('vidVelocidadDemo').playbackRate = 1.0">x1.0</button>
+            <button onclick="document.getElementById('vidVelocidadDemo').playbackRate = 2.0">x2.0</button>
+            <span id="reloj-video-demo" style="font-family: monospace; font-size: 20px; font-weight: bold; margin-left: 20px;">0.00s</span>
+        </div>
+    </div>
+<pre><code>&lt;div class="reproductor-avanzado"&gt;
+    &lt;video id="vidVelocidad" width="500"&gt;
+        &lt;source src="video.mp4" type="video/mp4"&gt;
+    &lt;/video&gt;
+    &lt;div class="panel-control"&gt;
+        &lt;button onclick="document.getElementById('vidVelocidad').play()"&gt;Play&lt;/button&gt;
+        &lt;button onclick="document.getElementById('vidVelocidad').pause()"&gt;Pause&lt;/button&gt;
+        &lt;button onclick="document.getElementById('vidVelocidad').playbackRate = 0.5"&gt;x0.5&lt;/button&gt;
+        &lt;button onclick="document.getElementById('vidVelocidad').playbackRate = 1.0"&gt;x1.0&lt;/button&gt;
+        &lt;button onclick="document.getElementById('vidVelocidad').playbackRate = 2.0"&gt;x2.0&lt;/button&gt;
+        &lt;span id="reloj-video"&gt;0.00s&lt;/span&gt;
+    &lt;/div&gt;
+&lt;/div&gt;
+
+&lt;script&gt;
+    const miVid = document.getElementById("vidVelocidad");
+    const reloj = document.getElementById("reloj-video");
+    miVid.addEventListener("timeupdate", () =&gt; {
+        reloj.innerText = miVid.currentTime.toFixed(2) + "s";
+    });
+&lt;/script&gt;</code></pre>
+
+    <h2>10. Canvas Avanzado: Curvas de Bézier y Degradados Lineales</h2>
+    
+    <div class="preview-zone">
+        <canvas id="cvsOndaDemo" width="500" height="200" style="background: #111; border: 2px solid white;"></canvas>
+    </div>
+<pre><code>&lt;canvas id="canvasOnda" width="500" height="200"&gt;&lt;/canvas&gt;
+
+&lt;script&gt;
+    const cvsOnda = document.getElementById("canvasOnda");
+    const ctxOnda = cvsOnda.getContext("2d");
+
+    const gradient = ctxOnda.createLinearGradient(0, 0, 0, 200);
+    gradient.addColorStop(0, "#ff0055");
+    gradient.addColorStop(1, "#000000");
+
+    ctxOnda.beginPath();
+    ctxOnda.moveTo(0, 100);
+    ctxOnda.bezierCurveTo(150, 10, 350, 190, 500, 100);
+    ctxOnda.lineTo(500, 200);
+    ctxOnda.lineTo(0, 200);
+    ctxOnda.closePath();
+
+    ctxOnda.fillStyle = gradient;
+    ctxOnda.fill();
+&lt;/script&gt;</code></pre>
+
+    <h2>11. SVG Avanzado: Filtros Nativos y Degradados Lineales</h2>
+    
+    <div class="preview-zone">
+        <svg width="300" height="300" xmlns="http://www.w3.org/2000/svg">
+            <defs>
+                <linearGradient id="degradadoFuego" x1="0%" y1="0%" x2="100%" y2="100%">
+                    <stop offset="0%" stop-color="yellow" />
+                    <stop offset="50%" stop-color="orange" />
+                    <stop offset="100%" stop-color="red" />
+                </linearGradient>
+                <filter id="sombraSVG">
+                    <feDropShadow dx="5" dy="5" stdDeviation="4" flood-color="black" flood-opacity="0.8"/>
+                </filter>
+            </defs>
+            <circle cx="150" cy="150" r="80" fill="url(#degradadoFuego)" filter="url(#sombraSVG)">
+                <animate attributeName="r" values="80;90;80" dur="2s" repeatCount="indefinite" />
+            </circle>
+        </svg>
+    </div>
+<pre><code>&lt;svg width="300" height="300" xmlns="http://www.w3.org/2000/svg"&gt;
+    &lt;defs&gt;
+        &lt;linearGradient id="degradadoFuego" x1="0%" y1="0%" x2="100%" y2="100%"&gt;
+            &lt;stop offset="0%" stop-color="yellow" /&gt;
+            &lt;stop offset="50%" stop-color="orange" /&gt;
+            &lt;stop offset="100%" stop-color="red" /&gt;
+        &lt;/linearGradient&gt;
+        &lt;filter id="sombraSVG"&gt;
+            &lt;feDropShadow dx="5" dy="5" stdDeviation="4" flood-color="black" flood-opacity="0.8"/&gt;
+        &lt;/filter&gt;
+    &lt;/defs&gt;
+    &lt;circle cx="150" cy="150" r="80" fill="url(#degradadoFuego)" filter="url(#sombraSVG)"&gt;
+        &lt;animate attributeName="r" values="80;90;80" dur="2s" repeatCount="indefinite" /&gt;
+    &lt;/circle&gt;
+&lt;/svg&gt;</code></pre>
+
+    <h2>12. jQuery Avanzado: DOM Traversing y Delegación de Eventos</h2>
+    
+    <div class="preview-zone">
+        <div style="background: white; color: black; padding: 20px; width: 400px; border: 2px solid black;">
+            <button id="btn-add-demo">Añadir Canción</button>
+            <ul id="lista-dinamica-demo" style="list-style: none; padding: 0; margin-top: 20px;">
+                <li style="padding: 10px; background: #eee; margin-bottom: 5px;">
+                    Canción Base
+                    <button class="btn-del-demo" style="float: right; color: red; cursor: pointer;">X</button>
+                </li>
+            </ul>
+        </div>
+    </div>
+<pre><code>&lt;button id="btn-agregar"&gt;Añadir Canción&lt;/button&gt;
+&lt;ul id="lista-canciones"&gt;
+    &lt;li&gt;
+        Canción Base
+        &lt;button class="btn-eliminar"&gt;X&lt;/button&gt;
+    &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;script&gt;
+    $(document).ready(function() {
+        let contador = 1;
+
+        $("#btn-agregar").click(function() {
+            const nuevaCaja = `
+                &lt;li style="display: none;"&gt;
+                    Nuevo Track ${contador}
+                    &lt;button class="btn-eliminar"&gt;X&lt;/button&gt;
+                &lt;/li&gt;
+            `;
+            $("#lista-canciones").append(nuevaCaja);
+            $("#lista-canciones li").last().slideDown();
+            contador++;
+        });
+
+        $("#lista-canciones").on("click", ".btn-eliminar", function() {
+            $(this).parent().slideUp(400, function() {
+                $(this).remove();
+            });
+        });
+    });
+&lt;/script&gt;</code></pre>
+
+    <h2>13. CSS3: Distribución de Pantalla (Grid y Flexbox)</h2>
+    <p>Para escapar del flujo lineal tradicional y estructurar la página por bloques, se recomienda combinar <strong>CSS Grid</strong> para el layout principal (bidimensional) y <strong>Flexbox</strong> para alinear elementos internos (unidimensional). Esto proporciona interfaces robustas y completamente responsivas.</p>
+    
+    <h3>13.1. Maquetación Clásica con CSS Grid</h3>
+    <p>El uso de <code>grid-template-areas</code> permite definir zonas de la página asignándoles un nombre, lo que facilita enormemente crear la estructura general (Cabecera, Menú, Contenido y Pie) de un solo vistazo.</p>
+    
+    <div class="preview-zone">
+        <div style="display: grid; grid-template-areas: 'header header' 'nav main' 'footer footer'; grid-template-columns: 1fr 3fr; grid-template-rows: auto 150px auto; gap: 10px; text-align: center; font-weight: bold;">
+            <header style="grid-area: header; background: #333; color: #fff; padding: 15px;">Cabecera (Header)</header>
+            <nav style="grid-area: nav; background: #777; color: #fff; padding: 15px; display: flex; align-items: center; justify-content: center;">Menú Lateral</nav>
+            <main style="grid-area: main; background: #aaa; padding: 15px; display: flex; align-items: center; justify-content: center; color: #000;">Contenido Principal</main>
+            <footer style="grid-area: footer; background: #000; color: #fff; padding: 15px;">Pie de página (Footer)</footer>
+        </div>
+    </div>
+<pre><code>&lt;style&gt;
+  .grid-layout {
+      display: grid;
+      grid-template-areas: 
+          "header header"
+          "nav main"
+          "footer footer";
+      grid-template-columns: 250px 1fr;
+      grid-template-rows: auto 1fr auto;
+      min-height: 100vh;
+      gap: 10px;
+  }
+  .grid-layout header { grid-area: header; background: #333; color: white; }
+  .grid-layout nav { grid-area: nav; background: #777; color: white; }
+  .grid-layout main { grid-area: main; background: #aaa; }
+  .grid-layout footer { grid-area: footer; background: #000; color: white; }
+&lt;/style&gt;
+
+&lt;div class="grid-layout"&gt;
+    &lt;header&gt;Cabecera&lt;/header&gt;
+    &lt;nav&gt;Menú Lateral&lt;/nav&gt;
+    &lt;main&gt;Contenido Principal&lt;/main&gt;
+    &lt;footer&gt;Pie de página&lt;/footer&gt;
+&lt;/div&gt;</code></pre>
+
+    <h3>13.2. Tarjetas Flexibles con Flexbox</h3>
+    <p>Para crear galerías, catálogos o distribuir tarjetas sin complicaciones de código, <code>display: flex</code> junto con <code>flex-wrap: wrap</code> permite que los elementos se distribuyan en fila y salten automáticamente a la línea inferior cuando se queden sin espacio disponible en la pantalla.</p>
+
+    <div class="preview-zone">
+        <div style="display: flex; flex-wrap: wrap; gap: 15px; justify-content: center;">
+            <div style="flex: 1 1 150px; background: #222; color: #fff; padding: 20px; text-align: center; border: 2px solid #000;">Caja 1</div>
+            <div style="flex: 1 1 150px; background: #444; color: #fff; padding: 20px; text-align: center; border: 2px solid #000;">Caja 2</div>
+            <div style="flex: 1 1 150px; background: #666; color: #fff; padding: 20px; text-align: center; border: 2px solid #000;">Caja 3</div>
+            <div style="flex: 1 1 150px; background: #888; color: #000; padding: 20px; text-align: center; border: 2px solid #000; font-weight: bold;">Caja 4</div>
+        </div>
+    </div>
+<pre><code>&lt;style&gt;
+  .flex-container {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 15px;
+      justify-content: center;
+  }
+  .flex-item {
+      flex: 1 1 200px;
+      background: #222;
+      
+      color: white;
+      padding: 20px;
+      text-align: center;
+      border: 2px solid #000;
+  }
+&lt;/style&gt;
+
+&lt;div class="flex-container"&gt;
+    &lt;div class="flex-item"&gt;Caja 1&lt;/div&gt;
+    &lt;div class="flex-item"&gt;Caja 2&lt;/div&gt;
+    &lt;div class="flex-item"&gt;Caja 3&lt;/div&gt;
+    &lt;div class="flex-item"&gt;Caja 4&lt;/div&gt;
+&lt;/div&gt;</code></pre>
+
+    <h3>13.3. Cuadrícula Responsiva Dinámica (Grid Auto-fit)</h3>
+    <p>Ideal para portafolios o catálogos. La función <code>repeat(auto-fit, minmax(...))</code> genera columnas automáticas que se adaptan al ancho de la pantalla sin tener que escribir ni una sola Media Query.</p>
+
+    <div class="preview-zone">
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(100px, 1fr)); gap: 10px;">
+            <div style="background: #111; color: #fff; padding: 20px; text-align: center; font-weight: bold; border: 1px solid #fff;">Item 1</div>
+            <div style="background: #333; color: #fff; padding: 20px; text-align: center; font-weight: bold; border: 1px solid #fff;">Item 2</div>
+            <div style="background: #555; color: #fff; padding: 20px; text-align: center; font-weight: bold; border: 1px solid #fff;">Item 3</div>
+            <div style="background: #777; color: #fff; padding: 20px; text-align: center; font-weight: bold; border: 1px solid #fff;">Item 4</div>
+            <div style="background: #999; color: #000; padding: 20px; text-align: center; font-weight: bold; border: 1px solid #000;">Item 5</div>
+        </div>
+    </div>
+<pre><code>&lt;style&gt;
+  .grid-dinamico {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 20px;
+  }
+  .grid-item {
+      background: #000;
+      color: white;
+      padding: 30px;
+      text-align: center;
+      text-transform: uppercase;
+  }
+&lt;/style&gt;
+
+&lt;div class="grid-dinamico"&gt;
+    &lt;div class="grid-item"&gt;Proyecto 1&lt;/div&gt;
+    &lt;div class="grid-item"&gt;Proyecto 2&lt;/div&gt;
+    &lt;div class="grid-item"&gt;Proyecto 3&lt;/div&gt;
+    &lt;div class="grid-item"&gt;Proyecto 4&lt;/div&gt;
+&lt;/div&gt;</code></pre>
+
+    <h3>13.4. Flexbox: Centrado Perfecto y Barra de Navegación</h3>
+    <p>El uso de <code>justify-content</code> y <code>align-items</code> soluciona el clásico problema de centrar un div. Además, aplicándolo como <code>space-between</code>, se consiguen barras de navegación perfectas (logo a la izquierda, menú a la derecha).</p>
+
+    <div class="preview-zone" style="display: flex; flex-direction: column; gap: 20px;">
+        <div style="display: flex; justify-content: space-between; align-items: center; background: #000; color: #fff; padding: 15px 30px; border: 2px solid #ffcc00;">
+            <div style="font-weight: 900; font-size: 1.5rem; letter-spacing: 2px;">SHOWROOM</div>
+            <div style="display: flex; gap: 20px; font-weight: bold; text-transform: uppercase; font-size: 0.9rem;">
+                <span style="cursor: pointer;">Inicio</span>
+                <span style="cursor: pointer;">Catálogo</span>
+                <span style="cursor: pointer;">Contacto</span>
+            </div>
+        </div>
+
+        <div style="display: flex; justify-content: center; align-items: center; background: #1a1a1a; height: 150px; border: 3px dashed #fff;">
+            <div style="background: red; color: white; padding: 15px 30px; font-weight: bold; font-size: 1.2rem; transform: rotate(-5deg); box-shadow: 5px 5px 0 #000;">¡CENTRADO ABSOLUTO!</div>
+        </div>
+    </div>
+<pre><code>&lt;style&gt;
+  .nav-flex {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background: #000;
+      color: white;
+      padding: 20px;
+  }
+  .nav-links {
+      display: flex;
+      gap: 20px;
+  }
+
+  .caja-centrada {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 300px;
+      background: #eee;
+  }
+&lt;/style&gt;
+
+&lt;nav class="nav-flex"&gt;
+    &lt;h2&gt;AGENCIA&lt;/h2&gt;
+    &lt;div class="nav-links"&gt;
+        &lt;a href="#" style="color:white;"&gt;Inicio&lt;/a&gt;
+        &lt;a href="#" style="color:white;"&gt;Servicios&lt;/a&gt;
+    &lt;/div&gt;
+&lt;/nav&gt;
+
+&lt;div class="caja-centrada"&gt;
+    &lt;div style="background: red; padding: 40px; color: white;"&gt;
+        ELEMENTO CENTRADO
+    &lt;/div&gt;
+&lt;/div&gt;</code></pre>
+
+</div>
+
+<script>
+    const vd = document.getElementById("vidReproductorDemo");
+    const prd = document.getElementById("progreso-demo");
+    const bgd = document.getElementById("bg-barra-demo");
+    if(vd){
+        vd.addEventListener("timeupdate", () => {
+            if(!isNaN(vd.duration)) prd.style.width = ((vd.currentTime / vd.duration) * 100) + "%";
+        });
+        bgd.addEventListener("click", (e) => vd.currentTime = (e.offsetX / bgd.offsetWidth) * vd.duration);
+    }
+
+    const cvL = document.getElementById("cvsLikesDemo");
+    if(cvL){
+        const ctL = cvL.getContext("2d");
+        let tL = 0;
+        function drawL(){
+            ctL.clearRect(0,0,300,50);
+            ctL.fillStyle="limegreen"; ctL.fillRect(0,0,(tL/200)*300,50);
+            ctL.fillStyle="black"; ctL.font="16px Arial"; ctL.fillText("Likes: "+tL, 10, 30);
+        }
+        function sumarL(){ if(tL<200){ tL+=10; drawL(); } }
+        drawL();
+    }
+
+    const cvG = document.getElementById("cvsGraficaDemo");
+    if(cvG){
+        const ctG = cvG.getContext("2d");
+        const v = [30, 90, 50, 120]; let px = 10;
+        for(let i=0; i<v.length; i++){
+            ctG.fillStyle="black"; ctG.fillRect(px, 150-v[i], 40, v[i]); px+=60;
+        }
+    }
+
+    const cvR = document.getElementById("cvsRadarDemo");
+    if(cvR){
+        const ctR = cvR.getContext("2d");
+        const gr = ctR.createRadialGradient(75,75,5,75,75,70);
+        gr.addColorStop(0,"white"); gr.addColorStop(1,"black");
+        ctR.beginPath(); ctR.arc(75,75,70,0,2*Math.PI); ctR.fillStyle=gr; ctR.fill();
+    }
+
+    const vAdv = document.getElementById("vidVelocidadDemo");
+    const rel = document.getElementById("reloj-video-demo");
+    if(vAdv) {
+        vAdv.addEventListener("timeupdate", () => {
+            rel.innerText = vAdv.currentTime.toFixed(2) + "s";
+        });
+    }
+
+    const cvO = document.getElementById("cvsOndaDemo");
+    if(cvO){
+        const ctO = cvO.getContext("2d");
+        const gradO = ctO.createLinearGradient(0, 0, 0, 200);
+        gradO.addColorStop(0, "#ff0055"); gradO.addColorStop(1, "#000000");
+        ctO.beginPath(); ctO.moveTo(0, 100);
+        ctO.bezierCurveTo(150, 10, 350, 190, 500, 100);
+        ctO.lineTo(500, 200); ctO.lineTo(0, 200); ctO.closePath();
+        ctO.fillStyle = gradO; ctO.fill();
+    }
+
+    let osc = false;
+    document.getElementById("btn-oscuro-demo").addEventListener("click", function(){
+        osc = !osc;
+        this.parentElement.style.backgroundColor = osc ? "#222" : "#eee";
+        document.getElementById("txt-demo").style.color = osc ? "#fff" : "#000";
+    });
+    let tf = 16;
+    document.getElementById("btn-fuente-demo").addEventListener("click", function(){
+        tf = tf === 16 ? 22 : 16;
+        document.getElementById("txt-demo").style.fontSize = tf+"px";
+    });
+
+    $(document).ready(function(){
+        $(".acordeon-titulo").click(function(){
+            $(".acordeon-contenido").not($(this).next()).slideUp(200);
+            $(this).next().slideToggle(200);
+        });
+        $("#buscadorDemo").on("keyup", function(){
+            let val = $(this).val().toLowerCase();
+            $("#listaDemo li").filter(function(){
+                $(this).toggle($(this).text().toLowerCase().indexOf(val) > -1);
+            });
+        });
+        
+        let cnt = 1;
+        $("#btn-add-demo").click(function(){
+            const li = `<li style="padding: 10px; background: #eee; margin-bottom: 5px; display: none;">Nuevo Track ${cnt} <button class="btn-del-demo" style="float: right; color: red; cursor: pointer;">X</button></li>`;
+            $("#lista-dinamica-demo").append(li);
+            $("#lista-dinamica-demo li").last().slideDown();
+            cnt++;
+        });
+        $("#lista-dinamica-demo").on("click", ".btn-del-demo", function(){
+            $(this).parent().slideUp(300, function(){ $(this).remove(); });
+        });
+    });
+</script>
+
+</body>
+</html>

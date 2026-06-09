@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Avanzado 2 - Canvas y SVG</title>
+    <style>
+        body { font-family: sans-serif; background-color: #f0f0f0; padding: 20px; }
+        .contenedor { background: white; padding: 40px; margin-bottom: 30px; border: 2px solid black; text-align: center; }
+    </style>
+</head>
+<body>
+    <div class="contenedor">
+        <h2>3. Canvas: Degradado Radial</h2>
+        <canvas id="radarCanvas" width="300" height="300" style="background: #111;"></canvas>
+    </div>
+
+    <div class="contenedor">
+        <h2>4. SVG: Texto en Curva y Animaciones</h2>
+        <svg width="400" height="200" viewBox="0 0 400 200" style="background: #e0e0e0; border: 1px solid black;">
+            <path id="curvaTexto" d="M 50,150 Q 200,50 350,150" fill="transparent" stroke="none" />
+            
+            <text font-family="Arial Black, sans-serif" font-size="28" fill="black">
+                <textPath href="#curvaTexto" startOffset="50%" text-anchor="middle">
+                    QUAVEMIND V.2.0
+                </textPath>
+            </text>
+            
+            <circle cx="200" cy="110" r="10" fill="red">
+                <animate attributeName="r" values="10;30;10" dur="2s" repeatCount="indefinite" />
+                <animate attributeName="opacity" values="1;0;1" dur="2s" repeatCount="indefinite" />
+            </circle>
+        </svg>
+    </div>
+
+    <script>
+        const radar = document.getElementById("radarCanvas");
+        const ctxRadar = radar.getContext("2d");
+
+        const degradado = ctxRadar.createRadialGradient(150, 150, 10, 150, 150, 140);
+        degradado.addColorStop(0, "white");
+        degradado.addColorStop(0.5, "gray");
+        degradado.addColorStop(1, "black");
+
+        ctxRadar.beginPath();
+        ctxRadar.arc(150, 150, 140, 0, 2 * Math.PI);
+        ctxRadar.fillStyle = degradado;
+        ctxRadar.fill();
+
+        ctxRadar.strokeStyle = "red";
+        ctxRadar.lineWidth = 2;
+        ctxRadar.moveTo(150, 0); ctxRadar.lineTo(150, 300);
+        ctxRadar.moveTo(0, 150); ctxRadar.lineTo(300, 150);
+        ctxRadar.stroke();
+    </script>
+</body>
+</html>

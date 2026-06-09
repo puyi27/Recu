@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Reproductor Personalizado Completo</title>
+    <style>
+        body { 
+            font-family: Arial, sans-serif; 
+            background-color: #f4f4f4; 
+            display: flex; 
+            justify-content: center; 
+            padding: 40px; 
+        }
+        
+        .reproductor-contenedor { 
+            width: 600px; 
+            background: #1a1a1a; 
+            padding: 20px; 
+            border-radius: 8px; 
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5); 
+        }
+        
+        video { 
+            width: 100%; 
+            display: block; 
+            border-radius: 4px; 
+        }
+        
+        /* Estilos de la barra */
+        .barra-fondo { 
+            width: 100%; 
+            height: 12px; 
+            background: #444; 
+            cursor: pointer; 
+            margin-top: 15px; 
+            border-radius: 6px; 
+            overflow: hidden; 
+        }
+        
+        .barra-progreso { 
+            height: 100%; 
+            width: 0%; 
+            background: red; 
+            /* Transición para que el avance se vea suave y no a tirones */
+            transition: width 0.1s linear; 
+        }
+        
+        /* Estilos de los botones */
+        .controles { 
+            margin-top: 20px; 
+            display: flex; 
+            gap: 10px; 
+        }
+        
+        button { 
+            padding: 10px 20px; 
+            cursor: pointer; 
+            background: white; 
+            color: black;
+            border: none; 
+            font-weight: bold; 
+            border-radius: 4px; 
+            transition: background 0.2s;
+        }
+        
+        button:hover { 
+            background: #ccc; 
+        }
+    </style>
+</head>
+<body>
+
+    <div class="reproductor-contenedor">
+        <video id="vidExamen">
+            <source src="https://interactive-examples.mdn.mozilla.net/media/cc0-videos/friday.mp4" type="video/mp4">
+            Tu navegador no soporta el vídeo.
+        </video>
+
+        <div class="barra-fondo" id="barra-fondo">
+            <div class="barra-progreso" id="barra-progreso"></div>
+        </div>
+
+        <div class="controles">
+            <button onclick="activarVideo()">Play</button>
+            <button onclick="pausarVideo()">Pausar</button>
+            <button onclick="reiniciarVideo()">Reiniciar</button>
+        </div>
+    </div>
+
+    <script>
+        const vid = document.getElementById("vidExamen");
+        const barraProgreso = document.getElementById("barra-progreso");
+        const barraFondo = document.getElementById("barra-fondo");
+
+        // --- 1. LÓGICA DE BOTONES ---
+
+        function activarVideo() {
+            vid.muted = false; // Quita el silencio por si acaso
+            vid.volume = 1.0;  // Volumen al máximo
+            vid.play();
+        }
+
+        function pausarVideo() {
+            vid.pause();
+        }
+
+        function reiniciarVideo() {
+            vid.currentTime = 0; // Vuelve al segundo 0
+            vid.play();          // Arranca de nuevo
+        }
+
+        // --- 2. LÓGICA DE LA BARRA DE PROGRESO ---
+
+        // Evento que se dispara continuamente mientras el vídeo avanza
+        vid.addEventListener("timeupdate", () => {
+            // Evitamos errores si el vídeo aún no ha cargado su duración
+            if (!isNaN(vid.duration)) {
+                let porcentaje = (vid.currentTime / vid.duration) * 100;
+                barraProgreso.style.width = porcentaje + "%";
+            }
+        });
+
+        // Evento para saltar a un punto concreto al hacer clic en la barra
+        barraFondo.addEventListener("click", (e) => {
+            let anchoTotal = barraFondo.offsetWidth; // Ancho total de la barra gris
+            let clickX = e.offsetX;                  // Dónde ha hecho clic el usuario
+            
+            // Regla de 3: (Posición Clic / Ancho Total) * Duración del vídeo
+            let nuevoTiempo = (clickX / anchoTotal) * vid.duration;
+            vid.currentTime = nuevoTiempo;
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Tarea UD5 - Multimedia</title>
+  
+  <link rel="icon" type="image/svg+xml" href="08_logo.svg">
+
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+</head>
+<body>
+
+  <header>
+    <img src="08_logo.svg" alt="Logo corporativo" width="150">
+  </header>
+
+  <section id="promocion">
+    <picture>
+      <source media="(max-width: 575px)" srcset="05_composicion_500.jpg">
+      <source media="(min-width: 576px)" srcset="05_composicion_1000.jpg">
+      <img src="05_composicion_1000.jpg" alt="Producto en promoción">
+    </picture>
+  </section>
+
+  <section id="destacados">
+    <ul>
+      <li><i class="fas fa-star"></i> Producto destacado 1: Zapatillas de calle</li>
+      <li><i class="fas fa-fire"></i> Producto destacado 2: Sudadera oversize</li>
+      <li><i class="fas fa-bolt"></i> Producto destacado 3: Gorra edición limitada</li>
+    </ul>
+  </section>
+
+  <aside id="lateral">
+    <audio controls>
+      <source src="audio.mp3" type="audio/mpeg">
+      <source src="audio.ogg" type="audio/ogg">
+      Tu navegador no soporta el audio.
+    </audio>
+  </aside>
+
+  <section id="formulario">
+    <video id="miVideo" poster="05_composicion.jpg" muted width="100%">
+      <source src="video.mp4" type="video/mp4">
+      <source src="video.webm" type="video/webm">
+      Tu navegador no soporta el vídeo.
+    </video>
+    
+    <div id="controles-video">
+      <button onclick="reproducir()">Reproducir</button>
+      <button onclick="pausar()">Pausar</button>
+      <button onclick="subirVolumen()">Subir volumen</button>
+      <button onclick="bajarVolumen()">Bajar volumen</button>
+    </div>
+  </section>
+
+  <script>
+    const video = document.getElementById('miVideo');
+
+    function reproducir() {
+      video.play();
+    }
+
+    function pausar() {
+      video.pause();
+    }
+
+    function subirVolumen() {
+      // El volumen máximo es 1.0, comprobamos para no dar error
+      if(video.volume < 1.0) {
+        video.volume += 0.1;
+      }
+    }
+
+    function bajarVolumen() {
+      // El volumen mínimo es 0.0
+      if(video.volume > 0.0) {
+        video.volume -= 0.1;
+      }
+    }
+  </script>
+
+</body>
+</html>

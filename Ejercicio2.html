@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Ejercicio 2 - Transformaciones y Transiciones</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 40px;
+        }
+
+        .menu {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 60px;
+        }
+
+        .nav-item {
+            display: inline-block;
+            padding: 20px 40px;
+            background-color: #1a1a1a;
+            color: white;
+            text-decoration: none;
+            font-weight: bold;
+            font-size: 18px;
+            position: relative;
+            overflow: hidden;
+            z-index: 1;
+        }
+
+        .nav-item::before {
+            content: "";
+            position: absolute;
+            top: -100%;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            transition: top 0.3s ease-in-out;
+            z-index: -1;
+        }
+
+        .nav-item.futbol::before { background-color: blue; }
+        .nav-item.baloncesto::before { background-color: #ffcc00; }
+        .nav-item.tenis::before { background-color: #cc0000; }
+        .nav-item.motor::before { background-color: #009933; }
+
+        .nav-item:hover::before {
+            top: 0;
+        }
+
+        .seccion-productos {
+            display: flex;
+            gap: 50px;
+            align-items: flex-start;
+        }
+
+        .promo-container img {
+            width: 400px;
+            border-radius: 8px;
+            transition: transform 0.3s ease;
+        }
+
+        .promo-container img:hover {
+            transform: scale(1.1);
+        }
+
+        .destacados-container {
+            display: flex;
+            gap: 20px;
+        }
+
+        .destacado-item img {
+            width: 200px;
+            border-radius: 8px;
+            transition: transform 0.3s ease;
+        }
+
+        .destacado-item img:hover {
+            transform: translateY(-20px);
+        }
+    </style>
+</head>
+<body>
+
+    <nav class="menu">
+        <a href="#" class="nav-item futbol">Fútbol</a>
+        <a href="#" class="nav-item baloncesto">Baloncesto</a>
+        <a href="#" class="nav-item tenis">Tenis</a>
+        <a href="#" class="nav-item motor">Motor</a>
+    </nav>
+
+    <div class="seccion-productos">
+        <div class="promo-container">
+            <h2>Producto en Promoción</h2>
+            <img src="05_composicion.jpg" alt="Producto Promoción">
+        </div>
+
+        <div>
+            <h2>Productos Destacados</h2>
+            <div class="destacados-container">
+                <div class="destacado-item">
+                    <img src="destacado1.jpg" alt="Destacado 1">
+                </div>
+                <div class="destacado-item">
+                    <img src="destacado2.jpg" alt="Destacado 2">
+                </div>
+                <div class="destacado-item">
+                    <img src="destacado3.jpg" alt="Destacado 3">
+                </div>
+            </div>
+        </div>
+    </div>
+
+</body>
+</html>

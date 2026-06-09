@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Repaso - Canvas y SVG</title>
+    <style>
+        body { font-family: Arial, sans-serif; padding: 20px; background-color: #f4f4f4; }
+        .contenedor { background: white; padding: 20px; margin-bottom: 20px; border-radius: 8px; }
+    </style>
+</head>
+<body>
+
+    <div class="contenedor">
+        <h2>Problema 1: Canvas Avanzado</h2>
+        <canvas id="canvasAvanzado" width="400" height="200" style="border: 2px solid black;"></canvas>
+    </div>
+
+    <div class="contenedor">
+        <h2>Problema 5: SVG Nativo (Polígono y Texto)</h2>
+        <svg width="300" height="300" viewBox="0 0 300 300" style="border: 1px solid #ccc;">
+            <polygon points="150,50 250,150 50,150" fill="green" stroke="black" stroke-width="5" />
+            <text x="120" y="200" font-size="30" font-family="Arial" fill="blue" font-weight="bold">PLAY</text>
+        </svg>
+    </div>
+
+    <script>
+        // Lógica del Canvas
+        const cvs = document.getElementById("canvasAvanzado");
+        const contexto = cvs.getContext("2d");
+
+        const imgLogo = new Image();
+        // Imagen de prueba directa
+        imgLogo.src = "https://placehold.co/100x100/000000/FFFFFF?text=LOGO"; 
+
+        imgLogo.onload = function() {
+            contexto.drawImage(imgLogo, 0, 0, 100, 100);
+            
+            contexto.font = "24px Arial";
+            contexto.fillStyle = "red";
+            contexto.fillText("Nuevo Drop", 120, 50); 
+        };
+    </script>
+</body>
+</html>

@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Urban Drop - Simulacro Online 100% Funcional</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+            transition: background-color 0.3s, color 0.3s;
+        }
+        .hero-container {
+            width: 100%;
+            text-align: center;
+            background: #000;
+        }
+        picture img {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+        .video-section {
+            position: relative;
+            width: 100%;
+            background: #222;
+            padding: 20px 0;
+            text-align: center;
+        }
+        .controles {
+            margin-top: 10px;
+        }
+        button {
+            padding: 10px 15px;
+            margin: 5px;
+            cursor: pointer;
+            background: black;
+            color: white;
+            border: 1px solid white;
+            font-weight: bold;
+        }
+        .galeria {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 50px;
+        }
+        .prenda-img {
+            width: 300px;
+            border-radius: 10px;
+            transition: transform 0.4s ease;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+        }
+        .prenda-img:hover {
+            transform: scale(1.15) rotate(5deg);
+        }
+        @keyframes parpadeo {
+            0% { opacity: 1; }
+            50% { opacity: 0.5; }
+            100% { opacity: 1; }
+        }
+        .etiqueta-sold {
+            background: red;
+            color: white;
+            padding: 5px 15px;
+            font-weight: bold;
+            margin-top: -15px;
+            z-index: 10;
+            animation: parpadeo 2s infinite;
+        }
+        .graficos {
+            display: flex;
+            justify-content: center;
+            gap: 50px;
+            padding: 50px;
+            background: white;
+            transition: background-color 0.3s;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="hero-container">
+        <picture>
+            <source media="(min-width: 1024px)" srcset="https://placehold.co/1024x400/0000FF/FFF?text=ESCRITORIO+(1024px+o+mas)">
+            
+            <source media="(min-width: 768px)" srcset="https://placehold.co/768x400/008000/FFF?text=TABLET+(768px+a+1023px)">
+            
+            <img src="https://placehold.co/500x300/FF0000/FFF?text=MOVIL+(menos+de+768px)" alt="Drop Streetwear">
+        </picture>
+    </div>
+
+    <div class="video-section">
+        <video controls id="bg-video" width="80%" muted poster="https://picsum.photos/id/237/800/400">
+            <source src="https://interactive-examples.mdn.mozilla.net/media/cc0-videos/friday.mp4" type="video/mp4">
+            Tu navegador no soporta el vídeo.
+        </video>
+        <div class="controles">
+            <button onclick="toggleMute()">Mutear / Desmutear</button>
+            <button onclick="fullScreen()">Pantalla Completa</button>
+            <button id="btn-noche">Modo Noche</button>
+            <button id="btn-filtrar">Ocultar Sudadera</button>
+        </div>
+    </div>
+
+    <div class="galeria">
+        <img src="https://picsum.photos/id/1005/300/400" class="prenda-img sudadera" alt="Sudadera">
+        <div class="etiqueta-sold">SOLD OUT</div>
+    </div>
+
+    <div class="graficos">
+        <canvas id="miCanvas" width="200" height="200" style="border:1px solid #ccc; border-radius: 10px;"></canvas>
+
+        <svg width="200" height="200" viewBox="0 0 200 200" style="border:1px solid #ccc; border-radius: 10px;">
+            <polygon points="100,50 150,150 50,150" fill="#1a1a1a">
+                <animateTransform attributeName="transform" type="rotate" from="0 100 116" to="360 100 116" dur="4s" repeatCount="indefinite" />
+            </polygon>
+        </svg>
+    </div>
+
+    <script>
+        const video = document.getElementById("bg-video");
+
+        function toggleMute() {
+            video.muted = !video.muted;
+        }
+
+        function fullScreen() {
+            if (video.requestFullscreen) {
+                video.requestFullscreen();
+            }
+        }
+
+        const canvas = document.getElementById("miCanvas");
+        const ctx = canvas.getContext("2d");
+
+        ctx.beginPath();
+        ctx.arc(100, 100, 50, 0, 2 * Math.PI);
+        ctx.fillStyle = "red";
+        ctx.fill();
+
+        $(document).ready(function() {
+            $("#btn-noche").click(function() {
+                $("body").css({
+                    "background-color": "#111",
+                    "color": "white"
+                });
+                $(".graficos").css("background-color", "#222");
+            });
+
+            $("#btn-filtrar").click(function() {
+                $(".sudadera").slideUp();
+                $(".etiqueta-sold").fadeOut();
+            });
+        });
+    </script>
+</body>
+</html>

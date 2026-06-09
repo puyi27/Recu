@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Noticias y Accesibilidad</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+
+    <style>
+        body {
+            transition: background-color 0.5s;
+            padding: 20px;
+            font-family: Arial, sans-serif;
+        }
+
+        .barra-accesibilidad {
+            background: #eee;
+            padding: 10px;
+            margin-bottom: 20px;
+        }
+
+        .barra-accesibilidad button {
+            font-size: 18px;
+            padding: 10px;
+            margin-right: 5px;
+            cursor: pointer;
+        }
+
+        #info-fuente {
+            font-weight: bold;
+            margin-left: 15px;
+        }
+
+        article {
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 1px solid #ccc;
+        }
+
+        h2 {
+            cursor: pointer;
+        }
+
+        /* Para indicar que es clicable en vista simplificada */
+    </style>
+</head>
+
+<body>
+
+    <div class="barra-accesibilidad">
+        <button id="btn-aumentar" title="Aumentar fuente"><i class="fas fa-search-plus"></i></button>
+        <button id="btn-reducir" title="Reducir fuente"><i class="fas fa-search-minus"></i></button>
+        <button id="btn-oscuro" title="Modo Oscuro"><i class="fas fa-moon"></i></button>
+        <button id="btn-simple" title="Vista Simplificada"><i class="fas fa-align-justify"></i></button>
+        <button id="btn-novedades" title="Novedades"><i class="fas fa-plus-circle"></i></button>
+        <button id="btn-reset" title="Restablecer"><i class="fas fa-sync-alt"></i></button>
+        <span id="info-fuente">Tamaño de texto: 16px</span>
+    </div>
+
+    <div id="contenedor-noticias">
+        <article class="noticia">
+            <h2>Primera Noticia del Día</h2>
+            <p>Este es el texto del párrafo de la primera noticia. Aquí se aplica el tamaño de fuente inicial.</p>
+        </article>
+        <article class="noticia">
+            <h2>Segunda Noticia Importante</h2>
+            <p>Este es el texto del segundo párrafo. La accesibilidad en la web es fundamental para todos los usuarios.
+            </p>
+        </article>
+    </div>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            let tamañoFuenteP = 16;
+            let tamañoFuenteH2 = 24;
+            const limiteMax = 28;
+            const limiteMin = 10;
+            const infoFuente = document.getElementById("info-fuente");
+            const body = document.body;
+
+            const updateFonts = () => {
+                document.querySelectorAll("p").forEach(p => p.style.fontSize = tamañoFuenteP + "px");
+                document.querySelectorAll("h2").forEach(h2 => h2.style.fontSize = tamañoFuenteH2 + "px");
+                infoFuente.textContent = "Tamaño de texto: " + tamañoFuenteP + "px";
+            };
+
+            document.getElementById("btn-aumentar").addEventListener("click", () => {
+                if (tamañoFuenteP < limiteMax) {
+                    tamañoFuenteP += 3;
+                    tamañoFuenteH2 += 3;
+                    updateFonts();
+                }
+            });
+
+            document.getElementById("btn-reducir").addEventListener("click", () => {
+                if (tamañoFuenteP > limiteMin) {
+                    tamañoFuenteP -= 3;
+                    tamañoFuenteH2 -= 3;
+                    updateFonts();
+                }
+            });
+
+            document.getElementById("btn-oscuro").addEventListener("click", () => {
+                body.style.backgroundColor = "black";
+                document.querySelectorAll("h2").forEach(h2 => h2.style.color = "green");
+                document.querySelectorAll("p").forEach(p => p.style.color = "white");
+            });
+
+            document.getElementById("btn-simple").addEventListener("click", () => {
+                document.querySelectorAll("p").forEach(p => p.style.display = "none");
+            });
+
+            document.querySelectorAll("h2").forEach(h2 => {
+                h2.addEventListener("click", () => {
+                    const p = h2.nextElementSibling;
+                    if (p && p.tagName === "P") p.style.display = "block";
+                });
+            });
+
+            const btnNovedades = document.getElementById("btn-novedades");
+            btnNovedades.addEventListener("click", () => {
+                const nuevaNoticia = document.createElement("article");
+                nuevaNoticia.className = "noticia";
+                nuevaNoticia.innerHTML = `<h2>Nueva Norma de Accesibilidad</h2><p>Contenido generado dinámicamente.</p>`;
+                document.getElementById("contenedor-noticias").prepend(nuevaNoticia);
+                btnNovedades.style.display = "none";
+            });
+
+            document.getElementById("btn-reset").addEventListener("click", () => {
+                location.reload();
+            });
+        });
+    </script>
+</body>
+
+</html>

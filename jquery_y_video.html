@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Repaso - jQuery y API Vídeo</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <style>
+        body { font-family: Arial, sans-serif; padding: 20px; background-color: #f4f4f4; }
+        .contenedor { background: white; padding: 20px; margin-bottom: 20px; border-radius: 8px; }
+        button { padding: 10px; cursor: pointer; font-weight: bold; }
+    </style>
+</head>
+<body>
+
+    <div class="contenedor">
+        <h2>Problema 4: API de Vídeo (Saltar a tiempo)</h2>
+        <video id="videoclip" width="500" controls>
+            <source src="https://interactive-examples.mdn.mozilla.net/media/cc0-videos/friday.mp4" type="video/mp4">
+        </video>
+        <br><br>
+        <button onclick="irAlEstribillo()">Saltar al estribillo (Seg 5)</button>
+    </div>
+
+    <div class="contenedor" style="height: 300px;">
+        <h2>Problema 2: jQuery (Animar y Ocultar)</h2>
+        <button id="btn-comprar">Añadir al carrito</button>
+        <div style="position: relative; margin-top: 20px;">
+            <img src="https://picsum.photos/150/150" id="prenda" style="position: absolute; width: 150px; left: 0;">
+        </div>
+    </div>
+
+    <script>
+        // --- 1. Lógica API Vídeo (JS Puro) ---
+        const miClip = document.getElementById("videoclip");
+        function irAlEstribillo() {
+            miClip.currentTime = 5; // Mueve la barra de tiempo al segundo 5
+            miClip.volume = 1.0;    // Sube volumen al máximo
+            miClip.play();          // Fuerza la reproducción
+        }
+
+        // --- 2. Lógica jQuery ---
+        $(document).ready(function() {
+            $("#btn-comprar").click(function() {
+                // Primero mueve a la derecha y baja opacidad, luego recoge hacia arriba
+                $("#prenda").animate({
+                    left: '200px',
+                    opacity: '0.5'
+                }, 1000).slideUp(); 
+            });
+        });
+    </script>
+</body>
+</html>

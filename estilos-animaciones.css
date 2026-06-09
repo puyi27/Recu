@@ -1,0 +1,29 @@
+/* Contenedor que oculta lo que sobresale */
+.slider-contenedor {
+    width: 600px;
+    height: 300px;
+    overflow: hidden;
+    position: relative;
+    border: 2px solid black;
+}
+
+/* El bloque que contiene las 3 imágenes y se mueve */
+.slider-movimiento {
+    display: flex;
+    width: 300%; /* 3 imágenes = 300% */
+    animation: moverSlider 10s infinite; /* 10s ininterrumpidos */
+}
+
+.slider-movimiento img {
+    width: 600px;
+    height: 300px;
+    object-fit: cover;
+}
+
+/* Animación Keyframes */
+@keyframes moverSlider {
+    0%, 25% { transform: translateX(0); } /* Muestra img 1 */
+    33%, 58% { transform: translateX(-600px); } /* Muestra img 2 */
+    66%, 91% { transform: translateX(-1200px); } /* Muestra img 3 */
+    100% { transform: translateX(0); } /* Vuelve a img 1 */
+}
