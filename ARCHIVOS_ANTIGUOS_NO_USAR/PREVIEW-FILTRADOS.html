@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>VISUALIZADOR DE EJERCICIOS FILTRADOS</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <style>
+        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background: #2c3e50; color: white; padding: 20px; text-align: center; }
+        h1 { border-bottom: 2px solid #e74c3c; padding-bottom: 10px; }
+        .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px; margin-top: 20px; }
+        .demo-box { background: white; color: black; border-radius: 8px; padding: 20px; box-shadow: 0 4px 8px rgba(0,0,0,0.2); display: flex; flex-direction: column; align-items: center; justify-content: center; min-height: 200px; position: relative;}
+        .demo-box h3 { margin-top: 0; color: #c0392b; width: 100%; border-bottom: 1px solid #ccc; padding-bottom: 5px; }
+        
+        /* CSS EJERCICIO 2: TARJETA FLIP 3D */
+        .tarjeta-contenedor { width: 150px; height: 200px; perspective: 1000px; }
+        .tarjeta-flip { width: 100%; height: 100%; position: relative; transition: transform 0.8s; transform-style: preserve-3d; }
+        .tarjeta-contenedor:hover .tarjeta-flip { transform: rotateY(180deg); }
+        .cara { width: 100%; height: 100%; position: absolute; backface-visibility: hidden; background: #1abc9c; color: white; display: flex; align-items: center; justify-content: center; border: 2px solid #16a085; font-weight: bold; border-radius: 8px;}
+        .cara-trasera { background: #34495e; color: white; transform: rotateY(180deg); flex-direction: column;}
+        
+        /* CSS EJERCICIO 3: SPINNER CSS */
+        .loader-brutalista { width: 50px; height: 50px; border: 6px solid #f3f3f3; border-top: 6px solid #e74c3c; border-radius: 50%; animation: giro 1s linear infinite; }
+        @keyframes giro { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
+
+        /* CLASE MODO NOCHE PARA EJERCICIO 10 */
+        .clase-oscura { background: #111 !important; color: #fff !important; }
+
+        /* BTN ARRIBA EJERCICIO 11 */
+        #btn-subir { display: none; position: fixed; bottom: 20px; right: 20px; padding: 15px; background: #e74c3c; color: white; border: none; border-radius: 50%; cursor: pointer; z-index: 1000;}
+    </style>
+</head>
+<body>
+
+    <h1>👀 VISUALIZADOR DE EJERCICIOS (MIRA LO QUE HACEN)</h1>
+    <p>Abre este archivo y prueba los ejercicios. Así, si el profesor te dice de boca "haz un acordeón", ya sabes visualmente a qué bloque de código de la Mega Guía tienes que ir.</p>
+
+    <div class="grid">
+        <!-- Ejercicio 2 -->
+        <div class="demo-box">
+            <h3>2. Tarjeta Flip 3D</h3>
+            <p style="font-size:12px; color:#666;">(Pasa el ratón por encima)</p>
+            <div class="tarjeta-contenedor">
+              <div class="tarjeta-flip">
+                <div class="cara cara-frontal">PORTADA DISCO</div>
+                <div class="cara cara-trasera"><p>1. Cancion 1</p><p>2. Cancion 2</p></div>
+              </div>
+            </div>
+        </div>
+
+        <!-- Ejercicio 3 -->
+        <div class="demo-box">
+            <h3>3. Loader Spinner (CSS)</h3>
+            <p style="font-size:12px; color:#666;">(Matemática pura, sin JS)</p>
+            <div class="loader-brutalista"></div>
+        </div>
+
+        <!-- Ejercicio 4 -->
+        <div class="demo-box">
+            <h3>4. Barra Progreso Vídeo</h3>
+            <video id="vidReproductor" width="100%" src="https://www.w3schools.com/html/mov_bbb.mp4" controls></video>
+            <div id="barra-fondo" style="width: 100%; height: 10px; background: #ddd; cursor: pointer; margin-top:5px;">
+              <div id="barra-progreso" style="height: 100%; width: 0%; background: #e74c3c;"></div>
+            </div>
+            <p style="font-size:12px; color:#666;">(Dale a play y mira la barra roja, o pincha en la barra)</p>
+        </div>
+
+        <!-- Ejercicio 5 -->
+        <div class="demo-box">
+            <h3>5. Gráfica Barras (Canvas)</h3>
+            <canvas id="graf" width="250" height="150" style="border: 1px solid #ccc; background:#f9f9f9;"></canvas>
+        </div>
+
+        <!-- Ejercicio 6 -->
+        <div class="demo-box">
+            <h3>6. SVG Clip-Path</h3>
+            <svg width="0" height="0">
+              <defs>
+                <clipPath id="miRecorte">
+                  <polygon points="50,0 100,50 50,100 0,50" />
+                </clipPath>
+              </defs>
+            </svg>
+            <div style="width: 100px; height: 100px; background: #3498db; clip-path: url(#miRecorte);"></div>
+            <p style="font-size:12px; color:#666;">(Rombo creado recortando un cuadrado con SVG)</p>
+        </div>
+
+        <!-- Ejercicio 7 -->
+        <div class="demo-box">
+            <h3>7. Filtro Tiempo Real</h3>
+            <input type="text" id="buscador" placeholder="Escribe 'ro' o 'de'..." style="padding: 5px;">
+            <ul id="lista-artistas" style="text-align:left; background:#eee; padding:10px; width:80%;">
+              <li>Rosalia</li>
+              <li>Dellafuente</li>
+              <li>Cruz Cafune</li>
+            </ul>
+        </div>
+
+        <!-- Ejercicio 8 -->
+        <div class="demo-box">
+            <h3>8. Acordeón jQuery</h3>
+            <div style="width:100%; text-align:left;">
+                <h4 class="titulo-acordeon" style="background:#2c3e50; color:white; padding:5px; cursor:pointer; margin:0;">+ Abrir Pregunta 1</h4>
+                <div class="contenido-acordeon" style="display:none; padding:5px; border:1px solid #ccc;">Respuesta secreta 1</div>
+                
+                <h4 class="titulo-acordeon" style="background:#2c3e50; color:white; padding:5px; cursor:pointer; margin:0; margin-top:5px;">+ Abrir Pregunta 2</h4>
+                <div class="contenido-acordeon" style="display:none; padding:5px; border:1px solid #ccc;">Respuesta secreta 2</div>
+            </div>
+        </div>
+
+        <!-- Ejercicio 10 -->
+        <div class="demo-box" id="caja-noche-local">
+            <h3>10. LocalStorage Noche</h3>
+            <button id="btn-noche-local" style="padding:10px; cursor:pointer;">Activar Modo Oscuro</button>
+            <p style="font-size:12px;">(Si lo activas y pulsas F5, se acordará)</p>
+        </div>
+        
+    </div>
+
+    <button id="btn-subir">⬆️</button>
+    <div style="height: 1000px; margin-top:20px; border: 2px dashed #95a5a6; padding:20px;">
+        Haz scroll hacia abajo para ver el botón "Volver Arriba" (Ejercicio 11).
+    </div>
+
+    <script>
+        $(document).ready(function() {
+            // EJ 4: VIDEO BARRAS
+            const vid = document.getElementById("vidReproductor");
+            const barraP = document.getElementById("barra-progreso");
+            const barraF = document.getElementById("barra-fondo");
+            vid.addEventListener("timeupdate", () => {
+                let porcentaje = (vid.currentTime / vid.duration) * 100;
+                barraP.style.width = porcentaje + "%";
+            });
+            barraF.addEventListener("click", (e) => {
+                let nuevoTiempo = (e.offsetX / barraF.offsetWidth) * vid.duration;
+                vid.currentTime = nuevoTiempo;
+            });
+
+            // EJ 5: GRAFICA CANVAS
+            const ctxGraf = document.getElementById("graf").getContext("2d");
+            const ventas = [30, 80, 50, 100];
+            let posX = 15;
+            for (let i = 0; i < ventas.length; i++) {
+                let alto = ventas[i];
+                let posY = 150 - alto; 
+                ctxGraf.fillStyle = "#e74c3c";
+                ctxGraf.fillRect(posX, posY, 30, alto);
+                posX += 50; 
+            }
+
+            // EJ 7: BUSCADOR
+            $("#buscador").on("keyup", function() {
+                let v = $(this).val().toLowerCase(); 
+                $("#lista-artistas li").filter(function() {
+                    $(this).toggle($(this).text().toLowerCase().indexOf(v) > -1);
+                });
+            });
+
+            // EJ 8: ACORDEON
+            $(".titulo-acordeon").click(function() {
+                $(".contenido-acordeon").slideUp();
+                $(this).next(".contenido-acordeon").stop().slideToggle();
+            });
+
+            // EJ 10: LOCALSTORAGE
+            if (localStorage.getItem("modo_demo") === "oscuro") {
+                $("#caja-noche-local").addClass("clase-oscura");
+            }
+            $("#btn-noche-local").click(function() {
+                $("#caja-noche-local").toggleClass("clase-oscura");
+                if ($("#caja-noche-local").hasClass("clase-oscura")) {
+                    localStorage.setItem("modo_demo", "oscuro");
+                } else {
+                    localStorage.setItem("modo_demo", "claro");
+                }
+            });
+
+            // EJ 11: SCROLL
+            $(window).scroll(function() {
+                if ($(window).scrollTop() > 100) { $("#btn-subir").fadeIn(); } 
+                else { $("#btn-subir").fadeOut(); }
+            });
+            $("#btn-subir").click(function() {
+                $("html, body").animate({ scrollTop: 0 }, "slow");
+            });
+        });
+    </script>
+</body>
+</html>

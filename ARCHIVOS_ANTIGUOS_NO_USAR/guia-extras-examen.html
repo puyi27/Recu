@@ -1,0 +1,530 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Extras Examen DIW: Salvavidas</title>
+
+<!-- Favicon -->
+<link rel="icon" href="https://placehold.co/32x32/e74c3c/fff?text=X" type="image/x-icon">
+
+<!-- Font Awesome via CDN -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+
+<!-- jQuery via CDN -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+
+<style>
+/* ==================== VARIABLES Y ESTILOS BASE ==================== */
+:root {
+    --bg-color: #f8f9fa;
+    --text-color: #212529;
+    --border-color: #dee2e6;
+    --accent-color: #0d6efd;
+    --panel-bg: #ffffff;
+    --font-base: 16px;
+    --shadow: 0 4px 6px rgba(0,0,0,0.05);
+}
+
+body.dark-mode {
+    --bg-color: #121212;
+    --text-color: #e0e0e0;
+    --border-color: #333333;
+    --accent-color: #3f51b5;
+    --panel-bg: #1e1e1e;
+    --shadow: 0 4px 6px rgba(255,255,255,0.05);
+}
+
+body {
+    background-color: var(--bg-color);
+    color: var(--text-color);
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    margin: 0;
+    padding: 20px;
+    font-size: var(--font-base);
+    transition: background-color 0.3s ease, color 0.3s ease, font-size 0.3s ease;
+    line-height: 1.6;
+}
+
+.container {
+    max-width: 900px;
+    margin: 0 auto;
+    background: var(--panel-bg);
+    padding: 40px;
+    border-radius: 8px;
+    border: 1px solid var(--border-color);
+    box-shadow: var(--shadow);
+    transition: all 0.3s ease;
+}
+
+h1, h2 {
+    font-family: inherit;
+    font-weight: 600;
+    color: var(--text-color);
+}
+
+h1 {
+    text-align: center;
+    border-bottom: 2px solid var(--border-color);
+    padding-bottom: 15px;
+    margin-bottom: 30px;
+    font-size: 2.2rem;
+}
+
+/* ==================== EJERCICIO 4: BARRA DE ACCESIBILIDAD ==================== */
+.barra-accesibilidad {
+    display: flex;
+    gap: 10px;
+    background: var(--bg-color);
+    padding: 15px;
+    flex-wrap: wrap;
+    justify-content: center;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    border-radius: 8px;
+    border: 1px solid var(--border-color);
+    box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+}
+
+.btn-acc {
+    background: var(--panel-bg);
+    color: var(--text-color);
+    border: 1px solid var(--border-color);
+    padding: 8px 16px;
+    border-radius: 6px;
+    cursor: pointer;
+    font-weight: 500;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 14px;
+    transition: all 0.2s ease;
+}
+
+.btn-acc:hover {
+    background: var(--border-color);
+}
+
+/* ==================== ESTILOS SECCIONES ==================== */
+.seccion-manual {
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    padding: 24px;
+    margin-bottom: 30px;
+    background: var(--panel-bg);
+    box-shadow: 0 2px 4px rgba(0,0,0,0.02);
+    transition: all 0.3s;
+}
+
+.seccion-manual h2 { 
+    border-bottom: 1px solid var(--border-color); 
+    padding-bottom: 10px; 
+    margin-top: 0; 
+    cursor: pointer; 
+    font-size: 1.5rem;
+}
+.cuerpo-apartado { margin-top: 15px; }
+
+code { 
+    background: var(--bg-color); 
+    padding: 2px 6px; 
+    border-radius: 4px; 
+    color: #d63384; 
+    font-family: SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+    font-size: 0.9em;
+}
+body.dark-mode code { color: #ff79c6; background: #2d2d2d; }
+
+pre {
+    background: var(--bg-color);
+    padding: 16px;
+    border-radius: 6px;
+    overflow-x: auto;
+    border: 1px solid var(--border-color);
+    margin-top: 15px;
+    margin-bottom: 15px;
+}
+
+pre code {
+    background: transparent;
+    color: inherit;
+    padding: 0;
+    border: none;
+}
+
+/* Cajas de Explicación */
+.explicacion {
+    background: var(--bg-color);
+    border-left: 4px solid var(--accent-color);
+    padding: 12px 16px;
+    margin-top: 10px;
+    font-size: 0.9em;
+    color: var(--text-color);
+    border-radius: 0 6px 6px 0;
+}
+body.dark-mode .explicacion {
+    background: #2d2d2d;
+}
+</style>
+</head>
+<body>
+
+<div class="container">
+
+    <!-- BARRA NAVEGACIÓN -->
+    <div class="barra-accesibilidad">
+        <button class="btn-acc" onclick="window.location.href='guia-ud5.html'" style="background:var(--accent-color); color:white;"><i class="fas fa-arrow-left"></i> Volver a la Chuleta UD5</button>
+        <button class="btn-acc" id="btn-oscuro"><i class="fas fa-moon"></i> Modo Oscuro</button>
+    </div>
+
+    <h1 style="color: var(--header-color); text-align: center;">Extras de Examen: El Salvavidas 🛟</h1>
+
+    <!-- 1. CSS GRID Y FLEXBOX -->
+    <div class="seccion-manual">
+        <h2>1. CSS Avanzado: Grid y Flexbox</h2>
+        <div class="cuerpo-apartado">
+            <p><strong>A) El Layout Infalible con CSS Grid (De 1 a varias columnas sin Media Queries):</strong></p>
+            <div class="grid-examen" style="display:grid; grid-template-columns:repeat(auto-fit, minmax(150px, 1fr)); gap:15px; margin-bottom: 15px;">
+                <div style="background:var(--bg-color); padding:15px; border:1px solid var(--border-color); text-align:center; border-radius:6px; font-weight:bold;">Caja 1</div>
+                <div style="background:var(--bg-color); padding:15px; border:1px solid var(--border-color); text-align:center; border-radius:6px; font-weight:bold;">Caja 2</div>
+                <div style="background:var(--bg-color); padding:15px; border:1px solid var(--border-color); text-align:center; border-radius:6px; font-weight:bold;">Caja 3</div>
+            </div>
+<pre><code>&lt;style&gt;
+  .grid-examen {
+      display: grid;
+      /* TRUCO EXAMEN: auto-fit crea tantas columnas de 250px como quepan. 
+         Si la pantalla es pequeña (móvil), bajan a la siguiente línea automáticamente. */
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 20px;
+  }
+&lt;/style&gt;</code></pre>
+            <div class="explicacion">
+                <strong>💡 Explicación Detallada (Examen):</strong>
+                <p>En lugar de escribir pesadas Media Queries (<code>@media (max-width:...)</code>) para hacer que el diseño sea responsive, <code>CSS Grid</code> tiene una fórmula mágica:</p>
+                <ul style="margin-top: 5px; padding-left: 20px; margin-bottom: 0;">
+                    <li><code>repeat(...)</code>: Le dice al navegador que repita la creación de columnas automáticamente.</li>
+                    <li><code>auto-fit</code>: Hace que el grid calcule cuántas columnas caben en la pantalla actual. Si la pantalla es gigante, pondrá muchas; si es un móvil, pondrá 1 sola.</li>
+                    <li><code>minmax(250px, 1fr)</code>: Es la regla de tamaño. La columna nunca será más estrecha de <code>250px</code>. Si hay espacio extra, se repartirá equitativamente (<code>1fr</code> = 1 fracción libre).</li>
+                </ul>
+            </div>
+
+            <hr style="border: 1px solid var(--border-color); margin: 30px 0;">
+
+            <p><strong>B) Centrado Perfecto con Flexbox:</strong></p>
+<pre><code>&lt;style&gt;
+  .centrar-todo {
+      display: flex;
+      justify-content: center; /* Centra en el eje X (horizontal) */
+      align-items: center;     /* Centra en el eje Y (vertical) */
+      height: 100vh;           /* 100vh = Altura de toda la pantalla */
+  }
+&lt;/style&gt;</code></pre>
+        </div>
+    </div>
+
+    <!-- 2. FETCH Y AJAX -->
+    <div class="seccion-manual">
+        <h2>2. Carga Dinámica de Datos (Fetch API / AJAX)</h2>
+        <div class="cuerpo-apartado">
+            <p><strong>Cargar un JSON externo y pintarlo en la página:</strong></p>
+            <button class="btn-acc" id="btn-cargar-datos" style="margin-bottom:15px; background: #28a745; color: white; border:none;"><i class="fas fa-cloud-download-alt"></i> Cargar Productos desde API Falsa</button>
+            <ul id="lista-api" style="list-style:none; padding:0; margin:0;"></ul>
+<pre><code>&lt;script&gt;
+  // Usando el moderno Fetch API (Recomendado y nativo en Javascript)
+  $("#btn-cargar-datos").click(function() {
+      fetch('https://jsonplaceholder.typicode.com/todos?_limit=3')
+        .then(response =&gt; response.json()) // Lo convertimos a formato JSON
+        .then(datos =&gt; {
+            $("#lista-api").empty(); // Vaciar la lista antes de añadir
+            datos.forEach(tarea =&gt; {
+                // Dibujamos cada dato que viene del servidor usando Template Literals (`)
+                $("#lista-api").append(`&lt;li&gt;[ID: ${tarea.id}] ${tarea.title}&lt;/li&gt;`);
+            });
+        })
+        .catch(error =&gt; console.error("Error al cargar:", error));
+  });
+&lt;/script&gt;</code></pre>
+            <div class="explicacion">
+                <strong>💡 Explicación Detallada (Examen):</strong>
+                <p>El API <code>Fetch</code> es el estándar moderno en Javascript para conectarse a servidores externos o cargar archivos <code>.json</code> locales. Es asíncrono y usa Promesas (<code>.then()</code>).</p>
+                <ul style="margin-top: 5px; padding-left: 20px; margin-bottom: 0;">
+                    <li><code>fetch('URL')</code>: Realiza la petición de red para traer los datos.</li>
+                    <li><code>.then(response =&gt; response.json())</code>: Paso OBLIGATORIO. El servidor te devuelve un texto crudo. Esta línea lo parsea y lo convierte en un Objeto/Array real de Javascript.</li>
+                    <li><code>.then(datos =&gt; { ... })</code>: Aquí ya tienes los datos listos. Normalmente, se usa <code>datos.forEach()</code> para iterar sobre la lista y hacer un <code>.append()</code> en el HTML.</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <!-- 3. ACCESIBILIDAD Y SEMÁNTICA -->
+    <div class="seccion-manual">
+        <h2>3. Semántica y Accesibilidad (Puntos Fáciles)</h2>
+        <div class="cuerpo-apartado">
+            <p><strong>A) Estructura Semántica HTML5 (¡Ojo con usar solo divs!):</strong></p>
+<pre><code>&lt;body&gt;
+  &lt;header&gt; &lt;!-- Cabecera (Logos, menú) --&gt;
+      &lt;nav&gt;...&lt;/nav&gt; &lt;!-- Menú de navegación principal --&gt;
+  &lt;/header&gt;
+  
+  &lt;main&gt; &lt;!-- Contenido principal de la página (OBLIGATORIO) --&gt;
+      &lt;section&gt; &lt;!-- Sección temática --&gt;
+          &lt;article&gt;...&lt;/article&gt; &lt;!-- Contenido independiente (ej. Noticia, Producto) --&gt;
+      &lt;/section&gt;
+      &lt;aside&gt;...&lt;/aside&gt; &lt;!-- Barra lateral (publicidad, menús secundarios) --&gt;
+  &lt;/main&gt;
+  
+  &lt;footer&gt;...&lt;/footer&gt; &lt;!-- Pie de página (Legal, copyright, enlaces) --&gt;
+&lt;/body&gt;</code></pre>
+            <div class="explicacion">
+                <strong>💡 Explicación Detallada (Examen):</strong>
+                <p>En diseño web, usar únicamente <code>&lt;div&gt;</code> para todo está penalizado. Los lectores de pantalla para ciegos necesitan entender la estructura de la página usando estas etiquetas (Semántica HTML5):</p>
+                <ul style="margin-top: 5px; padding-left: 20px; margin-bottom: 0;">
+                    <li><code>&lt;header&gt;</code> y <code>&lt;footer&gt;</code>: Definen el principio y el final.</li>
+                    <li><code>&lt;main&gt;</code>: Todo el contenido vital debe ir dentro de esto. Solo puede haber uno por página.</li>
+                    <li><code>&lt;section&gt;</code> y <code>&lt;article&gt;</code>: Reemplazan a los divs grandes. <em>Article</em> se usa si el contenido tiene sentido por sí solo (ej. un producto, un post del blog).</li>
+                </ul>
+            </div>
+
+            <hr style="border: 1px solid var(--border-color); margin: 30px 0;">
+
+            <p><strong>B) Etiquetas ARIA y Accesibilidad de Teclado (Eventos Combinados):</strong></p>
+            <div style="display:flex; gap:10px; align-items:center; margin-bottom:15px;">
+                <!-- Botón accesible -->
+                <div class="btn-acc" tabindex="0" aria-label="Botón de alerta de prueba" role="button" id="btn-teclado" style="background:#e74c3c; color:white; border:none;">
+                    <i class="fas fa-exclamation-triangle"></i> Clica aquí o púlsame con Tabulador + Enter
+                </div>
+            </div>
+<pre><code>&lt;!-- 1. tabindex="0" permite hacer focus con el teclado a cosas que no son botones o links nativos --&gt;
+&lt;!-- 2. aria-label="" se usa cuando hay un icono sin texto para que el lector de pantalla sepa qué es --&gt;
+&lt;!-- 3. role="button" avisa a los lectores de que este div actúa como botón --&gt;
+&lt;div tabindex="0" aria-label="Cerrar ventana" role="button" id="btn-cerrar"&gt; &lt;i class="fas fa-times"&gt;&lt;/i&gt; &lt;/div&gt;
+
+&lt;script&gt;
+  // Evento mixto (Click de ratón O pulsación de teclado)
+  $("#btn-teclado").on("click keypress", function(e) {
+      // Si fue click (e.type) O fue pulsación de tecla Enter (e.key)
+      if(e.type === "click" || e.key === "Enter") {
+          alert("¡Acción lanzada de forma 100% accesible!");
+      }
+  });
+&lt;/script&gt;</code></pre>
+            <div class="explicacion">
+                <strong>💡 Explicación Detallada (Examen):</strong>
+                <p>Si creas un botón falso usando un <code>&lt;div&gt;</code>, el usuario de teclado no puede interactuar con él (el tabulador lo ignorará). Hay que arreglar 3 cosas:</p>
+                <ul style="margin-top: 5px; padding-left: 20px; margin-bottom: 0;">
+                    <li><code>tabindex="0"</code>: Fuerza al navegador a permitir que este elemento reciba foco con la tecla Tabulador.</li>
+                    <li><code>role="button"</code> y <code>aria-label</code>: Le chiva al lector de voz que eso no es un texto normal, sino un botón, y le dice qué hace.</li>
+                    <li><strong>Evento Mixto de Teclado:</strong> Usamos <code>on("click keypress")</code> para detectar ambas acciones. Dentro, leemos <code>e.key === "Enter"</code> para ejecutar el código cuando se pulsa el intro.</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <!-- 4. EJERCICIOS CLÁSICOS DE EXAMEN -->
+    <div class="seccion-manual">
+        <h2>4. Ejercicios Prácticos Clásicos de Examen</h2>
+        <div class="cuerpo-apartado">
+            
+            <p><strong>A) Acordeón (Mostrar uno, ocultar los demás):</strong></p>
+            <div id="acordeon" style="border:1px solid var(--border-color); border-radius:6px; overflow:hidden;">
+                <div class="acc-titulo" style="background:var(--bg-color); padding:10px; cursor:pointer; font-weight:bold; border-bottom:1px solid var(--border-color);">+ Sección 1</div>
+                <div class="acc-contenido" style="padding:15px; display:none;">Contenido oculto de la sección 1. Aquí se usa slideToggle().</div>
+                <div class="acc-titulo" style="background:var(--bg-color); padding:10px; cursor:pointer; font-weight:bold; border-bottom:1px solid var(--border-color);">+ Sección 2</div>
+                <div class="acc-contenido" style="padding:15px; display:none;">Contenido oculto de la sección 2. Al abrir este, el otro se cierra automáticamente.</div>
+            </div>
+<pre><code>&lt;script&gt;
+  $(".acc-titulo").click(function() {
+      // 1. Ocultar todos los contenidos abiertos con animación
+      $(".acc-contenido").slideUp();
+      
+      // 2. Si el que he clicado estaba cerrado, lo abro
+      if(!$(this).next().is(":visible")) {
+          $(this).next().slideDown();
+      }
+  });
+&lt;/script&gt;</code></pre>
+            <div class="explicacion">
+                <strong>💡 Por qué apuntarlo:</strong> Es el ejercicio estrella de DOM con jQuery. El truco de examen está en usar <code>$(this).next()</code> para seleccionar el contenido que está justo debajo del título al que hiciste clic, sin necesidad de ponerles IDs diferentes a cada uno.
+            </div>
+
+            <hr style="border: 1px solid var(--border-color); margin: 30px 0;">
+
+            <p><strong>B) Ventana Modal Emergente:</strong></p>
+            <button class="btn-acc" id="btn-abrir-modal" style="background:var(--accent-color); color:white; border:none;">Abrir Modal</button>
+            
+            <!-- Estructura del Modal (Oculta por defecto) -->
+            <div id="mi-modal" style="display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.7); z-index:999; align-items:center; justify-content:center;">
+                <div style="background:var(--panel-bg); padding:30px; border-radius:8px; width:300px; text-align:center; position:relative;">
+                    <h3 style="margin-top:0;">¡Aviso Importante!</h3>
+                    <p>Has abierto la ventana modal.</p>
+                    <button class="btn-acc" id="btn-cerrar-modal" style="margin:0 auto; justify-content:center;">Cerrar</button>
+                </div>
+            </div>
+<pre><code>&lt;script&gt;
+  // Abrir modal (Cambiamos de display:none a display:flex)
+  $("#btn-abrir-modal").click(() =&gt; $("#mi-modal").css("display", "flex"));
+  
+  // Cerrar desde el botón
+  $("#btn-cerrar-modal").click(() =&gt; $("#mi-modal").hide());
+  
+  // Cerrar al hacer clic fuera (en el fondo oscuro)
+  $("#mi-modal").click(function(e) {
+      if(e.target.id === "mi-modal") $(this).hide();
+  });
+&lt;/script&gt;</code></pre>
+            <div class="explicacion">
+                <strong>💡 Por qué apuntarlo:</strong> Te evalúan si sabes usar CSS <code>position: fixed</code> para cubrir la pantalla completa, y si sabes atrapar eventos para cerrarla. ¡Punto extra de examen! El <code>e.target.id === "mi-modal"</code> evita que la ventana se cierre incorrectamente si haces clic dentro del cuadrado blanco central.
+            </div>
+
+            <hr style="border: 1px solid var(--border-color); margin: 30px 0;">
+
+            <p><strong>C) Intercambio de Atributos (Galería de miniaturas):</strong></p>
+            <div style="display:flex; gap:15px; align-items:flex-start;">
+                <!-- Imagen Principal -->
+                <img id="img-principal" src="https://placehold.co/400x300/3498db/fff?text=IMAGEN+1" style="width:300px; height:auto; border-radius:8px; border:1px solid var(--border-color);">
+                
+                <!-- Miniaturas -->
+                <div style="display:flex; flex-direction:column; gap:10px;">
+                    <img class="miniatura" src="https://placehold.co/400x300/3498db/fff?text=IMAGEN+1" style="width:80px; cursor:pointer; border:2px solid var(--accent-color); border-radius:4px;">
+                    <img class="miniatura" src="https://placehold.co/400x300/e74c3c/fff?text=IMAGEN+2" style="width:80px; cursor:pointer; border:2px solid transparent; border-radius:4px;">
+                    <img class="miniatura" src="https://placehold.co/400x300/2ecc71/fff?text=IMAGEN+3" style="width:80px; cursor:pointer; border:2px solid transparent; border-radius:4px;">
+                </div>
+            </div>
+<pre><code>&lt;script&gt;
+  $(".miniatura").click(function() {
+      // 1. Coger el src de la miniatura clickada
+      let nuevoSrc = $(this).attr("src");
+      
+      // 2. Ponérselo a la imagen grande principal
+      $("#img-principal").attr("src", nuevoSrc);
+      
+      // 3. Cambiar el borde activo visualmente
+      $(".miniatura").css("border-color", "transparent");
+      $(this).css("border-color", "var(--accent-color)");
+  });
+&lt;/script&gt;</code></pre>
+            <div class="explicacion">
+                <strong>💡 Por qué apuntarlo:</strong> Evalúa si sabes leer y escribir atributos HTML en tiempo real con <code>.attr()</code>. En simulacros de tiendas online de exámenes (ej. "cambiar el color de una camiseta al pulsar un botón"), esto es exactamente lo que esperan que programes.
+            </div>
+
+            <hr style="border: 1px solid var(--border-color); margin: 30px 0;">
+
+            <p><strong>D) Botón "Volver Arriba" (Eventos de Scroll):</strong></p>
+            <div style="padding:15px; background:var(--bg-color); border-left:4px solid var(--accent-color); border-radius:4px;">
+                <em>Haz scroll hacia arriba y abajo en esta página. Fíjate en el botón flotante rojo que aparece abajo a la derecha de tu pantalla.</em>
+            </div>
+            
+            <!-- Botón pegajoso (Sticky) -->
+            <button id="btn-up" style="display:none; position:fixed; bottom:30px; right:30px; background:#e74c3c; color:white; border:none; border-radius:50%; width:50px; height:50px; font-size:20px; cursor:pointer; box-shadow:0 4px 10px rgba(0,0,0,0.3); z-index:1000; align-items:center; justify-content:center;">
+                <i class="fas fa-arrow-up"></i>
+            </button>
+<pre><code>&lt;script&gt;
+  // Escuchar el evento scroll de la ventana general
+  $(window).scroll(function() {
+      // Si bajamos más de 300px, mostramos el botón
+      if ($(this).scrollTop() &gt; 300) {
+          $("#btn-up").fadeIn();
+      } else {
+          $("#btn-up").fadeOut();
+      }
+  });
+
+  // Al hacer clic, subir suavizado
+  $("#btn-up").click(function() {
+      // Javascript nativo moderno para subir suave (Recomendado sobre jQuery animate)
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+  });
+&lt;/script&gt;</code></pre>
+            <div class="explicacion">
+                <strong>💡 Por qué apuntarlo:</strong> Las funciones <code>$(window).scroll()</code> y <code>scrollTop()</code> te pueden caer para hacer barras de progreso laterales, menús pegajosos o botones de "Volver arriba". Es un ejercicio clásico que mezcla eventos globales de la ventana (no de un botón) y animaciones de JS moderno (<code>behavior: 'smooth'</code>).
+            </div>
+
+        </div>
+    </div>
+
+</div>
+
+<!-- SCRIPT FUNCIONAL PARA LA CHULETA -->
+<script>
+$(document).ready(function() {
+    
+    // Modo Oscuro
+    $("#btn-oscuro").click(function() {
+        $("body").toggleClass("dark-mode");
+    });
+
+    // Petición Fetch a una API Falsa de Prueba
+    $("#btn-cargar-datos").click(function() {
+        // Mostramos que está cargando (Feedback de UX)
+        $("#lista-api").html('<li style="padding:10px;"><i class="fas fa-spinner fa-spin"></i> Cargando datos externos...</li>');
+        
+        fetch('https://jsonplaceholder.typicode.com/todos?_limit=3')
+            .then(response => response.json())
+            .then(datos => {
+                $("#lista-api").empty(); // Vaciamos el loader
+                datos.forEach(tarea => {
+                    // Creamos el li con los datos devueltos por el servidor
+                    $("#lista-api").append(`
+                        <li style="padding:10px; background:var(--bg-color); border:1px solid var(--border-color); border-radius:4px; margin-bottom:5px; border-left:4px solid var(--accent-color);">
+                            <strong>[ID Servidor: ${tarea.id}]</strong> ${tarea.title}
+                        </li>
+                    `);
+                });
+            })
+            .catch(error => {
+                $("#lista-api").html('<li style="color:#e74c3c; font-weight:bold;">Error al cargar la red</li>');
+                console.error(error);
+            });
+    });
+
+    // Accesibilidad Teclado
+    $("#btn-teclado").on("click keypress", function(e) {
+        if(e.type === "click" || e.key === "Enter") {
+            alert("¡Funciona! Has activado esto mediante click O usando la tecla Enter.");
+        }
+    });
+
+    // --- LÓGICA EJERCICIOS CLÁSICOS (NUEVOS) ---
+
+    // A) Acordeón
+    $(".acc-titulo").click(function() {
+        $(".acc-contenido").slideUp();
+        if(!$(this).next().is(":visible")) {
+            $(this).next().slideDown();
+        }
+    });
+
+    // B) Modal
+    $("#btn-abrir-modal").click(() => $("#mi-modal").css("display", "flex"));
+    $("#btn-cerrar-modal").click(() => $("#mi-modal").hide());
+    $("#mi-modal").click(function(e) {
+        if(e.target.id === "mi-modal") $(this).hide();
+    });
+
+    // C) Galería Atributos (Miniaturas)
+    $(".miniatura").click(function() {
+        let nuevoSrc = $(this).attr("src");
+        $("#img-principal").attr("src", nuevoSrc);
+        $(".miniatura").css("border-color", "transparent");
+        $(this).css("border-color", "var(--accent-color)");
+    });
+
+    // D) Botón Volver Arriba
+    $("#btn-up").css("display", "flex").hide(); // Para asegurar el display:flex al hacer fadeIn
+    $(window).scroll(function() {
+        if ($(this).scrollTop() > 300) {
+            $("#btn-up").fadeIn();
+        } else {
+            $("#btn-up").fadeOut();
+        }
+    });
+    $("#btn-up").click(function() {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
+
+});
+</script>
+
+</body>
+</html>

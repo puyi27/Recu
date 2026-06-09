@@ -1,0 +1,913 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Manual Perfecto DIW: UD5 - Examen</title>
+
+<!-- Favicon (Ej. 1) -->
+<link rel="icon" href="https://placehold.co/32x32/007bff/fff?text=F" type="image/x-icon">
+
+<!-- Font Awesome via CDN (Ej. 1) -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+
+<!-- jQuery via CDN (Temario) -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+
+<style>
+/* ==================== VARIABLES Y ESTILOS BASE ==================== */
+:root {
+    --bg-color: #f8f9fa;
+    --text-color: #212529;
+    --border-color: #dee2e6;
+    --accent-color: #0d6efd;
+    --panel-bg: #ffffff;
+    --font-base: 16px;
+    --shadow: 0 4px 6px rgba(0,0,0,0.05);
+}
+
+body.dark-mode {
+    --bg-color: #121212;
+    --text-color: #e0e0e0;
+    --border-color: #333333;
+    --accent-color: #3f51b5;
+    --panel-bg: #1e1e1e;
+    --shadow: 0 4px 6px rgba(255,255,255,0.05);
+}
+
+body {
+    background-color: var(--bg-color);
+    color: var(--text-color);
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    margin: 0;
+    padding: 20px;
+    font-size: var(--font-base);
+    transition: background-color 0.3s ease, color 0.3s ease, font-size 0.3s ease;
+    line-height: 1.6;
+}
+
+.container {
+    max-width: 900px;
+    margin: 0 auto;
+    background: var(--panel-bg);
+    padding: 40px;
+    border-radius: 8px;
+    border: 1px solid var(--border-color);
+    box-shadow: var(--shadow);
+    transition: all 0.3s ease;
+}
+
+h1, h2 {
+    font-family: inherit;
+    font-weight: 600;
+    color: var(--text-color);
+}
+
+h1 {
+    text-align: center;
+    border-bottom: 2px solid var(--border-color);
+    padding-bottom: 15px;
+    margin-bottom: 30px;
+    font-size: 2.2rem;
+}
+
+/* ==================== EJERCICIO 4: BARRA DE ACCESIBILIDAD ==================== */
+.barra-accesibilidad {
+    display: flex;
+    gap: 10px;
+    background: var(--bg-color);
+    padding: 15px;
+    flex-wrap: wrap;
+    justify-content: center;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    border-radius: 8px;
+    border: 1px solid var(--border-color);
+    box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+}
+
+.btn-acc {
+    background: var(--panel-bg);
+    color: var(--text-color);
+    border: 1px solid var(--border-color);
+    padding: 8px 16px;
+    border-radius: 6px;
+    cursor: pointer;
+    font-weight: 500;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 14px;
+    transition: all 0.2s ease;
+}
+
+.btn-acc:hover {
+    background: var(--border-color);
+}
+
+/* ==================== ESTILOS SECCIONES ==================== */
+.seccion-manual {
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    padding: 24px;
+    margin-bottom: 30px;
+    background: var(--panel-bg);
+    box-shadow: 0 2px 4px rgba(0,0,0,0.02);
+    transition: all 0.3s;
+}
+
+.seccion-manual h2 { 
+    border-bottom: 1px solid var(--border-color); 
+    padding-bottom: 10px; 
+    margin-top: 0; 
+    cursor: pointer; 
+    font-size: 1.5rem;
+}
+.cuerpo-apartado { margin-top: 15px; }
+
+code { 
+    background: var(--bg-color); 
+    padding: 2px 6px; 
+    border-radius: 4px; 
+    color: #d63384; 
+    font-family: SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+    font-size: 0.9em;
+}
+body.dark-mode code { color: #ff79c6; background: #2d2d2d; }
+
+pre {
+    background: var(--bg-color);
+    padding: 16px;
+    border-radius: 6px;
+    overflow-x: auto;
+    border: 1px solid var(--border-color);
+    margin-top: 15px;
+    margin-bottom: 15px;
+}
+
+pre code {
+    background: transparent;
+    color: inherit;
+    padding: 0;
+    border: none;
+}
+
+/* Elementos Multimedia */
+video, canvas, svg, picture img, .caja-hover img {
+    border-radius: 6px;
+    border: 1px solid var(--border-color);
+    background: var(--panel-bg);
+}
+
+/* ==================== EJERCICIO 2: TRANSICIONES Y TRANSFORMACIONES ==================== */
+.menu-cortina { display: flex; gap: 15px; background: var(--bg-color); padding: 10px; border-radius: 6px; border: 1px solid var(--border-color); }
+.nav-item {
+    position: relative;
+    padding: 10px 20px;
+    color: var(--text-color);
+    text-decoration: none;
+    font-weight: 500;
+    border-radius: 4px;
+    overflow: hidden;
+    transition: color 0.3s;
+}
+.nav-item::before {
+    content: "";
+    position: absolute;
+    top: -100%;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: var(--accent-color);
+    transition: top 0.3s ease;
+    z-index: -1;
+}
+.nav-item:hover::before { top: 0; }
+.nav-item:hover { color: #fff; }
+
+.caja-hover { display: inline-block; padding: 20px; background: var(--bg-color); border: 1px solid var(--border-color); border-radius: 8px; margin: 10px; transition: transform 0.3s ease, box-shadow 0.3s ease; text-align: center; }
+.hover-escala:hover { transform: scale(1.05); box-shadow: 0 8px 16px rgba(0,0,0,0.1); }
+.hover-translate:hover { transform: translateY(-8px); box-shadow: 0 8px 16px rgba(0,0,0,0.1); }
+
+/* ==================== EJERCICIO 3: ANIMACIONES CSS (@keyframes) ==================== */
+.slider-container { width: 100%; max-width: 600px; height: 300px; overflow: hidden; margin: 20px auto; position: relative; border-radius: 8px; box-shadow: 0 4px 8px rgba(0,0,0,0.05); }
+.slider-mov { display: flex; width: 300%; animation: moverSlider 10s infinite; }
+.slider-mov img { width: 100%; height: 300px; object-fit: cover; border: none; border-radius: 0; }
+@keyframes moverSlider {
+    0%, 25% { transform: translateX(0); }
+    33%, 58% { transform: translateX(-33.33%); }
+    66%, 91% { transform: translateX(-66.66%); }
+    100% { transform: translateX(0); }
+}
+
+.pendulo { width: 40px; height: 40px; background: #e74c3c; border-radius: 50%; margin: 20px auto; animation: balanceo 1.5s infinite ease-in-out alternate; transform-origin: 50% -100px; box-shadow: 0 4px 8px rgba(0,0,0,0.15); }
+@keyframes balanceo { 0% { transform: rotate(-30deg); } 100% { transform: rotate(30deg); } }
+
+/* Cajas de Explicación */
+.explicacion {
+    background: var(--bg-color);
+    border-left: 4px solid var(--accent-color);
+    padding: 12px 16px;
+    margin-top: 10px;
+    font-size: 0.9em;
+    color: var(--text-color);
+    border-radius: 0 6px 6px 0;
+}
+body.dark-mode .explicacion {
+    background: #2d2d2d;
+}
+</style>
+</head>
+<body>
+
+<div class="container">
+
+    <!-- EJERCICIO 4: BARRA DE ACCESIBILIDAD -->
+    <div class="barra-accesibilidad">
+        <button class="btn-acc" id="btn-aumentar"><i class="fas fa-search-plus"></i> Aumentar Texto</button>
+        <button class="btn-acc" id="btn-reducir"><i class="fas fa-search-minus"></i> Reducir Texto</button>
+        <button class="btn-acc" id="btn-oscuro"><i class="fas fa-moon"></i> Modo Oscuro</button>
+        <button class="btn-acc" id="btn-simplificar"><i class="fas fa-compress-alt"></i> Vista Simplificada</button>
+        <button class="btn-acc" id="btn-novedades"><i class="fas fa-plus-circle"></i> Novedades</button>
+        <button class="btn-acc" id="btn-reset"><i class="fas fa-sync-alt"></i> Restablecer</button>
+    </div>
+
+    <h1 style="color: var(--header-color); text-align: center;">Manual DIW - UD5 Completo</h1>
+
+    <!-- EJERCICIO 1: IMÁGENES, LOGOS E ICONOS -->
+    <div class="seccion-manual">
+        <h2>1. Imágenes, Logo SVG y FontAwesome (Ej. 1)</h2>
+        <div class="cuerpo-apartado">
+            
+            <!-- Logo SVG (Ej 1) -->
+            <p><strong>Logotipo SVG:</strong></p>
+            <svg width="200" height="60" viewBox="0 0 200 60" style="background:#2c3e50; border-radius:8px;">
+                <text x="50%" y="50%" fill="#fff" dominant-baseline="middle" text-anchor="middle" font-weight="bold" font-family="sans-serif" font-size="20">MI LOGO SVG</text>
+            </svg>
+<pre><code>&lt;svg width="200" height="60" viewBox="0 0 200 60"&gt;
+  &lt;text x="50%" y="50%" fill="#fff" text-anchor="middle"&gt;MI LOGO SVG&lt;/text&gt;
+&lt;/svg&gt;</code></pre>
+            <div class="explicacion">
+                <strong>💡 Qué es:</strong> El atributo <code>viewBox</code> define el sistema de coordenadas. La etiqueta <code>&lt;text&gt;</code> usa <code>x="50%" y="50%"</code> junto con <code>text-anchor="middle"</code> y <code>dominant-baseline="middle"</code> para centrar el texto matemáticamente en el centro del SVG, independientemente del tamaño de la pantalla.
+            </div>
+            <br><br>
+            
+            <!-- Imagen Responsiva Picture (Ej 1) -->
+            <p><strong>Imagen en Promoción (Responsiva):</strong></p>
+            <picture>
+                <!-- Para dispositivos mayores a 576px se carga la imagen de 1000px -->
+                <source media="(min-width: 576px)" srcset="https://placehold.co/1000x300/007bff/fff?text=IMAGEN+1000px">
+                <!-- Por defecto para móviles se carga la de 500px -->
+                <img src="https://placehold.co/500x300/e74c3c/fff?text=IMAGEN+500px" alt="Producto en Promoción" style="width:100%; max-width:1000px; border-radius:8px;">
+            </picture>
+<pre><code>&lt;picture&gt;
+  &lt;source media="(min-width: 576px)" srcset="img-1000px.jpg"&gt;
+  &lt;img src="img-500px.jpg" alt="Producto Responsivo"&gt;
+&lt;/picture&gt;</code></pre>
+            <div class="explicacion">
+                <strong>💡 Qué es:</strong> La etiqueta <code>&lt;picture&gt;</code> permite Art Direction (cambiar la imagen por completo según la pantalla). El <code>&lt;source&gt;</code> define una condición (ej. pantallas anchas). Si se cumple, usa ese archivo. Si no, o si el navegador no soporta <code>picture</code>, usa la imagen por defecto del <code>&lt;img&gt;</code>. Ideal para optimizar el rendimiento y no cargar imágenes gigantes en móviles.
+            </div>
+            <br><br>
+
+            <!-- Font Awesome Destacados (Ej 1) -->
+            <p><strong>Productos Destacados con Iconos FontAwesome:</strong></p>
+            <p><i class="fas fa-star" style="color: gold; font-size: 1.5em;"></i> Producto Destacado A (Mejor Valoración)</p>
+            <p><i class="fas fa-fire" style="color: red; font-size: 1.5em;"></i> Producto Destacado B (Más Vendido)</p>
+            <p><i class="fas fa-leaf" style="color: green; font-size: 1.5em;"></i> Producto Destacado C (Ecológico)</p>
+<pre><code>&lt;link rel="stylesheet" href=".../fontawesome/css/all.min.css"&gt;
+&lt;i class="fas fa-star"&gt;&lt;/i&gt; Producto A
+&lt;i class="fas fa-fire"&gt;&lt;/i&gt; Producto B</code></pre>
+            <div class="explicacion">
+                <strong>💡 Qué es:</strong> Insertamos la librería vía CDN en el <code>&lt;head&gt;</code>. Luego, usamos la etiqueta <code>&lt;i&gt;</code> con clases predefinidas. <code>fas</code> indica estilo sólido (Solid) y <code>fa-star</code> el icono específico. ¡Son fuentes vectoriales, así que se pueden estilar con <code>color</code> y <code>font-size</code> en CSS sin perder calidad!
+            </div>
+        </div>
+    </div>
+
+    <!-- EJERCICIO 1: AUDIO Y VÍDEO CON CONTROLES API -->
+    <div class="seccion-manual">
+        <h2>2. Audio y Vídeo HTML5 con API (Ej. 1)</h2>
+        <div class="cuerpo-apartado">
+            
+            <!-- Audio Múltiples Orígenes -->
+            <p><strong>Audio (Múltiples formatos para compatibilidad):</strong></p>
+            <audio controls preload="metadata" style="width: 100%;">
+                <source src="https://interactive-examples.mdn.mozilla.net/media/cc0-audio/t-rex-roar.mp3" type="audio/mpeg">
+                <source src="https://interactive-examples.mdn.mozilla.net/media/cc0-audio/t-rex-roar.ogg" type="audio/ogg">
+                Tu navegador no soporta el elemento de audio.
+            </audio>
+<pre><code>&lt;audio controls preload="metadata"&gt;
+  &lt;source src="audio.mp3" type="audio/mpeg"&gt;
+  &lt;source src="audio.ogg" type="audio/ogg"&gt;
+&lt;/audio&gt;</code></pre>
+            <div class="explicacion">
+                <strong>💡 Qué es:</strong> <code>controls</code> muestra el reproductor nativo del navegador. Ponemos varios <code>&lt;source&gt;</code> para asegurar que el navegador reproduzca el primer formato que entienda (MP3, OGG, WAV). <code>preload="metadata"</code> solo descarga la duración y los datos básicos inicialmente, ahorrando datos al usuario.
+            </div>
+            <br><br>
+
+            <!-- Vídeo Silenciado con Poster y Controles JS -->
+            <p><strong>Vídeo con Poster, Silenciado y Controles API JS:</strong></p>
+            <video id="miVideo" width="100%" poster="https://placehold.co/800x400/2c3e50/fff?text=POSTER+DEL+VIDEO" muted preload="metadata" style="border-radius: 8px; background: #000;">
+                <source src="https://interactive-examples.mdn.mozilla.net/media/cc0-videos/friday.mp4" type="video/mp4">
+                <source src="https://interactive-examples.mdn.mozilla.net/media/cc0-videos/friday.webm" type="video/webm">
+                Tu navegador no soporta el elemento de vídeo.
+            </video>
+            
+            <!-- Controles Personalizados Javascript -->
+            <div style="display:flex; gap:10px; margin-top:10px;">
+                <button class="btn-acc" onclick="document.getElementById('miVideo').play()"><i class="fas fa-play"></i> Reproducir</button>
+                <button class="btn-acc" onclick="document.getElementById('miVideo').pause()"><i class="fas fa-pause"></i> Pausar</button>
+                <button class="btn-acc" onclick="modificarVolumen(0.1)"><i class="fas fa-volume-up"></i> Subir Vol</button>
+                <button class="btn-acc" onclick="modificarVolumen(-0.1)"><i class="fas fa-volume-down"></i> Bajar Vol</button>
+            </div>
+
+            <script>
+                function modificarVolumen(cambio) {
+                    const video = document.getElementById('miVideo');
+                    // Desilenciamos automáticamente si el usuario ajusta el volumen
+                    if(video.muted) video.muted = false; 
+                    
+                    let nuevoVolumen = video.volume + cambio;
+                    if(nuevoVolumen > 1) nuevoVolumen = 1;
+                    if(nuevoVolumen < 0) nuevoVolumen = 0;
+                    video.volume = nuevoVolumen;
+                }
+            </script>
+<pre><code>&lt;video id="miVideo" poster="poster.jpg" muted&gt;
+  &lt;source src="video.mp4" type="video/mp4"&gt;
+&lt;/video&gt;
+&lt;button onclick="document.getElementById('miVideo').play()"&gt;Play&lt;/button&gt;
+&lt;script&gt;
+  function modificarVolumen(cambio) {
+      const vid = document.getElementById('miVideo');
+      vid.volume = Math.max(0, Math.min(1, vid.volume + cambio));
+  }
+&lt;/script&gt;</code></pre>
+            <div class="explicacion">
+                <strong>💡 Qué es:</strong> El atributo <code>poster</code> muestra una imagen antes de darle a Play. <code>muted</code> es obligatorio en muchos navegadores para permitir que se reproduzca automáticamente. Las funciones JS usan el API Multimedia HTML5: <code>.play()</code>, <code>.pause()</code> y <code>.volume</code> (que va obligatoriamente de 0.0 a 1.0).
+            </div>
+        </div>
+    </div>
+
+    <!-- EJERCICIO 2: TRANSICIONES Y TRANSFORMACIONES -->
+    <div class="seccion-manual">
+        <h2>3. Transiciones y Transformaciones CSS3 (Ej. 2)</h2>
+        <div class="cuerpo-apartado">
+            
+            <p><strong>A) Menú con transición (Efecto Cortina de arriba a abajo):</strong></p>
+            <nav class="menu-cortina">
+                <a href="#" class="nav-item">Inicio</a>
+                <a href="#" class="nav-item">Productos</a>
+                <a href="#" class="nav-item">Contacto</a>
+            </nav>
+<pre><code>&lt;style&gt;
+  .nav-item::before {
+      content: ""; position: absolute; top: -100%; left: 0;
+      width: 100%; height: 100%; transition: top 0.3s ease;
+  }
+  .nav-item:hover::before { top: 0; }
+&lt;/style&gt;</code></pre>
+            <div class="explicacion">
+                <strong>💡 Qué es:</strong> Una transición clásica de efecto cortina. Usamos <code>::before</code> para crear un pseudoelemento de color oculto justo arriba (<code>top: -100%</code>). Al hacer <code>:hover</code> en el botón, le decimos que baje a <code>top: 0</code>. La regla <code>transition: top 0.3s</code> hace que este movimiento sea suave.
+            </div>
+            <br>
+
+            <p><strong>B) Transformaciones al pasar el ratón (Hover):</strong></p>
+            <div style="display: flex; gap: 20px; flex-wrap: wrap;">
+                <!-- Escala (Promoción) -->
+                <div class="caja-hover hover-escala">
+                    <img src="https://placehold.co/120x120/f1c40f/000?text=PROMO" alt="Promoción" style="border-radius:4px;">
+                    <p style="margin-bottom:0;"><code>transform: scale()</code></p>
+                </div>
+                
+                <!-- Traslación (Destacados) -->
+                <div class="caja-hover hover-translate">
+                    <img src="https://placehold.co/120x120/e74c3c/fff?text=DESTACADO" alt="Destacado" style="border-radius:4px;">
+                    <p style="margin-bottom:0;"><code>transform: translateY()</code></p>
+                </div>
+            </div>
+<pre><code>&lt;style&gt;
+  .hover-escala:hover { transform: scale(1.1); }
+  .hover-translate:hover { transform: translateY(-10px); }
+&lt;/style&gt;</code></pre>
+            <div class="explicacion">
+                <strong>💡 Qué es:</strong> <code>transform: scale(1.05)</code> amplía el elemento un 5% desde su centro. <code>transform: translateY(-8px)</code> lo desplaza físicamente 8 píxeles hacia arriba. Acompañado de un <code>transition: transform</code> en el estado base, genera microinteracciones fluidas muy profesionales.
+            </div>
+        </div>
+    </div>
+
+    <!-- EJERCICIO 3: ANIMACIONES CSS, CANVAS Y SVG -->
+    <div class="seccion-manual">
+        <h2>4. Animaciones Web: CSS, Canvas y SVG (Ej. 3)</h2>
+        <div class="cuerpo-apartado">
+            
+            <p><strong>1. HTML5 y CSS3 (@keyframes) - Slider Ininterrumpido:</strong></p>
+            <div class="slider-container">
+                <div class="slider-mov">
+                    <img src="https://placehold.co/600x300/ff7675/fff?text=SLIDER+IMAGEN+1">
+                    <img src="https://placehold.co/600x300/74b9ff/fff?text=SLIDER+IMAGEN+2">
+                    <img src="https://placehold.co/600x300/55efc4/000?text=SLIDER+IMAGEN+3">
+                </div>
+            </div>
+<pre><code>&lt;style&gt;
+  .slider-mov { display: flex; width: 300%; animation: moverSlider 10s infinite; }
+  @keyframes moverSlider {
+      0%, 25% { transform: translateX(0); }
+      33%, 58% { transform: translateX(-33.33%); }
+      66%, 91% { transform: translateX(-66.66%); }
+      100% { transform: translateX(0); }
+  }
+&lt;/style&gt;</code></pre>
+            <div class="explicacion">
+                <strong>💡 Qué es:</strong> El contenedor interno (<code>.slider-mov</code>) mide un 300% de ancho porque caben 3 imágenes en fila. La animación <code>@keyframes</code> desplaza el contenedor en el eje X: en 33% se desplaza a la segunda imagen (<code>-33.3%</code>), en 66% a la tercera, y al final vuelve a 0. El <code>infinite</code> hace que no se detenga nunca.
+            </div>
+
+            <p><strong>Extra Temario: Pausar/Reanudar animación con JS:</strong></p>
+            <div id="penduloAnimado" class="pendulo"></div>
+            <div style="text-align: center; display:flex; justify-content:center; gap:10px;">
+                <button class="btn-acc" id="btn-pausa-css"><i class="fas fa-stop"></i> Pausar</button>
+                <button class="btn-acc" id="btn-play-css"><i class="fas fa-play"></i> Reanudar</button>
+            </div>
+<pre><code>&lt;script&gt;
+  $("#btn-pausa-css").click(() =&gt; $("#pendulo").css("animation-play-state", "paused"));
+  $("#btn-play-css").click(() =&gt; $("#pendulo").css("animation-play-state", "running"));
+&lt;/script&gt;</code></pre>
+            <div class="explicacion">
+                <strong>💡 Qué es:</strong> Se puede pausar y reanudar cualquier animación CSS pura dinámicamente usando JS o jQuery cambiando la propiedad <code>animation-play-state</code> entre <code>running</code> y <code>paused</code>.
+            </div>
+
+            <p><strong>2. Animación con API Canvas (Barra de Likes 0 a 200):</strong></p>
+            <div style="background:#fff; padding:20px; border:1px solid #ccc; border-radius:6px; text-align:center;">
+                <canvas id="canvasLikes" width="400" height="50" style="border: 1px solid #ccc; border-radius:4px; background:#f9f9f9; width:100%; max-width:400px;"></canvas><br>
+                <button class="btn-acc" id="btn-add-like" style="margin:15px auto 0 auto;"><i class="fas fa-thumbs-up"></i> Sumar Like</button>
+            </div>
+            <script>
+                const canvasCtx = document.getElementById("canvasLikes").getContext("2d");
+                let contadorLikes = 0;
+                function actualizarCanvas() {
+                    // Limpiar el lienzo
+                    canvasCtx.clearRect(0, 0, 400, 50);
+                    // Barra de progreso (Verde)
+                    canvasCtx.fillStyle = "#28a745";
+                    // Regla de 3: 200 likes = 400px de ancho
+                    canvasCtx.fillRect(0, 0, (contadorLikes / 200) * 400, 50); 
+                    // Texto
+                    canvasCtx.fillStyle = "#000";
+                    canvasCtx.font = "bold 18px sans-serif";
+                    canvasCtx.fillText(`Likes: ${contadorLikes} / 200`, 15, 32);
+                }
+                actualizarCanvas(); // Dibujo inicial
+                document.getElementById("btn-add-like").addEventListener("click", () => {
+                    if (contadorLikes < 200) { 
+                        contadorLikes += 20; // Incremento
+                        actualizarCanvas(); 
+                    }
+                });
+            </script>
+<pre><code>&lt;canvas id="canvasLikes" width="400" height="50"&gt;&lt;/canvas&gt;
+&lt;script&gt;
+  const ctx = document.getElementById("canvasLikes").getContext("2d");
+  let likes = 0;
+  function dibujar() {
+      ctx.clearRect(0, 0, 400, 50);
+      ctx.fillRect(0, 0, (likes / 200) * 400, 50); 
+  }
+&lt;/script&gt;</code></pre>
+            <div class="explicacion">
+                <strong>💡 Explicación Detallada (Examen):</strong>
+                <p>El API Canvas es como un lienzo de pintura. Funciona por "fotogramas", así que para actualizar algo, la regla de oro es: <strong>Borrar y volver a Dibujar</strong>.</p>
+                <ul style="margin-top: 5px; padding-left: 20px; margin-bottom: 0;">
+                    <li><code>getContext("2d")</code>: Obligatorio. Le dice al navegador que vas a dibujar en plano (X, Y). Te devuelve un objeto (<code>ctx</code>) con todas las herramientas (pinceles).</li>
+                    <li><code>clearRect(0, 0, 400, 50)</code>: Borra un rectángulo entero desde la coordenada 0,0 hasta el final del canvas. Es vital llamarlo en cada actualización, de lo contrario, pintarías encima del trazo anterior.</li>
+                    <li><code>fillRect(x, y, ancho, alto)</code>: Dibuja un rectángulo pintado. En los exámenes, la clave está en el <strong>ancho dinámico</strong>. Usamos una Regla de 3: <code>(likes / max_likes) * ancho_total_canvas</code>.</li>
+                </ul>
+            </div>
+
+            <p><strong>3. Animación SVG: Dos imágenes persiguiéndose en trayectoria:</strong></p>
+            <svg width="100%" height="250" style="border: 1px solid #ccc; border-radius:6px; background:#fff;">
+                <!-- Trayectoria Path -->
+                <path id="rutaSVG" d="M 50 200 Q 250 10 450 200 T 850 200" fill="none" stroke="#ddd" stroke-width="4" stroke-dasharray="10,5"/>
+                
+                <!-- Imagen 1 (Atrapado) -->
+                <image href="https://placehold.co/40x40/e74c3c/fff?text=1" width="40" height="40" x="-20" y="-20">
+                    <animateMotion dur="5s" repeatCount="indefinite" rotate="auto">
+                        <mpath href="#rutaSVG"/>
+                    </animateMotion>
+                </image>
+                
+                <!-- Imagen 2 (Perseguidor con un retraso en el inicio 'begin') -->
+                <image href="https://placehold.co/40x40/3498db/fff?text=2" width="40" height="40" x="-20" y="-20">
+                    <animateMotion dur="5s" begin="0.8s" repeatCount="indefinite" rotate="auto">
+                        <mpath href="#rutaSVG"/>
+                    </animateMotion>
+                </image>
+            </svg>
+<pre><code>&lt;svg width="100%" height="250"&gt;
+  &lt;path id="rutaSVG" d="M 50 200 Q 250 10 450 200" fill="none"/&gt;
+  &lt;image href="img1.png"&gt;
+    &lt;animateMotion dur="5s" repeatCount="indefinite" rotate="auto"&gt;
+      &lt;mpath href="#rutaSVG"/&gt;
+    &lt;/animateMotion&gt;
+  &lt;/image&gt;
+  &lt;image href="img2.png"&gt;
+    &lt;animateMotion dur="5s" begin="0.8s" repeatCount="indefinite" rotate="auto"&gt;
+      &lt;mpath href="#rutaSVG"/&gt;
+    &lt;/animateMotion&gt;
+  &lt;/image&gt;
+&lt;/svg&gt;</code></pre>
+            <div class="explicacion">
+                <strong>💡 Explicación Detallada (Examen):</strong>
+                <p>Las animaciones SVG se componen del camino (<code>&lt;path&gt;</code>) y el elemento que se mueve (<code>&lt;animateMotion&gt;</code>).</p>
+                <ul style="margin-top: 5px; padding-left: 20px; margin-bottom: 0;">
+                    <li><strong>El atributo <code>d="..."</code> (Data del Path):</strong> Define matemáticamente el trazado.
+                        <ul style="margin-top:5px; margin-bottom:5px;">
+                            <li><code>M 50 200</code>: <em>(Move To)</em> Mueve el pincel a la coordenada X:50, Y:200 sin pintar. Es el punto de inicio.</li>
+                            <li><code>Q 250 10 450 200</code>: <em>(Quadratic Bezier)</em> Dibuja una curva. Los primeros dos números (250 10) son el "imán" invisible que tira de la línea hacia arriba. Los últimos dos (450 200) son el punto final de esta curva.</li>
+                            <li><code>T 850 200</code>: <em>(Smooth Quadratic)</em> Continúa la curva anterior con una onda suave hasta la coordenada 850 200.</li>
+                        </ul>
+                    </li>
+                    <li><strong><code>&lt;animateMotion&gt;</code> y <code>&lt;mpath&gt;</code>:</strong> Se incrusta <em>dentro</em> de la imagen que quieres mover. La etiqueta interna <code>mpath href="#rutaSVG"</code> vincula la animación con el camino dibujado arriba.</li>
+                    <li><strong>El truco de la persecución:</strong> Al poner <code>begin="0.8s"</code> en la segunda imagen, forzamos un retraso. Esta arranca casi 1 segundo tarde, dando el efecto visual de "persecución".</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <!-- EJERCICIO EXTRA: FORMULARIO Y DRAG AND DROP -->
+    <div class="seccion-manual">
+        <h2>5. Extra Examen: Formulario Dinámico y Drag & Drop API</h2>
+        <div class="cuerpo-apartado">
+            <p><strong>A) Arrastra el producto a la cesta de compra (Drag & Drop):</strong></p>
+            <div style="display:flex; gap:20px; align-items:center; margin-bottom: 30px;">
+                <!-- Elemento a arrastrar -->
+                <div id="producto-drag" draggable="true" ondragstart="iniciarArrastre(event)" style="padding:15px; background:var(--accent-color); color:#fff; border-radius:6px; cursor:grab; font-weight:bold;">
+                    <i class="fas fa-box"></i> Producto Especial
+                </div>
+                
+                <!-- Zona de soltar -->
+                <div id="cesta-drop" ondragover="permitirSoltar(event)" ondrop="soltar(event)" style="width:200px; height:100px; border:2px dashed var(--border-color); border-radius:8px; display:flex; align-items:center; justify-content:center; background:var(--bg-color); color:var(--text-color); font-weight:bold;">
+                    Cesta de Compra
+                </div>
+            </div>
+
+            <script>
+                function iniciarArrastre(evento) {
+                    evento.dataTransfer.setData("text", evento.target.id);
+                }
+                function permitirSoltar(evento) {
+                    evento.preventDefault();
+                }
+                function soltar(evento) {
+                    evento.preventDefault();
+                    let idElemento = evento.dataTransfer.getData("text");
+                    evento.target.appendChild(document.getElementById(idElemento));
+                    evento.target.style.borderStyle = "solid";
+                    evento.target.style.borderColor = "#28a745";
+                }
+            </script>
+<pre><code>&lt;div id="producto" draggable="true" ondragstart="arrastrar(event)"&gt;Caja&lt;/div&gt;
+&lt;div id="zona" ondragover="permitir(event)" ondrop="soltar(event)"&gt;&lt;/div&gt;
+&lt;script&gt;
+  function arrastrar(e) { e.dataTransfer.setData("id", e.target.id); }
+  function permitir(e) { e.preventDefault(); } // MUY IMPORTANTE
+  function soltar(e) {
+      e.preventDefault();
+      let id = e.dataTransfer.getData("id");
+      e.target.appendChild(document.getElementById(id));
+  }
+&lt;/script&gt;</code></pre>
+            <div class="explicacion">
+                <strong>💡 Explicación Detallada (Examen):</strong>
+                <p>El API Drag & Drop de HTML5 tiene 3 fases críticas que siempre debes programar:</p>
+                <ul style="margin-top: 5px; padding-left: 20px; margin-bottom: 0;">
+                    <li><strong>Fase 1 (Inicio - <code>ondragstart</code>):</strong> El elemento HTML necesita obligatoriamente <code>draggable="true"</code>. En el evento, usamos <code>e.dataTransfer.setData("id", e.target.id)</code>. Esto es como un portapapeles temporal: guarda el ID de la caja que estás agarrando.</li>
+                    <li><strong>Fase 2 (¡LA TRAMPA! - <code>ondragover</code>):</strong> Por seguridad, los navegadores <em>prohíben</em> soltar cosas encima de otras. En la zona de destino, tienes que atrapar el evento <code>ondragover</code> y escribir <code>e.preventDefault()</code> para anular esa prohibición. Si olvidas esto, el bloque no se soltará nunca.</li>
+                    <li><strong>Fase 3 (Soltar - <code>ondrop</code>):</strong> En la zona de destino, recuperamos el ID del portapapeles con <code>e.dataTransfer.getData("id")</code>. Por último, usamos el DOM (<code>appendChild</code>) para mover físicamente el elemento HTML de un lado a otro.</li>
+                </ul>
+            </div>
+
+            <hr style="border: 1px solid var(--border-color); margin: 30px 0;">
+
+            <p><strong>B) Lista de Tareas Dinámica (Manipulación DOM jQuery):</strong></p>
+            <div style="display:flex; gap:10px; margin-bottom:15px;">
+                <input type="text" id="input-tarea" placeholder="Nueva tarea a realizar..." style="flex:1; padding:10px; border:1px solid var(--border-color); border-radius:6px;">
+                <button class="btn-acc" id="btn-add-tarea" style="background:var(--accent-color); color:#fff; border:none;"><i class="fas fa-plus"></i> Añadir</button>
+            </div>
+            <ul id="lista-tareas" style="list-style:none; padding:0; margin:0;">
+                <li style="padding:10px; background:var(--bg-color); border:1px solid var(--border-color); border-radius:6px; margin-bottom:5px; display:flex; justify-content:space-between;">
+                    Estudiar DOM jQuery <button class="btn-eliminar-tarea" style="color:#e74c3c; cursor:pointer; background:none; border:none; font-size:1.1em;"><i class="fas fa-trash"></i></button>
+                </li>
+            </ul>
+<pre><code>&lt;script&gt;
+  // 1. Añadir al DOM
+  $("#btn-add").click(function() {
+      let valor = $("#input").val();
+      $("#lista").append(`&lt;li&gt;${valor} &lt;button class="del"&gt;X&lt;/button&gt;&lt;/li&gt;`);
+  });
+
+  // 2. Delegación de eventos (borrar elementos generados dinámicamente)
+  $("#lista").on("click", ".del", function() {
+      $(this).parent().remove();
+  });
+&lt;/script&gt;</code></pre>
+            <div class="explicacion">
+                <strong>💡 Qué es:</strong> Manipulación del DOM con jQuery. <code>.append()</code> inserta HTML al final. <strong>¡OJO EXAMEN!</strong> Como los botones de borrar se crean dinámicamente (no existen al cargar la página), NO puedes usar <code>$(".del").click()</code> directo. Debes usar "Delegación de Eventos": <code>$("#lista").on("click", ".del", fn)</code> que asigna la escucha al padre estático que siempre existió.
+            </div>
+        </div>
+    </div>
+
+    <!-- EJERCICIO EXTRA 3: FORMULARIOS, FILTROS Y WEB STORAGE -->
+    <div class="seccion-manual">
+        <h2>6. Extra Examen: Formularios, Filtros y Web Storage</h2>
+        <div class="cuerpo-apartado">
+            
+            <p><strong>A) Validación de Formularios (HTML5 + jQuery):</strong></p>
+            <form id="form-examen" style="background:var(--bg-color); padding:15px; border-radius:6px; border:1px solid var(--border-color); max-width:400px;">
+                <label>Usuario (Solo letras):</label><br>
+                <input type="text" id="username" required pattern="[A-Za-z]+" style="width:100%; padding:8px; margin-bottom:10px; border:1px solid var(--border-color); border-radius:4px;"><br>
+                <label>Contraseña:</label><br>
+                <input type="password" id="pass1" required style="width:100%; padding:8px; margin-bottom:10px; border:1px solid var(--border-color); border-radius:4px;"><br>
+                <label>Repetir Contraseña:</label><br>
+                <input type="password" id="pass2" required style="width:100%; padding:8px; margin-bottom:10px; border:1px solid var(--border-color); border-radius:4px;"><br>
+                <button type="submit" class="btn-acc" style="background:var(--accent-color); color:#fff; border:none; width:100%; justify-content:center;">Registrar</button>
+                <div id="error-msg" style="color:#e74c3c; margin-top:10px; font-weight:bold; display:none;">Las contraseñas no coinciden.</div>
+                <div id="success-msg" style="color:#28a745; margin-top:10px; font-weight:bold; display:none;">¡Registrado correctamente!</div>
+            </form>
+<pre><code>&lt;script&gt;
+  $("#form-examen").on("submit", function(e) {
+      let p1 = $("#pass1").val();
+      let p2 = $("#pass2").val();
+      if(p1 !== p2) {
+          e.preventDefault(); // Evita que se envíe
+          $("#error-msg").slideDown(); // Muestra el error
+      }
+  });
+&lt;/script&gt;</code></pre>
+            <div class="explicacion">
+                <strong>💡 Qué es:</strong> Validación personalizada interceptando el evento <code>submit</code>. HTML5 ya valida el <code>pattern</code> y <code>required</code>, pero para reglas complejas (ej. "las contraseñas deben coincidir") usamos jQuery. Usar <code>e.preventDefault()</code> es clave: detiene el envío del formulario si detectamos que algo está mal.
+            </div>
+
+            <hr style="border: 1px solid var(--border-color); margin: 30px 0;">
+
+            <p><strong>B) Galería Filtrable (Manipulación de Arrays/Clases con jQuery):</strong></p>
+            <div style="margin-bottom:15px;">
+                <button class="btn-acc filter-btn" data-filter="all">Todos</button>
+                <button class="btn-acc filter-btn" data-filter="web">Diseño Web</button>
+                <button class="btn-acc filter-btn" data-filter="logo">Logotipos</button>
+            </div>
+            <div id="galeria" style="display:flex; gap:10px; flex-wrap:wrap;">
+                <div class="item-galeria web" style="width:100px; height:100px; background:#3498db; color:#fff; display:flex; align-items:center; justify-content:center; border-radius:6px; font-weight:bold;">Web 1</div>
+                <div class="item-galeria logo" style="width:100px; height:100px; background:#e74c3c; color:#fff; display:flex; align-items:center; justify-content:center; border-radius:6px; font-weight:bold;">Logo 1</div>
+                <div class="item-galeria web" style="width:100px; height:100px; background:#3498db; color:#fff; display:flex; align-items:center; justify-content:center; border-radius:6px; font-weight:bold;">Web 2</div>
+                <div class="item-galeria logo" style="width:100px; height:100px; background:#e74c3c; color:#fff; display:flex; align-items:center; justify-content:center; border-radius:6px; font-weight:bold;">Logo 2</div>
+            </div>
+<pre><code>&lt;script&gt;
+  $(".filter-btn").click(function() {
+      let categoria = $(this).attr("data-filter");
+      if(categoria === "all") {
+          $(".item-galeria").fadeIn();
+      } else {
+          $(".item-galeria").hide();
+          $("." + categoria).fadeIn();
+      }
+  });
+&lt;/script&gt;</code></pre>
+            <div class="explicacion">
+                <strong>💡 Qué es:</strong> Un filtro de portfolio. Usamos un atributo personalizado (<code>data-filter</code>) en los botones para saber qué queremos mostrar. Luego con jQuery usamos <code>.hide()</code> para esconder todas las tarjetas y <code>.fadeIn()</code> concatenando el valor del filtro (<code>"." + categoria</code>) para mostrar solo las correctas.
+            </div>
+
+            <hr style="border: 1px solid var(--border-color); margin: 30px 0;">
+
+            <p><strong>C) Web Storage API (Guardar datos en el navegador):</strong></p>
+            <div style="display:flex; gap:10px; align-items:center;">
+                <input type="text" id="nombre-user" placeholder="Tu nombre..." style="padding:10px; border:1px solid var(--border-color); border-radius:6px;">
+                <button class="btn-acc" id="btn-guardar"><i class="fas fa-save"></i> Guardar</button>
+                <button class="btn-acc" id="btn-cargar"><i class="fas fa-download"></i> Cargar</button>
+                <span id="saludo-storage" style="font-weight:bold; margin-left:10px; color:var(--accent-color);"></span>
+            </div>
+<pre><code>&lt;script&gt;
+  // Guardar
+  $("#btn-guardar").click(() =&gt; localStorage.setItem("usuario", $("#nombre-user").val()));
+  
+  // Recuperar
+  $("#btn-cargar").click(function() {
+      let nom = localStorage.getItem("usuario");
+      if(nom) $("#saludo-storage").text("¡Hola de nuevo, " + nom + "!");
+  });
+&lt;/script&gt;</code></pre>
+            <div class="explicacion">
+                <strong>💡 Qué es:</strong> <code>localStorage</code> permite guardar datos permanentemente en el navegador. No se borran al cerrar la pestaña (se usa mucho para guardar el Modo Oscuro o un login). Sus dos funciones principales son <code>setItem("clave", valor)</code> y <code>getItem("clave")</code>.
+            </div>
+
+            <hr style="border: 1px solid var(--border-color); margin: 30px 0;">
+
+            <p><strong>D) Canvas Avanzado: Gráfico Circular (Pie Chart):</strong></p>
+            <div style="display:flex; gap:20px; align-items:center;">
+                <canvas id="canvasPie" width="200" height="200" style="background:#fff; border-radius:50%; box-shadow:0 4px 10px rgba(0,0,0,0.1);"></canvas>
+                <div>
+                    <p style="color:#3498db; font-weight:bold;"><i class="fas fa-square"></i> 50% Aprobados (Web)</p>
+                    <p style="color:#e74c3c; font-weight:bold;"><i class="fas fa-square"></i> 50% Suspensos (Logos)</p>
+                </div>
+            </div>
+<pre><code>&lt;canvas id="canvasPie" width="200" height="200"&gt;&lt;/canvas&gt;
+&lt;script&gt;
+  const ctxP = document.getElementById("canvasPie").getContext("2d");
+  
+  // arc(x, y, radio, anguloInicio, anguloFin)
+  // Nota: Los ángulos usan Radianes (Math.PI * 2 = 360º)
+  
+  ctxP.beginPath();
+  ctxP.moveTo(100, 100);
+  ctxP.arc(100, 100, 100, 0, Math.PI, false); // 0 a 180º
+  ctxP.fillStyle = "#3498db";
+  ctxP.fill();
+
+  ctxP.beginPath();
+  ctxP.moveTo(100, 100);
+  ctxP.arc(100, 100, 100, Math.PI, Math.PI * 2, false); // 180º a 360º
+  ctxP.fillStyle = "#e74c3c";
+  ctxP.fill();
+&lt;/script&gt;</code></pre>
+            <div class="explicacion">
+                <strong>💡 Qué es:</strong> Mientras que hacer rectángulos es fácil (<code>fillRect</code>), dibujar gráficas requiere <code>arc()</code>. El truco es usar <code>beginPath()</code>, mover el "lápiz" al centro exacto con <code>moveTo()</code>, trazar el arco definiendo los ángulos en Radianes (<code>Math.PI</code> es media vuelta completa), y pintarlo con <code>fill()</code>.
+            </div>
+
+        </div>
+    </div>
+
+</div>
+
+<!-- ==================== SCRIPT JQUERY (EJERCICIO 4 Y TEMARIO) ==================== -->
+<script>
+// Esperar a que el documento esté preparado
+$(document).ready(function() {
+
+    // --- LÓGICA EJERCICIO EXTRA 3: FORMULARIOS, FILTROS Y STORAGE ---
+    
+    // A) Validación Formulario
+    $("#form-examen").on("submit", function(e) {
+        e.preventDefault(); // Prevenir recarga siempre para este ejemplo visual
+        let p1 = $("#pass1").val();
+        let p2 = $("#pass2").val();
+        if(p1 !== p2) {
+            $("#error-msg").slideDown(); 
+            $("#success-msg").slideUp();
+        } else {
+            $("#error-msg").slideUp();
+            $("#success-msg").slideDown();
+        }
+    });
+
+    // B) Filtros Galería
+    $(".filter-btn").click(function() {
+        let categoria = $(this).attr("data-filter");
+        if(categoria === "all") {
+            $(".item-galeria").fadeIn(300);
+        } else {
+            $(".item-galeria").hide();
+            $("." + categoria).fadeIn(300);
+        }
+    });
+
+    // C) Web Storage
+    $("#btn-guardar").click(function() {
+        let nombre = $("#nombre-user").val();
+        if(nombre.trim() !== "") {
+            localStorage.setItem("usuarioGuardado", nombre);
+            $("#saludo-storage").css("color", "#28a745").text("¡Guardado con éxito!");
+        }
+    });
+    
+    $("#btn-cargar").click(function() {
+        let nombreGuardado = localStorage.getItem("usuarioGuardado");
+        if(nombreGuardado) {
+            $("#saludo-storage").css("color", "var(--accent-color)").text("¡Hola de nuevo, " + nombreGuardado + "!");
+        } else {
+            $("#saludo-storage").css("color", "#e74c3c").text("No hay nada guardado.");
+        }
+    });
+
+    // D) Canvas Pie Chart (Carga directa sin jQuery porque es API estándar)
+    const ctxP = document.getElementById("canvasPie").getContext("2d");
+    ctxP.beginPath();
+    ctxP.moveTo(100, 100);
+    ctxP.arc(100, 100, 100, 0, Math.PI, false);
+    ctxP.fillStyle = "#3498db";
+    ctxP.fill();
+    ctxP.beginPath();
+    ctxP.moveTo(100, 100);
+    ctxP.arc(100, 100, 100, Math.PI, Math.PI * 2, false);
+    ctxP.fillStyle = "#e74c3c";
+    ctxP.fill();
+
+    
+    // --- Lógica Temario: Pausar y Reanudar Animaciones CSS ---
+    $("#btn-pausa-css").click(function() {
+        $("#penduloAnimado").css("animation-play-state", "paused");
+    });
+    $("#btn-play-css").click(function() {
+        $("#penduloAnimado").css("animation-play-state", "running");
+    });
+
+    // --- LÓGICA EJERCICIO 4: BARRA DE ACCESIBILIDAD ---
+    
+    let tamanoFuente = 16;
+    const MAX_FUENTE = 25; // Tamaño máximo de aumento
+    const MIN_FUENTE = 10; // Tamaño mínimo
+    
+    // 1. Aumentar tamaño de la fuente (+3px con límite)
+    $("#btn-aumentar").click(function() {
+        if (tamanoFuente < MAX_FUENTE) {
+            tamanoFuente += 3;
+            $("body").css("font-size", tamanoFuente + "px");
+            console.log("Tamaño actual: " + tamanoFuente + "px");
+        }
+    });
+
+    // 2. Reducir tamaño de la fuente (-3px con límite)
+    $("#btn-reducir").click(function() {
+        if (tamanoFuente > MIN_FUENTE) {
+            tamanoFuente -= 3;
+            $("body").css("font-size", tamanoFuente + "px");
+            console.log("Tamaño actual: " + tamanoFuente + "px");
+        }
+    });
+
+    // 3. Modo Oscuro (Toggle de clase en el body)
+    $("#btn-oscuro").click(function() {
+        $("body").toggleClass("dark-mode");
+    });
+
+    // 4. Vista Simplificada (Ocultar párrafos/cuerpos con efecto)
+    $("#btn-simplificar").click(function() {
+        $(".cuerpo-apartado").slideToggle(400); // Se pliega o despliega
+    });
+
+    // Extra Vista Simplificada: Clic en H2 vuelve a mostrar el contenido
+    $(".seccion-manual h2").click(function() {
+        // Seleccionamos el elemento hermano siguiente (.cuerpo-apartado) y hacemos toggle
+        $(this).next(".cuerpo-apartado").slideToggle(400);
+    });
+
+    // 5. Novedades (Insertar dinámicamente un nodo y ocultar el botón)
+    $("#btn-novedades").click(function() {
+        // Bloque HTML a insertar
+        const nodoNuevo = `
+        <div class="seccion-manual apartado-novedad" style="display:none; border-color:#007bff; border-width: 2px;">
+            <h2 style="color:#007bff;">Noticia de Accesibilidad (Novedad Dinámica)</h2>
+            <div class="cuerpo-apartado">
+                <p>Este bloque se ha insertado al principio utilizando jQuery <code>.after()</code> o <code>.prepend()</code>, cumpliendo el requisito del Ejercicio 4.</p>
+            </div>
+        </div>`;
+        
+        // Insertar justo debajo del h1 (al principio de los apartados)
+        $("h1").after(nodoNuevo);
+        
+        // Animación de aparición
+        $(".apartado-novedad").slideDown(500);
+        
+        // El botón desaparece y no se vuelve a mostrar
+        $(this).fadeOut(300);
+    });
+
+    // 6. Restablecer el estado original (Reset)
+    $("#btn-reset").click(function() {
+        // Restaurar fuente
+        tamanoFuente = 16;
+        $("body").css("font-size", tamanoFuente + "px");
+        
+        // Quitar modo oscuro
+        $("body").removeClass("dark-mode");
+        
+        // Mostrar todos los contenidos si estaban ocultos
+        $(".cuerpo-apartado").slideDown(400);
+        
+        // Eliminar apartado dinámico si existe y volver a mostrar el botón
+        $(".apartado-novedad").remove();
+        $("#btn-novedades").fadeIn(300);
+    });
+
+    // --- LÓGICA EJERCICIO EXTRA: LISTA DE TAREAS ---
+    $("#btn-add-tarea").click(function() {
+        let texto = $("#input-tarea").val();
+        if(texto.trim() !== "") {
+            let nuevoLi = $(`<li style="padding:10px; background:var(--bg-color); border:1px solid var(--border-color); border-radius:6px; margin-bottom:5px; display:flex; justify-content:space-between; display:none;">
+                ${texto} <button class="btn-eliminar-tarea" style="color:#e74c3c; cursor:pointer; background:none; border:none; font-size:1.1em;"><i class="fas fa-trash"></i></button>
+            </li>`);
+            $("#lista-tareas").append(nuevoLi);
+            nuevoLi.slideDown(200);
+            $("#input-tarea").val("");
+        }
+    });
+
+    $("#lista-tareas").on("click", ".btn-eliminar-tarea", function() {
+        $(this).parent().slideUp(200, function() {
+            $(this).remove();
+        });
+    });
+
+});
+</script>
+
+</body>
+</html>

@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Plantilla Examen MEGA COMPLETA</title>
+<!-- jQuery (Obligatorio en casi todos los exámenes) -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+<style>
+/* =========================================
+   1. CSS PARA COPIAR Y PEGAR RÁPIDO
+   ========================================= */
+
+/* Layout de cuadrícula automática (Responsive sin media queries) */
+.grid-magico {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 20px;
+}
+
+/* Centrar todo perfecto (Vertical y Horizontal) */
+.centrar-magico {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* Media Queries (Por si te obligan a no usar auto-fit) */
+@media (max-width: 768px) {
+    /* Todo lo que esté aquí solo se aplica en móviles */
+    .solo-escritorio { display: none !important; }
+}
+
+/* Animación y Transición rápida */
+.animacion-hover {
+    transition: transform 0.3s ease, background-color 0.3s ease;
+}
+.animacion-hover:hover {
+    transform: scale(1.05); /* Se hace un 5% más grande */
+}
+
+/* Clases útiles para jQuery */
+.oculto { display: none; }
+.error-input { border: 2px solid red !important; }
+.modo-noche { background-color: #1a1a1a !important; color: white !important; }
+
+/* Modal (Fondo oscuro transparente) */
+.fondo-modal {
+    display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+    background: rgba(0,0,0,0.8); z-index: 999; justify-content: center; align-items: center;
+}
+.caja-modal { background: white; padding: 30px; border-radius: 8px; color: black; text-align: center;}
+</style>
+</head>
+<body>
+
+<!-- =========================================
+   2. ESTRUCTURA HTML SEMÁNTICA
+   ========================================= -->
+<header>
+    <h1>Cabecera del Examen</h1>
+</header>
+
+<main>
+    <section>
+        <h2>Sección Interactiva BÁSICA</h2>
+        
+        <!-- Botón Genérico -->
+        <button id="btn-magico">Alternar Noche/Día</button>
+
+        <!-- Formulario (Listo para validar) -->
+        <form id="formulario-examen" style="margin-top: 20px; padding:10px; border:1px solid #ccc;">
+            <input type="text" id="campo-texto" placeholder="Escribe algo aquí...">
+            <span id="mensaje-error" class="oculto" style="color:red;">Error, el campo está vacío</span>
+            <button type="submit">Enviar Formulario</button>
+        </form>
+
+        <!-- Contenedor vacío (Para inyectar tarjetas con jQuery o Grid) -->
+        <div id="contenedor-principal" class="grid-magico" style="margin-top: 20px;">
+            <div style="background:#eee; padding:20px;">Caja 1</div>
+            <div style="background:#ddd; padding:20px;">Caja 2</div>
+        </div>
+    </section>
+
+    <!-- SECCIÓN ACORDEÓN -->
+    <section style="margin-top: 40px;">
+        <h2>Sección Acordeón</h2>
+        <div class="acc-titulo" style="background:#007bff; color:white; padding:10px; cursor:pointer;">+ Desplegable 1</div>
+        <div class="acc-contenido oculto" style="padding:15px; border:1px solid #ccc;">Texto oculto del desplegable 1...</div>
+        
+        <div class="acc-titulo" style="background:#007bff; color:white; padding:10px; cursor:pointer; margin-top:5px;">+ Desplegable 2</div>
+        <div class="acc-contenido oculto" style="padding:15px; border:1px solid #ccc;">Texto oculto del desplegable 2...</div>
+    </section>
+
+    <!-- DRAG AND DROP -->
+    <section style="margin-top: 40px;">
+        <h2>Drag & Drop (Arrastrar)</h2>
+        <div style="display:flex; gap:20px;">
+            <!-- Caja origen -->
+            <div id="zona-origen" style="width:150px; min-height:150px; background:#ddd; padding:10px;">
+                <!-- El atributo draggable="true" es vital -->
+                <div id="cuadrado-movil" draggable="true" style="width:100px; height:100px; background:red; cursor:grab; color:white; text-align:center;">Arrástrame</div>
+            </div>
+            <!-- Zona destino: OBLIGATORIO ondragover="event.preventDefault()" -->
+            <div id="zona-destino" ondragover="event.preventDefault()" style="width:150px; min-height:150px; background:#a8e6cf; padding:10px;">
+                Suelta aquí
+            </div>
+        </div>
+    </section>
+
+    <!-- MULTIMEDIA -->
+    <section style="margin-top: 40px;">
+        <h2>Audio y Vídeo</h2>
+        <!-- controls = botones. autoplay = arranca solo. loop = repite -->
+        <video id="mi-video" width="400" controls>
+            <source src="video.mp4" type="video/mp4">
+            Tu navegador no soporta vídeo.
+        </video>
+        <br>
+        <button id="btn-play">▶️ Forzar Play JS</button>
+    </section>
+
+    <!-- SVG -->
+    <section style="margin-top: 40px;">
+        <h2>Gráfico SVG (Vectores)</h2>
+        <!-- viewBox="0 0 ancho alto" -->
+        <svg width="400" height="200" style="border:1px solid #ccc; background:#f9f9f9;">
+            <!-- Círculo -->
+            <circle cx="50" cy="50" r="40" fill="purple" stroke="black" stroke-width="2" />
+            <!-- Rectángulo -->
+            <rect x="150" y="20" width="100" height="60" fill="orange" rx="10" />
+            <!-- Línea Libre (Path) -->
+            <path d="M 50 150 Q 150 50 250 150 T 350 150" fill="transparent" stroke="blue" stroke-width="3" />
+        </svg>
+    </section>
+
+    <!-- CANVAS -->
+    <section style="margin-top: 40px;">
+        <h2>Canvas</h2>
+        <canvas id="mi-lienzo" width="500" height="200" style="border:1px solid #000; background:#fff;"></canvas>
+        <br>
+        <button id="btn-animar-canvas">Iniciar Animación</button>
+    </section>
+</main>
+
+<!-- Modal Oculto -->
+<div id="mi-modal" class="fondo-modal">
+    <div class="caja-modal">
+        <h3>Aviso Modal</h3>
+        <p>Aviso importante del examen.</p>
+        <button id="btn-cerrar-modal">Cerrar Ventana</button>
+    </div>
+</div>
+
+<!-- =========================================
+   3. JAVASCRIPT / JQUERY PARA COPIAR Y PEGAR
+   ========================================= -->
+<script>
+$(document).ready(function() {
+
+    // ----------------------------------------------------
+    // COPIAR: CLICK Y TOGGLE CLASS
+    // ----------------------------------------------------
+    $("#btn-magico").click(function() {
+        $("body").toggleClass("modo-noche");
+        // $("#contenedor-principal").slideToggle(); // Animación rápida
+    });
+
+    // ----------------------------------------------------
+    // COPIAR: ACORDEÓN
+    // ----------------------------------------------------
+    $(".acc-titulo").click(function() {
+        $(".acc-contenido").slideUp(); // Cierra todos
+        if(!$(this).next().is(":visible")) {
+            $(this).next().slideDown(); // Abre solo el de debajo
+        }
+    });
+
+    // ----------------------------------------------------
+    // COPIAR: VALIDAR FORMULARIO
+    // ----------------------------------------------------
+    $("#formulario-examen").submit(function(e) {
+        e.preventDefault(); // OBLIGATORIO: Evita que recargue la página
+
+        let valor = $("#campo-texto").val(); 
+        
+        if (valor === "") {
+            $("#campo-texto").addClass("error-input");
+            $("#mensaje-error").fadeIn();
+        } else {
+            $("#campo-texto").removeClass("error-input");
+            $("#mensaje-error").fadeOut();
+            alert("Enviado: " + valor);
+        }
+    });
+
+    // ----------------------------------------------------
+    // COPIAR: DRAG AND DROP JQUERY
+    // ----------------------------------------------------
+    // 1. Guardar ID al arrastrar
+    $("#cuadrado-movil").on("dragstart", function(e) {
+        // jQuery envuelve los eventos, necesitamos originalEvent
+        e.originalEvent.dataTransfer.setData("id_caja", e.target.id);
+    });
+
+    // 2. Soltar
+    $("#zona-destino").on("drop", function(e) {
+        e.preventDefault();
+        let idArrastrado = e.originalEvent.dataTransfer.getData("id_caja");
+        // Mueve físicamente el cuadro al nuevo div
+        $(this).append( document.getElementById(idArrastrado) );
+    });
+
+    // ----------------------------------------------------
+    // COPIAR: FETCH (CARGAR JSON)
+    // ----------------------------------------------------
+    /*
+    fetch('examen.json') 
+        .then(response => response.json())
+        .then(datos => {
+            $("#contenedor-principal").empty();
+            datos.forEach(item => {
+                $("#contenedor-principal").append(`<div style="background:#fff; padding:10px;">${item.nombre}</div>`);
+            });
+        });
+    */
+
+    // ----------------------------------------------------
+    // COPIAR: LOCALSTORAGE (GUARDAR DATOS ENTRE RECARGAS)
+    // ----------------------------------------------------
+    // Guardar: localStorage.setItem("usuario", "Angel");
+    // Leer:    let miUsuario = localStorage.getItem("usuario");
+    // Borrar:  localStorage.clear();
+
+    // ----------------------------------------------------
+    // COPIAR: CONTROLAR VÍDEO CON BOTONES JS
+    // ----------------------------------------------------
+    $("#btn-play").click(function() {
+        let video = document.getElementById("mi-video");
+        video.play(); // O video.pause();
+    });
+
+}); // Fin document.ready
+
+// ----------------------------------------------------
+// COPIAR: CANVAS (DIBUJAR) - Vanilla JS
+// ----------------------------------------------------
+let miCanvas = document.getElementById("mi-lienzo");
+let ctx = miCanvas.getContext("2d");
+
+// 1. Rectángulo Relleno
+ctx.fillStyle = "blue"; 
+ctx.fillRect(50, 50, 100, 50); // X, Y, Ancho, Alto
+
+// 2. Texto en Canvas
+ctx.fillStyle = "black";
+ctx.font = "20px Arial";
+ctx.fillText("Hola Examen", 200, 50); // Texto, X, Y
+
+// 3. Círculo
+ctx.beginPath();
+ctx.arc(250, 150, 40, 0, 2 * Math.PI); // X, Y, Radio, Inicio, Fin
+ctx.fillStyle = "red";
+ctx.fill();
+
+// ----------------------------------------------------
+// COPIAR: ANIMACIÓN EN CANVAS
+// ----------------------------------------------------
+let posX = 0;
+let animacionActiva = false;
+
+function animar() {
+    if (!animacionActiva) return; // Si la apagamos, se corta el bucle
+
+    ctx.clearRect(0, 0, miCanvas.width, miCanvas.height); // OBLIGATORIO: Borrar todo
+
+    // Dibujar el cuadrado en la nueva posición
+    ctx.fillStyle = "green";
+    ctx.fillRect(posX, 100, 50, 50);
+
+    // Moverlo hacia la derecha
+    posX += 2;
+    if (posX > miCanvas.width) posX = -50; // Si se sale, vuelve al principio
+
+    // Volver a llamar a la función en el siguiente frame
+    requestAnimationFrame(animar);
+}
+
+// Botón para iniciar/parar
+$("#btn-animar-canvas").click(function() {
+    animacionActiva = !animacionActiva; // Cambia entre encendido/apagado
+    if (animacionActiva) animar();
+});
+
+</script>
+</body>
+</html>

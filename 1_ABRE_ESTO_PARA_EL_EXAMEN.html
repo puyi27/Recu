@@ -1,0 +1,1197 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>MEGA GUÍA DEFINITIVA - DIW RA4</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <style>
+        :root { --bg: #f4f4f9; --text: #333; --sidebar: #1a252f; --accent: #3498db; }
+        body { margin: 0; display: flex; font-family: 'Segoe UI', sans-serif; background: var(--bg); color: var(--text); }
+        
+        /* Menú Lateral Fijo */
+        nav { width: 280px; background: var(--sidebar); color: white; height: 100vh; position: fixed; padding: 20px; overflow-y: auto; box-sizing: border-box; box-shadow: 4px 0 10px rgba(0,0,0,0.1); }
+        nav h2 { color: #ecf0f1; font-size: 1.2em; border-bottom: 2px solid var(--accent); padding-bottom: 10px; margin-top:0;}
+        nav ul { list-style: none; padding: 0; }
+        nav ul li { margin-bottom: 15px; }
+        nav ul li a { color: #bdc3c7; text-decoration: none; font-weight: bold; display: block; transition: 0.2s; font-size:1.1em;}
+        nav ul li a:hover { color: white; padding-left: 10px; border-left: 4px solid var(--accent); }
+        
+        /* Contenido Principal */
+        main { margin-left: 280px; padding: 40px; width: calc(100% - 280px); box-sizing: border-box; }
+        h1 { font-size: 2.8em; border-bottom: 3px solid var(--sidebar); padding-bottom: 10px; margin-top:0; color:var(--sidebar);}
+        h2 { color: var(--sidebar); margin-top: 50px; font-size:2em; border-bottom: 2px dashed #ccc; padding-bottom: 10px;}
+        h3 { color: #2980b9; margin-top:30px; font-size:1.4em;}
+        
+        /* Cajas de diseño */
+        .caja-teoria { background: white; padding: 30px; border-radius: 8px; box-shadow: 0 4px 8px rgba(0,0,0,0.05); margin-bottom: 20px; line-height: 1.6;}
+        .importante { border-left: 6px solid #e74c3c; background: #ffeaa7; padding: 15px; border-radius: 4px; font-weight: bold; margin-top:20px; color:#2c3e50;}
+        .super-tonto { border: 4px dashed #3498db; background: #e8f4f8; padding: 20px; border-radius: 10px; font-size: 1.1em; color: #2c3e50; }
+        
+        /* Bloques de Código */
+        pre { background: #282c34; color: #abb2bf; padding: 20px; border-radius: 8px; overflow-x: auto; font-family: Consolas, monospace; font-size:1.1em; border-left: 5px solid var(--accent);}
+        code { font-family: Consolas, monospace; background: #e0e0e0; padding: 2px 6px; border-radius: 4px; color: #c0392b; font-weight:bold;}
+        
+        /* Grid para resumen */
+        .grid-resumen { display:grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap:20px;}
+        .tarjeta { border: 1px solid #ddd; padding: 15px; border-radius: 8px; background: #fafafa;}
+        
+        /* CSS DEMOS EN VIVO */
+        .demo-en-vivo { border: 2px dashed #3498db; padding: 15px; margin-bottom: 10px; background: #eaf2f8; border-radius: 5px; text-align: center; display:flex; flex-direction:column; align-items:center;}
+        .demo-etiqueta { font-size: 0.8em; color: #e74c3c; font-weight: bold; margin-bottom: 10px; text-transform: uppercase; }
+        
+        /* Demo 2: Flip */
+        .demo-tarjeta-contenedor { width: 150px; height: 200px; perspective: 1000px; }
+        .demo-tarjeta-flip { width: 100%; height: 100%; position: relative; transition: transform 0.8s; transform-style: preserve-3d; }
+        .demo-tarjeta-contenedor:hover .demo-tarjeta-flip { transform: rotateY(180deg); }
+        .demo-cara { width: 100%; height: 100%; position: absolute; backface-visibility: hidden; background: #1abc9c; color: white; display: flex; align-items: center; justify-content: center; border: 2px solid #16a085; font-weight: bold; border-radius: 8px;}
+        .demo-cara-trasera { background: #34495e; color: white; transform: rotateY(180deg); flex-direction: column;}
+        
+        /* Demo 3: Spinner */
+        .demo-loader { width: 50px; height: 50px; border: 6px solid #fff; border-top: 6px solid #e74c3c; border-radius: 50%; animation: giro 1s linear infinite; }
+        @keyframes giro { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
+        
+        /* Demo 10: LocalStorage */
+        .demo-clase-oscura { background: #111 !important; color: #fff !important; }
+    </style>
+</head>
+<body>
+
+<nav>
+    <h2>Índice de la Guía</h2>
+    <ul>
+        <li><a href="#supervivencia">🆘 1. MODO PÁNICO (Leer YA)</a></li>
+        <li><a href="#plantilla-base">🏗️ 2. El Esqueleto Base (Copia esto primero)</a></li>
+        <li><a href="#plantillas-trozos">🧩 3. Trozos de Código (Copia y pega lo que pida)</a></li>
+        <li><a href="#teoria">🧠 4. Traductor de Examen (Entiende lo que pide)</a></li>
+        <li><a href="#anexo-simulacro">📝 5. El Simulacro Resuelto</a></li>
+        <li><a href="#anexo-guia">📚 6. Apuntes Extra (UD5)</a></li>
+        <li><a href="#filtraciones">🔥 7. Ejercicios Filtrados</a></li>
+        <li><a href="#clasicos">🏆 8. Clásicos del Temario</a></li>
+    </ul>
+
+    <div style="margin-top: 30px; text-align: center; font-size: 0.85em; color:#7f8c8d;">
+        <p><i>Usa Ctrl + F para buscar algo concreto en toda la guía.</i></p>
+    </div>
+</nav>
+
+<main>
+    <h1>🚀 RECUPERACIÓN DIW RA4 (ALCALÁ DE GUADAÍRA)</h1>
+    
+    <div class="super-tonto">
+        <strong>⚠️ INSTRUCCIONES PARA "DUMMIES":</strong><br>
+        Has dicho que no recuerdas absolutamente nada. Vale. Cero pánico.<br>
+        No intentes entender cómo funciona Javascript ahora mismo. Tu objetivo es <strong>COPIAR, PEGAR y CAMBIAR PALABRAS</strong>. He diseñado esta guía para que seas un robot. Solo tienes que hacer lo que dice el paso a paso.
+    </div>
+
+    <!-- MODO PÁNICO -->
+    <section id="supervivencia">
+        <h2>🆘 1. QUÉ HACER EN CUANTO TE SIENTES EN EL ORDENADOR</h2>
+        <div class="caja-teoria">
+            <ol style="font-size: 1.2em; line-height: 1.8;">
+                <li>Crea una carpeta en el Escritorio con tu nombre.</li>
+                <li>Dentro, crea un archivo llamado <code>index.html</code> y ábrelo con Visual Studio Code.</li>
+                <li>Vete a la sección 2 de esta guía (El Esqueleto Base), selecciona el código gris entero, dale a <strong>Copiar</strong> y <strong>Pégalo</strong> en tu <code>index.html</code>. No pienses, solo hazlo. Ya tienes medio examen aprobado porque la estructura es correcta.</li>
+                <li>Lee el examen del profesor. ¿Te pide un formulario? Bajas a la sección 3, copias el trozo del formulario y lo pegas donde pone "METE AQUÍ TU HTML". ¿Te pide un Canvas? Copias el trozo del Canvas y lo pegas.</li>
+                <li><strong>LA REGLA DE ORO:</strong> En los trozos de código que vas a copiar, verás palabras en MAYÚSCULAS o cosas como <code>#nombre_boton</code>. <strong>Ese es el único trabajo que tienes que hacer:</strong> cambiar ese nombre por el ID que tú le hayas puesto a tu botón en tu HTML.</li>
+            </ol>
+        </div>
+    </section>
+
+    <!-- ESQUELETO BASE -->
+    <section id="plantilla-base">
+        <h2>🏗️ 2. EL ESQUELETO BASE (Paso 1 del examen)</h2>
+        <p>Selecciona TODO el cuadro negro de abajo, haz Ctrl+C y pégalo (Ctrl+V) en tu <code>index.html</code> vacío. ¡Ya tienes importado jQuery, CSS Grid y el HTML5 perfecto!</p>
+        
+        <div class="caja-teoria">
+<pre>
+&lt;!DOCTYPE html&gt;
+&lt;html lang="es"&gt;
+&lt;head&gt;
+    &lt;meta charset="UTF-8"&gt;
+    &lt;meta name="viewport" content="width=device-width, initial-scale=1.0"&gt;
+    &lt;title&gt;Examen DIW&lt;/title&gt;
+    &lt;!-- ESTO ES JQUERY, NO LO BORRES --&gt;
+    &lt;script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"&gt;&lt;/script&gt;
+    
+    &lt;style&gt;
+        /* =================== CSS QUE TE SALVA LA VIDA =================== */
+        /* Si a un div le pones class="grid-automatico", coloca todo en cuadrícula sola */
+        .grid-automatico { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 15px; }
+        
+        /* Clase para esconder cosas (ej: mensajes de error) */
+        .escondido { display: none; }
+        
+        /* Modificador para bordes rojos en errores */
+        .borde-rojo { border: 2px solid red !important; }
+        
+        /* Clase para Modo Noche (fondo oscuro, letra clara) */
+        .modo-noche { background-color: #333 !important; color: #fff !important; }
+    &lt;/style&gt;
+&lt;/head&gt;
+&lt;body&gt;
+
+    &lt;!-- =================== ESTRUCTURA OBLIGATORIA HTML5 =================== --&gt;
+    &lt;header&gt;
+        &lt;h1&gt;Cabecera del Examen&lt;/h1&gt;
+    &lt;/header&gt;
+
+    &lt;main&gt;
+        &lt;section&gt;
+            &lt;!-- !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! --&gt;
+            &lt;!-- !!! AQUÍ DENTRO PEGARÁS LOS TROZOS DE HTML QUE NECESITES !!! --&gt;
+            &lt;!-- !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! --&gt;
+            
+            &lt;h2&gt;Mi Sección de Trabajo&lt;/h2&gt;
+            
+        &lt;/section&gt;
+    &lt;/main&gt;
+
+    &lt;footer&gt;
+        &lt;p&gt;Examen DIW - Tu Nombre Aquí&lt;/p&gt;
+    &lt;/footer&gt;
+
+    &lt;!-- =================== LÓGICA JAVASCRIPT =================== --&gt;
+    &lt;script&gt;
+        // ESTO SIGNIFICA "ESPERA A QUE CARGUE LA PÁGINA ANTES DE HACER NADA"
+        $(document).ready(function() {
+
+            // !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+            // !!! AQUÍ DENTRO PEGARÁS LOS TROZOS DE JAVASCRIPT/JQUERY !!!
+            // !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+
+        }); // FIN DEL READY
+
+        // !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+        // !!! LOS CÓDIGOS DEL CANVAS SE PEGAN AQUÍ ABAJO, FUERA DEL READY !!!
+        // !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+    &lt;/script&gt;
+
+&lt;/body&gt;
+&lt;/html&gt;
+</pre>
+        </div>
+    </section>
+
+    <!-- TROZOS DE CÓDIGO -->
+    <section id="plantillas-trozos">
+        <h2>🧩 3. PIEZAS DEL PUZLE (Busca lo que pida el examen)</h2>
+        <p>¿Qué te pide el profesor? Busca el bloque correspondiente, copia el HTML arriba en el <code>&lt;main&gt;</code> y el JS abajo en el <code>&lt;script&gt;</code>.</p>
+        
+        <div class="caja-teoria">
+            
+            <!-- FORMULARIO -->
+            <h3>🔴 SI EL EXAMEN PIDE: "Validar que el input no esté vacío"</h3>
+            <p><strong>Copia este HTML dentro de tu <code>&lt;main&gt;</code>:</strong></p>
+<pre>
+&lt;form id="formulario_ejercicio"&gt;
+    &lt;input type="text" id="campo_nombre" placeholder="Escribe tu nombre..."&gt;
+    &lt;p id="mensaje_error" class="escondido" style="color:red;"&gt;¡Cuidado, está vacío!&lt;/p&gt;
+    &lt;button type="submit"&gt;Enviar&lt;/button&gt;
+&lt;/form&gt;
+</pre>
+            <p><strong>Copia este Javascript dentro del <code>$(document).ready(function() {</code> :</strong></p>
+<pre>
+$("#formulario_ejercicio").submit(function(e) {
+    e.preventDefault(); // ESTO ES OBLIGATORIO PARA QUE NO SE RECARGUE LA PÁGINA
+
+    // Cogemos lo que ha escrito el usuario
+    let loQueHaEscrito = $("#campo_nombre").val(); 
+    
+    if (loQueHaEscrito === "") {
+        // SI ESTÁ VACÍO: Mostramos el error
+        $("#mensaje_error").fadeIn();
+        $("#campo_nombre").addClass("borde-rojo");
+    } else {
+        // SI HA ESCRITO ALGO: Ocultamos el error
+        $("#mensaje_error").fadeOut();
+        $("#campo_nombre").removeClass("borde-rojo");
+        alert("Todo correcto jefe");
+    }
+});
+</pre>
+
+            <hr style="margin:40px 0;">
+
+            <!-- MODO NOCHE / CLASES -->
+            <h3>🔴 SI EL EXAMEN PIDE: "Al darle a un botón cambiar a modo noche / añadir clase"</h3>
+            <p><strong>Copia este HTML dentro de tu <code>&lt;main&gt;</code>:</strong></p>
+<pre>
+&lt;button id="boton_color"&gt;Cambiar Colores&lt;/button&gt;
+&lt;div id="caja_a_cambiar" style="padding:20px; border:1px solid black;"&gt;
+    Mi texto cambiará de color
+&lt;/div&gt;
+</pre>
+            <p><strong>Copia este Javascript dentro del <code>$(document).ready(function() {</code> :</strong></p>
+<pre>
+$("#boton_color").click(function() {
+    // Si te piden afectar a toda la web, cambia "#caja_a_cambiar" por "body"
+    $("#caja_a_cambiar").toggleClass("modo-noche"); 
+});
+</pre>
+
+            <hr style="margin:40px 0;">
+
+            <!-- FETCH / JSON -->
+            <h3>🔴 SI EL EXAMEN PIDE: "Cargar datos desde un archivo JSON o de internet" (FETCH)</h3>
+            <p><strong>Copia este HTML dentro de tu <code>&lt;main&gt;</code>:</strong></p>
+<pre>
+&lt;!-- Fíjate que le he puesto la clase grid-automatico para que se alineen solos --&gt;
+&lt;div id="caja_datos" class="grid-automatico"&gt;
+    Los datos aparecerán aquí dentro...
+&lt;/div&gt;
+</pre>
+            <p><strong>Copia este Javascript dentro del <code>$(document).ready(function() {</code> :</strong></p>
+<pre>
+// CAMBIA "datos_del_profesor.json" POR EL ARCHIVO O LINK QUE TE DEN
+fetch('datos_del_profesor.json') 
+    .then(respuesta => respuesta.json())
+    .then(datosRecibidos => {
+        $("#caja_datos").empty(); // Borramos el texto de cargando...
+        
+        // Recorremos los datos (ej: una lista de alumnos o coches)
+        datosRecibidos.forEach(elemento => {
+            // CAMBIA "elemento.nombre" por lo que haya dentro del JSON del profesor
+            $("#caja_datos").append(`
+                &lt;div style="background:#eee; padding:10px; border:1px solid black;"&gt;
+                    &lt;h3&gt;${elemento.nombre}&lt;/h3&gt;
+                &lt;/div&gt;
+            `);
+        });
+    });
+</pre>
+
+            <hr style="margin:40px 0;">
+
+            <!-- DRAG AND DROP -->
+            <h3>🔴 SI EL EXAMEN PIDE: "Arrastrar una caja y soltarla dentro de otra" (Drag & Drop)</h3>
+            <p><strong>Copia este HTML dentro de tu <code>&lt;main&gt;</code>:</strong></p>
+<pre>
+&lt;div style="display:flex; gap:50px;"&gt;
+    &lt;!-- LA CAJA QUE SE PUEDE MOVER (OJO AL draggable="true") --&gt;
+    &lt;div id="caja_arrastrable" draggable="true" style="width:100px; height:100px; background:red; color:white;"&gt;Arrástrame&lt;/div&gt;
+    
+    &lt;!-- LA ZONA DONDE HAY QUE SOLTARLO (OJO AL ondragover) --&gt;
+    &lt;div id="zona_basura" ondragover="event.preventDefault()" style="width:200px; height:200px; background:lightgreen; border:3px dashed black;"&gt;
+        Suelta aquí
+    &lt;/div&gt;
+&lt;/div&gt;
+</pre>
+            <p><strong>Copia este Javascript dentro del <code>$(document).ready(function() {</code> :</strong></p>
+<pre>
+// 1. Cuando pinchamos la caja y empezamos a moverla
+$("#caja_arrastrable").on("dragstart", function(e) {
+    // Le metemos en la mochila invisible la ID de la caja
+    e.originalEvent.dataTransfer.setData("mochila", e.target.id);
+});
+
+// 2. Cuando soltamos el ratón encima de la zona destino
+$("#zona_basura").on("drop", function(e) {
+    e.preventDefault();
+    // Sacamos de la mochila la ID de la caja
+    let idSacado = e.originalEvent.dataTransfer.getData("mochila");
+    // Movemos la caja roja DENTRO de la zona verde
+    $(this).append( document.getElementById(idSacado) );
+});
+</pre>
+
+            <hr style="margin:40px 0;">
+
+            <!-- CANVAS -->
+            <h3>🔴 SI EL EXAMEN PIDE: "Dibuja un rectángulo/círculo animado" (CANVAS)</h3>
+            <p><strong>Copia este HTML dentro de tu <code>&lt;main&gt;</code>:</strong></p>
+<pre>
+&lt;canvas id="pizarra" width="400" height="200" style="border:2px solid black;"&gt;&lt;/canvas&gt;
+</pre>
+            <p><strong>Copia este Javascript AL FINAL DEL TODO, <span style="color:red;text-decoration:underline;">FUERA</span> DEL <code>$(document).ready()</code> :</strong></p>
+<pre>
+let miLienzo = document.getElementById("pizarra");
+let ctx = miLienzo.getContext("2d");
+let posicionX = 0; // Donde empieza el cuadrado
+
+function bucleMagico() {
+    // 1. BORRAMOS LA PIZARRA ENTERA (OBLIGATORIO)
+    ctx.clearRect(0, 0, miLienzo.width, miLienzo.height); 
+
+    // 2. DIBUJAMOS EL CUADRADO AZUL
+    ctx.fillStyle = "blue";
+    ctx.fillRect(posicionX, 50, 50, 50); // X, Y, Ancho, Alto
+
+    // 3. LE SUMAMOS 2 PARA QUE SE MUEVA A LA DERECHA
+    posicionX += 2; 
+    
+    // Si se sale de la pantalla, que vuelva al principio
+    if (posicionX > miLienzo.width) { posicionX = -50; }
+
+    // 4. VUELVE A LLAMARSE A SÍ MISMO (BUCLE INFINITO)
+    requestAnimationFrame(bucleMagico); 
+}
+// Arrancamos el bucle la primera vez
+bucleMagico();
+</pre>
+
+            <hr style="margin:40px 0;">
+            <!-- SVG -->
+            <h3>🔴 SI EL EXAMEN PIDE: "Gráfico en formato SVG puro"</h3>
+            <p><strong>El SVG NO USA Javascript. Simplemente copia esto en tu HTML:</strong></p>
+<pre>
+&lt;svg width="400" height="200" style="border:1px solid gray; background:#f9f9f9;"&gt;
+    &lt;!-- Un círculo morado (cx y cy son el centro) --&gt;
+    &lt;circle cx="50" cy="50" r="40" fill="purple" stroke="black" stroke-width="2" /&gt;
+    
+    &lt;!-- Un rectángulo naranja con esquinas redondeadas (rx) --&gt;
+    &lt;rect x="150" y="20" width="100" height="60" fill="orange" rx="10" /&gt;
+    
+    &lt;!-- Una línea curva suelta (La M es donde empieza, la Q es la curva) --&gt;
+    &lt;path d="M 50 150 Q 150 50 250 150 T 350 150" fill="transparent" stroke="blue" stroke-width="3" /&gt;
+&lt;/svg&gt;
+</pre>
+
+        </div>
+    </section>
+
+    <!-- TRADUCTOR -->
+    <section id="teoria">
+        <h2>🧠 4. TRADUCTOR DE PROFESOR (Si no sabes qué te está pidiendo)</h2>
+        <div class="caja-teoria grid-resumen">
+            <div class="tarjeta">
+                <h3>Si en el papel pone:</h3>
+                <p><i>"Evita el envío por defecto"</i><br>
+                <i>"Verifica en el lado del cliente"</i></p>
+                <hr>
+                <p><strong>Lo que tú haces:</strong><br>
+                Es el trozo de <strong>Validar el Formulario</strong>. Tienes que usar el <code>submit</code> y poner obligatoriamente el <code>e.preventDefault()</code>.</p>
+            </div>
+            <div class="tarjeta">
+                <h3>Si en el papel pone:</h3>
+                <p><i>"Obtén la información de forma asíncrona"</i><br>
+                <i>"Consume un archivo JSON externo"</i></p>
+                <hr>
+                <p><strong>Lo que tú haces:</strong><br>
+                Es el trozo de <strong>FETCH API</strong>. Busca la ruta del archivo que te dé y ponla en la primera línea del fetch.</p>
+            </div>
+            <div class="tarjeta">
+                <h3>Si en el papel pone:</h3>
+                <p><i>"Gráficos vectoriales nativos"</i><br>
+                <i>"Dibujo usando etiquetas d=..."</i></p>
+                <hr>
+                <p><strong>Lo que tú haces:</strong><br>
+                Es el trozo de <strong>SVG</strong>. Ni se te ocurra usar Javascript ni Canvas aquí. Es copiar y pegar el código HTML del <code>&lt;svg&gt;</code>.</p>
+            </div>
+            <div class="tarjeta">
+                <h3>Si en el papel pone:</h3>
+                <p><i>"Genera contenido responsivo dinámico"</i><br>
+                <i>"Estructura alineada en tarjetas"</i></p>
+                <hr>
+                <p><strong>Lo que tú haces:</strong><br>
+                Añade la clase <code>class="grid-automatico"</code> (que está en tu esqueleto base) al Div que envuelve las fotos. No te compliques haciendo media queries.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- ANEXO SIMULACRO -->
+    <section id="anexo-simulacro">
+        <h2>📝 5. ANEXO: El Simulacro Resuelto</h2>
+        <p>Aquí tienes los 4 ejercicios exactos del simulacro, con su solución lista para robar.</p>
+        <div class="caja-teoria grid-resumen">
+            <div class="tarjeta">
+                <h3>Ejercicio 1: CSS Grid</h3>
+                <p>4 cajas alineadas adaptables sin media queries.</p>
+<pre>
+#galeria-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 15px;
+}
+</pre>
+            </div>
+            <div class="tarjeta">
+                <h3>Ejercicio 2: Formulario Vacío</h3>
+<pre>
+$("#form").submit(function(e) {
+    e.preventDefault();
+    if ($("#clave").val() === "") {
+        $("#error").fadeIn();
+    } else {
+        $("#error").fadeOut();
+    }
+});
+</pre>
+            </div>
+            <div class="tarjeta">
+                <h3>Ejercicio 3: Modo Noche</h3>
+<pre>
+/* En tu CSS */
+.noche { background: #222 !important; color: #fff !important; }
+
+/* En tu Javascript */
+$("#btn-noche").click(function() {
+    $("#caja").toggleClass("noche");
+});
+</pre>
+            </div>
+            <div class="tarjeta">
+                <h3>Ejercicio 4: Canvas Básico</h3>
+<pre>
+let ctx = document.getElementById("canvas").getContext("2d");
+ctx.fillStyle = "blue";
+ctx.fillRect(20, 20, 100, 50); // x,y,w,h
+</pre>
+            </div>
+        </div>
+    </section>
+
+    <!-- ANEXO GUÍA -->
+    <section id="anexo-guia">
+        <h2>📚 6. ANEXO: Apuntes Extra (Por si acaso)</h2>
+        <p>Si te pide algo súper raro que no está arriba, búscalo aquí.</p>
+        
+        <div class="caja-teoria">
+            <h3>🔹 Etiquetas Multimedia (Audio y Vídeo)</h3>
+<pre>
+&lt;!-- Vídeo que se auto-reproduce y no tiene sonido --&gt;
+&lt;video src="pelicula.mp4" autoplay muted loop width="400"&gt;&lt;/video&gt;
+
+&lt;!-- Audio con controles básicos --&gt;
+&lt;audio src="cancion.mp3" controls&gt;&lt;/audio&gt;
+</pre>
+            
+            <h3>🔹 Propiedades raras de Canvas</h3>
+<pre>
+ctx.lineWidth = 5; // Grosor de la línea
+ctx.strokeStyle = "red"; // Color del borde
+ctx.strokeRect(10, 10, 50, 50); // Dibuja solo el borde de un cuadrado
+
+// Escribir texto gigante
+ctx.font = "40px Arial";
+ctx.fillText("Hola", 100, 100);
+</pre>
+            
+            <h3>🔹 Eventos Raros (Scroll y Teclado)</h3>
+<pre>
+// Saber si el usuario está bajando por la página
+$(window).scroll(function() {
+    let bajada = $(window).scrollTop();
+    if (bajada > 200) {
+        // Haz algo si ha bajado más de 200 píxeles
+    }
+});
+
+// Detectar qué tecla ha pulsado (ejemplo: Enter = Tecla 13)
+$(document).on("keypress", function(e) {
+    if (e.which === 13) {
+        alert("Has pulsado Enter");
+    }
+});
+</pre>
+        </div>
+    </section>
+
+    <!-- EJERCICIOS FILTRADOS -->
+    <section id="filtraciones">
+        <h2>🔥 7. EJERCICIOS FILTRADOS (CÓDIGO DE EXAMEN)</h2>
+        <p>Estos ejercicios son de ALTA PROBABILIDAD (Tarjeta que gira, Barras en Canvas, Filtros en tiempo real...). Aquí tienes el código directo para copiar y pegar.</p>
+        
+        <div class="caja-teoria">
+            
+            <h3>🔹 1. Imágenes Responsivas (&lt;picture&gt;)</h3>
+<pre>
+&lt;picture&gt;
+  &lt;!-- Cambia de imagen según el tamaño de la pantalla --&gt;
+  &lt;source media="(min-width: 1024px)" srcset="banner-pc.jpg"&gt;
+  &lt;img src="banner-movil.jpg" alt="Banner promocional"&gt;
+&lt;/picture&gt;
+</pre>
+
+            <h3>🔹 2. Tarjeta Flip 3D (Gira al pasar el ratón)</h3>
+            <div class="demo-en-vivo">
+                <span class="demo-etiqueta">👇 Pasa el ratón por encima 👇</span>
+                <div class="demo-tarjeta-contenedor">
+                  <div class="demo-tarjeta-flip">
+                    <div class="demo-cara">PORTADA</div>
+                    <div class="demo-cara demo-cara-trasera"><p>1. Cancion 1</p></div>
+                  </div>
+                </div>
+            </div>
+<pre>
+&lt;!-- HTML --&gt;
+&lt;div class="tarjeta-contenedor"&gt;
+  &lt;div class="tarjeta-flip"&gt;
+    &lt;div class="cara cara-frontal"&gt;&lt;h3&gt;PORTADA&lt;/h3&gt;&lt;/div&gt;
+    &lt;div class="cara cara-trasera"&gt;&lt;p&gt;Canciones&lt;/p&gt;&lt;/div&gt;
+  &lt;/div&gt;
+&lt;/div&gt;
+
+&lt;!-- CSS --&gt;
+&lt;style&gt;
+  .tarjeta-contenedor { width: 300px; height: 400px; perspective: 1000px; }
+  .tarjeta-flip { width: 100%; height: 100%; position: relative; transition: transform 0.8s; transform-style: preserve-3d; }
+  .tarjeta-contenedor:hover .tarjeta-flip { transform: rotateY(180deg); }
+  .cara { width: 100%; height: 100%; position: absolute; backface-visibility: hidden; background: black; color: white; display: flex; align-items: center; justify-content: center; border: 2px solid white; }
+  .cara-trasera { background: white; color: black; transform: rotateY(180deg); }
+&lt;/style&gt;
+</pre>
+
+            <h3>🔹 3. Loader Spinner Animado (Puro CSS)</h3>
+            <div class="demo-en-vivo">
+                <span class="demo-etiqueta">👇 Animación Matemática sin JS 👇</span>
+                <div class="demo-loader"></div>
+            </div>
+<pre>
+&lt;div class="loader-brutalista"&gt;&lt;/div&gt;
+&lt;style&gt;
+  .loader-brutalista {
+    width: 60px; height: 60px; border: 8px solid #f3f3f3; border-top: 8px solid black; border-radius: 50%;
+    animation: giro 1s linear infinite;
+  }
+  @keyframes giro {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+  }
+&lt;/style&gt;
+</pre>
+
+            <h3>🔹 4. Barra Progreso de Vídeo Dinámica</h3>
+            <div class="demo-en-vivo">
+                <span class="demo-etiqueta">👇 Dale al Play y mira la barra roja 👇</span>
+                <video id="demo-vid" width="300" src="https://www.w3schools.com/html/mov_bbb.mp4" controls></video>
+                <div id="demo-barra-fondo" style="width: 300px; height: 10px; background: #ddd; cursor: pointer; margin-top:5px;">
+                  <div id="demo-barra-progreso" style="height: 100%; width: 0%; background: #e74c3c;"></div>
+                </div>
+            </div>
+<pre>
+&lt;!-- HTML --&gt;
+&lt;video id="vidReproductor" width="500"&gt;&lt;source src="clip.mp4" type="video/mp4"&gt;&lt;/video&gt;
+&lt;div id="barra-fondo" style="width: 500px; height: 10px; background: gray; cursor: pointer;"&gt;
+  &lt;div id="barra-progreso" style="height: 100%; width: 0%; background: red;"&gt;&lt;/div&gt;
+&lt;/div&gt;
+
+&lt;!-- JAVASCRIPT (Pegar abajo del todo, fuera de jQuery) --&gt;
+&lt;script&gt;
+  const vid = document.getElementById("vidReproductor");
+  const barraP = document.getElementById("barra-progreso");
+  const barraF = document.getElementById("barra-fondo");
+
+  // La barra avanza sola
+  vid.addEventListener("timeupdate", () =&gt; {
+    let porcentaje = (vid.currentTime / vid.duration) * 100;
+    barraP.style.width = porcentaje + "%";
+  });
+
+  // Hacer click en la barra adelanta el vídeo
+  barraF.addEventListener("click", (e) =&gt; {
+    let anchoTotal = barraF.offsetWidth;
+    let nuevoTiempo = (e.offsetX / anchoTotal) * vid.duration;
+    vid.currentTime = nuevoTiempo;
+  });
+&lt;/script&gt;
+</pre>
+
+            <h3>🔹 5. Gráfica de Barras en Canvas</h3>
+            <div class="demo-en-vivo">
+                <span class="demo-etiqueta">👇 Creado con un bucle for 👇</span>
+                <canvas id="demo-graf" width="250" height="150" style="border: 1px solid #ccc; background:#fff;"></canvas>
+            </div>
+<pre>
+&lt;canvas id="graf" width="400" height="200" style="border: 1px solid black;"&gt;&lt;/canvas&gt;
+
+&lt;script&gt;
+  const ctxGraf = document.getElementById("graf").getContext("2d");
+  const ventas = [50, 120, 80, 150];
+  let posX = 20;
+
+  for (let i = 0; i &lt; ventas.length; i++) {
+    let altoBarra = ventas[i];
+    let posY = 200 - altoBarra; // Para que crezca desde el suelo
+    
+    ctxGraf.fillStyle = "black";
+    ctxGraf.fillRect(posX, posY, 50, altoBarra);
+    
+    posX += 80; // Separación entre la siguiente barra
+  }
+&lt;/script&gt;
+</pre>
+
+            <h3>🔹 6. Máscara Recorte SVG (Clip-Path)</h3>
+            <div class="demo-en-vivo">
+                <span class="demo-etiqueta">👇 Cuadrado recortado con forma de rombo 👇</span>
+                <svg width="0" height="0"><defs><clipPath id="demo-recorte"><polygon points="50,0 100,50 50,100 0,50" /></clipPath></defs></svg>
+                <div style="width: 100px; height: 100px; background: #3498db; clip-path: url(#demo-recorte);"></div>
+            </div>
+<pre>
+&lt;!-- El SVG que recorta --&gt;
+&lt;svg width="0" height="0"&gt;
+  &lt;defs&gt;
+    &lt;clipPath id="miRecorte"&gt;
+      &lt;polygon points="100,0 200,100 100,200 0,100" /&gt;
+    &lt;/clipPath&gt;
+  &lt;/defs&gt;
+&lt;/svg&gt;
+
+&lt;!-- La imagen que sufre el recorte --&gt;
+&lt;img src="artista.jpg" style="width: 200px; height: 200px; clip-path: url(#miRecorte);"&gt;
+</pre>
+
+            <h3>🔹 7. Buscador en Tiempo Real (jQuery)</h3>
+            <div class="demo-en-vivo">
+                <span class="demo-etiqueta">👇 Escribe 'ro' o 'de' 👇</span>
+                <input type="text" id="demo-buscador" placeholder="Buscar artista..." style="padding: 5px;">
+                <ul id="demo-lista" style="text-align:left; background:#fff; padding:10px; width:200px;">
+                  <li>Rosalia</li><li>Dellafuente</li><li>Cruz Cafune</li>
+                </ul>
+            </div>
+<pre>
+&lt;input type="text" id="buscador" placeholder="Buscar..."&gt;
+&lt;ul id="lista-artistas"&gt;
+  &lt;li&gt;Rosalia&lt;/li&gt;
+  &lt;li&gt;Dellafuente&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;script&gt;
+// PEGAR DENTRO DEL $(document).ready()
+$("#buscador").on("keyup", function() {
+    let valorBuscado = $(this).val().toLowerCase(); 
+    $("#lista-artistas li").filter(function() {
+        // Oculta lo que no coincida
+        $(this).toggle($(this).text().toLowerCase().indexOf(valorBuscado) &gt; -1);
+    });
+});
+&lt;/script&gt;
+</pre>
+
+            <h3>🔹 8. Acordeón Desplegable (jQuery)</h3>
+            <div class="demo-en-vivo">
+                <span class="demo-etiqueta">👇 Haz click en las preguntas 👇</span>
+                <div style="width:100%; text-align:left; max-width:300px;">
+                    <h4 class="demo-titulo-acordeon" style="background:#2c3e50; color:white; padding:5px; cursor:pointer; margin:0;">+ Pregunta 1</h4>
+                    <div class="demo-contenido-acordeon" style="display:none; padding:5px; border:1px solid #ccc;">Respuesta secreta 1</div>
+                    <h4 class="demo-titulo-acordeon" style="background:#2c3e50; color:white; padding:5px; cursor:pointer; margin:0; margin-top:5px;">+ Pregunta 2</h4>
+                    <div class="demo-contenido-acordeon" style="display:none; padding:5px; border:1px solid #ccc;">Respuesta secreta 2</div>
+                </div>
+            </div>
+<pre>
+&lt;!-- HTML --&gt;
+&lt;div class="acordeon-item"&gt;
+  &lt;h3 class="titulo-acordeon" style="background:#222; color:white; padding:10px; cursor:pointer;"&gt;Pregunta 1&lt;/h3&gt;
+  &lt;div class="contenido-acordeon" style="display:none; padding:10px; border:1px solid #222;"&gt;Respuesta oculta 1&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="acordeon-item"&gt;
+  &lt;h3 class="titulo-acordeon" style="background:#222; color:white; padding:10px; cursor:pointer;"&gt;Pregunta 2&lt;/h3&gt;
+  &lt;div class="contenido-acordeon" style="display:none; padding:10px; border:1px solid #222;"&gt;Respuesta oculta 2&lt;/div&gt;
+&lt;/div&gt;
+
+&lt;script&gt;
+// PEGAR DENTRO DEL $(document).ready()
+$(".titulo-acordeon").click(function() {
+    // Cierra todos los demás suavemente
+    $(".contenido-acordeon").slideUp();
+    // Abre solo el que he pinchado (si estaba cerrado)
+    $(this).next(".contenido-acordeon").stop().slideToggle();
+});
+&lt;/script&gt;
+</pre>
+
+            <h3>🔹 9. Galería de Imágenes Interactiva (jQuery)</h3>
+            <div class="demo-en-vivo">
+                <span class="demo-etiqueta">👇 Haz click en la miniatura ROJA 👇</span>
+                <img id="demo-foto-principal" src="https://via.placeholder.com/400x200/1abc9c/ffffff?text=GATO+1" width="300" style="margin-bottom:10px;">
+                <div>
+                    <img class="demo-miniatura" src="https://via.placeholder.com/400x200/1abc9c/ffffff?text=GATO+1" width="80" style="cursor:pointer; border:2px solid #ccc;">
+                    <img class="demo-miniatura" src="https://via.placeholder.com/400x200/e74c3c/ffffff?text=GATO+2" width="80" style="cursor:pointer; border:2px solid #ccc;">
+                </div>
+            </div>
+<pre>
+&lt;!-- HTML --&gt;
+&lt;img id="foto-principal" src="gato1.jpg" width="400"&gt;
+&lt;br&gt;
+&lt;img class="miniatura" src="gato1.jpg" width="100" style="cursor:pointer; border:2px solid black;"&gt;
+&lt;img class="miniatura" src="gato2.jpg" width="100" style="cursor:pointer; border:2px solid black;"&gt;
+
+&lt;script&gt;
+// PEGAR DENTRO DEL $(document).ready()
+$(".miniatura").click(function() {
+    // 1. Coge la ruta de la miniatura que he pinchado
+    let nuevaRuta = $(this).attr("src");
+    // 2. Se la pone a la foto gigante
+    $("#foto-principal").attr("src", nuevaRuta);
+});
+&lt;/script&gt;
+</pre>
+
+            <h3>🔹 10. Recordar el Modo Noche (LocalStorage)</h3>
+            <div class="demo-en-vivo" id="demo-caja-noche-local" style="transition:0.3s;">
+                <span class="demo-etiqueta">👇 Actívalo y recarga la pestaña (F5) 👇</span>
+                <button id="demo-btn-noche-local" style="padding:10px; cursor:pointer; background:#34495e; color:white; border:none; border-radius:5px;">Alternar Modo Noche</button>
+            </div>
+<pre>
+&lt;!-- HTML --&gt;
+&lt;button id="btn-noche-local"&gt;Alternar Modo Noche&lt;/button&gt;
+&lt;div id="caja-noche-local" style="padding:20px;"&gt;Esta caja recuerda su color al recargar la página&lt;/div&gt;
+
+&lt;style&gt; .clase-oscura { background: black !important; color: white !important; } &lt;/style&gt;
+
+&lt;script&gt;
+// PEGAR DENTRO DEL $(document).ready()
+
+// 1. Al cargar la página, comprobamos si el usuario lo activó ayer
+if (localStorage.getItem("modo") === "oscuro") {
+    $("#caja-noche-local").addClass("clase-oscura");
+}
+
+// 2. Al pulsar el botón
+$("#btn-noche-local").click(function() {
+    $("#caja-noche-local").toggleClass("clase-oscura");
+    
+    // Si la caja ahora tiene la clase, lo guardamos para siempre
+    if ($("#caja-noche-local").hasClass("clase-oscura")) {
+        localStorage.setItem("modo", "oscuro");
+    } else {
+        // Si no, borramos el recuerdo
+        localStorage.setItem("modo", "claro");
+    }
+});
+&lt;/script&gt;
+</pre>
+
+            <h3>🔹 11. Botón "Volver Arriba" (Aparece al hacer Scroll)</h3>
+            <div class="demo-en-vivo" style="height: 150px; overflow-y: scroll; position:relative; display:block;" id="demo-scroll-caja">
+                <div style="position:sticky; top:0; background:#eaf2f8; width:100%; text-align:center; padding:10px 0;"><span class="demo-etiqueta">👇 Haz scroll HACIA ABAJO dentro de esta caja 👇</span></div>
+                <div style="height: 400px; padding-top:20px; text-align:center; color:#7f8c8d;">
+                    Sigue bajando...<br><br><br><br><br><br>Casi llegas...
+                </div>
+                <button id="demo-btn-subir" style="display:none; position:absolute; bottom:10px; right:10px; background:#e74c3c; color:white; border:none; padding:10px; border-radius:50%; cursor:pointer;">⬆️</button>
+            </div>
+<pre>
+&lt;!-- HTML --&gt;
+&lt;button id="btn-subir" style="display:none; position:fixed; bottom:20px; right:20px;"&gt;Subir Arriba&lt;/button&gt;
+
+&lt;script&gt;
+// PEGAR DENTRO DEL $(document).ready()
+
+// 1. Detectar si el usuario baja por la página para mostrar el botón
+$(window).scroll(function() {
+    if ($(window).scrollTop() &gt; 300) { // Si baja más de 300px
+        $("#btn-subir").fadeIn();
+    } else {
+        $("#btn-subir").fadeOut();
+    }
+});
+
+// 2. Al hacer clic, subir suavemente
+$("#btn-subir").click(function() {
+    $("html, body").animate({ scrollTop: 0 }, "slow");
+});
+&lt;/script&gt;
+</pre>
+
+            <h3>🔹 12. Carrusel de Imágenes Automático (setInterval)</h3>
+            <div class="demo-en-vivo">
+                <span class="demo-etiqueta">👇 Espera 3 segundos y cambiará sola 👇</span>
+                <img id="demo-carrusel" src="https://via.placeholder.com/300x150/f1c40f/000000?text=FOTO+1" width="300">
+            </div>
+<pre>
+&lt;!-- HTML --&gt;
+&lt;img id="carrusel" src="foto1.jpg" width="400"&gt;
+
+&lt;script&gt;
+// PEGAR DENTRO DEL $(document).ready()
+let fotos = ["foto1.jpg", "foto2.jpg", "foto3.jpg"];
+let indice = 0;
+
+setInterval(function() {
+    indice++;
+    if (indice &gt;= fotos.length) {
+        indice = 0; // Vuelve a la primera foto
+    }
+    // Cambia la foto con un efecto de fundido
+    $("#carrusel").fadeOut(200, function() {
+        $(this).attr("src", fotos[indice]).fadeIn(200);
+    });
+}, 3000); // Cambia cada 3 segundos
+&lt;/script&gt;
+</pre>
+
+            <h3>🔹 13. Cuenta Atrás / Reloj Regresivo</h3>
+            <div class="demo-en-vivo">
+                <span class="demo-etiqueta">👇 Empezará a bajar desde 10 👇</span>
+                <div id="demo-reloj" style="font-size:40px; font-weight:bold; color:#e74c3c;">10</div>
+            </div>
+<pre>
+&lt;!-- HTML --&gt;
+&lt;div id="reloj" style="font-size:30px; font-weight:bold; color:red;"&gt;10&lt;/div&gt;
+
+&lt;script&gt;
+// PEGAR DENTRO DEL $(document).ready()
+let tiempo = 10;
+let temporizador = setInterval(function() {
+    tiempo--;
+    $("#reloj").text(tiempo);
+    
+    if (tiempo &lt;= 0) {
+        clearInterval(temporizador); // Para el reloj
+        $("#reloj").text("¡TIEMPO AGOTADO!");
+    }
+}, 1000); // Se ejecuta cada 1000ms (1 segundo)
+&lt;/script&gt;
+</pre>
+
+            <h3>🔹 14. Evento Teclado: Mover un cuadrado en Canvas</h3>
+            <div class="demo-en-vivo">
+                <span class="demo-etiqueta">👇 PINCHA EN EL CUADRO BLANCO y usa las flechas ⬅️⬆️⬇️➡️ 👇</span>
+                <canvas id="demo-lienzoJuego" width="200" height="200" style="border:2px solid #ccc; background:#fff;" tabindex="0"></canvas>
+            </div>
+<pre>
+&lt;!-- HTML --&gt;
+&lt;canvas id="lienzoJuego" width="400" height="400" style="border:2px solid black;"&gt;&lt;/canvas&gt;
+
+&lt;!-- JAVASCRIPT (Fuera del document.ready) --&gt;
+&lt;script&gt;
+  const ctxJuego = document.getElementById("lienzoJuego").getContext("2d");
+  let miX = 200;
+  let miY = 200;
+
+  function dibujarJugador() {
+      ctxJuego.clearRect(0, 0, 400, 400); // Borrar pantalla
+      ctxJuego.fillStyle = "purple";
+      ctxJuego.fillRect(miX, miY, 30, 30); // Dibujar
+  }
+
+  // Detectar flechas del teclado
+  document.addEventListener("keydown", function(evento) {
+      if (evento.key === "ArrowUp") miY -= 10;
+      if (evento.key === "ArrowDown") miY += 10;
+      if (evento.key === "ArrowLeft") miX -= 10;
+      if (evento.key === "ArrowRight") miX += 10;
+      
+      dibujarJugador(); // Redibujar en la nueva posición
+  });
+
+  dibujarJugador(); // Dibujar la primera vez
+&lt;/script&gt;
+</pre>
+
+        </div>
+    </section>
+
+    <!-- CLASICOS DEL TEMARIO -->
+    <section id="clasicos">
+        <h2>🏆 8. CLÁSICOS DEL TEMARIO</h2>
+        <p>Aparte de las filtraciones, el profesor adora preguntar estas 4 cosas específicas. Las tienes que llevar preparadas sí o sí.</p>
+        
+        <div class="caja-teoria">
+
+            <h3>🔹 15. Barra de Accesibilidad (Aumentar/Reducir Texto)</h3>
+            <div class="demo-en-vivo">
+                <span class="demo-etiqueta">👇 Pulsa los botones 👇</span>
+                <div style="display:flex; gap:10px;">
+                    <button id="demo-btn-aumentar" style="padding:10px; cursor:pointer;">Aumentar Texto</button>
+                    <button id="demo-btn-reducir" style="padding:10px; cursor:pointer;">Reducir Texto</button>
+                </div>
+                <p id="demo-texto-acc" style="margin-top:10px; font-size:16px;">Mírame, cambio de tamaño dinámicamente.</p>
+            </div>
+<pre>
+&lt;!-- HTML --&gt;
+&lt;button id="btn-aumentar"&gt;+ Aumentar&lt;/button&gt;
+&lt;button id="btn-reducir"&gt;- Reducir&lt;/button&gt;
+&lt;p id="texto-pagina" style="font-size: 16px;"&gt;Texto de prueba&lt;/p&gt;
+
+&lt;script&gt;
+// PEGAR DENTRO DEL $(document).ready()
+let tamano = 16;
+$("#btn-aumentar").click(function() {
+    tamano += 2;
+    $("#texto-pagina").css("font-size", tamano + "px"); // O $("body") para toda la web
+});
+$("#btn-reducir").click(function() {
+    tamano -= 2;
+    $("#texto-pagina").css("font-size", tamano + "px");
+});
+&lt;/script&gt;
+</pre>
+
+            <h3>🔹 16. Drag & Drop (Arrastrar y Soltar) API</h3>
+            <div class="demo-en-vivo">
+                <span class="demo-etiqueta">👇 Arrastra la caja roja a la caja punteada 👇</span>
+                <div style="display:flex; gap:20px; align-items:center; margin-top:10px;">
+                    <div id="demo-producto-drag" draggable="true" ondragstart="demoArrastrar(event)" style="padding:15px; background:#e74c3c; color:#fff; border-radius:6px; cursor:grab; font-weight:bold;">
+                        Caja Roja
+                    </div>
+                    <div id="demo-cesta-drop" ondragover="demoPermitir(event)" ondrop="demoSoltar(event)" style="width:200px; height:80px; border:2px dashed #ccc; display:flex; align-items:center; justify-content:center; background:#fff; color:#333; font-weight:bold;">
+                        Cesta
+                    </div>
+                </div>
+            </div>
+<pre>
+&lt;!-- HTML --&gt;
+&lt;div id="producto" draggable="true" ondragstart="arrastrar(event)" style="background:red; padding:10px;"&gt;Caja&lt;/div&gt;
+
+&lt;!-- EL ondragover ES OBLIGATORIO PARA QUE FUNCIONE --&gt;
+&lt;div id="zona" ondragover="permitir(event)" ondrop="soltar(event)" style="width:200px; height:100px; border:2px dashed black;"&gt;&lt;/div&gt;
+
+&lt;!-- JS FUERA DE JQUERY --&gt;
+&lt;script&gt;
+  function arrastrar(e) { 
+      e.dataTransfer.setData("id_caja", e.target.id); 
+  }
+  function permitir(e) { 
+      e.preventDefault(); // SUPER IMPORTANTE: Quita el bloqueo del navegador
+  } 
+  function soltar(e) {
+      e.preventDefault();
+      let id = e.dataTransfer.getData("id_caja");
+      e.target.appendChild(document.getElementById(id)); // Mueve la caja dentro
+  }
+&lt;/script&gt;
+</pre>
+
+            <h3>🔹 17. Formulario: Validar 2 contraseñas iguales</h3>
+            <div class="demo-en-vivo">
+                <span class="demo-etiqueta">👇 Pon contraseñas distintas y dale a enviar 👇</span>
+                <form id="demo-form-examen" style="background:#fff; padding:15px; border-radius:6px; border:1px solid #ccc; max-width:250px;">
+                    <input type="password" id="demo-pass1" required placeholder="Pass 1" style="width:100%; margin-bottom:5px;"><br>
+                    <input type="password" id="demo-pass2" required placeholder="Repetir Pass" style="width:100%; margin-bottom:5px;"><br>
+                    <button type="submit" style="width:100%;">Enviar</button>
+                    <div id="demo-error-msg" style="color:red; margin-top:5px; font-weight:bold; display:none; font-size:12px;">¡No coinciden!</div>
+                    <div id="demo-success-msg" style="color:green; margin-top:5px; font-weight:bold; display:none; font-size:12px;">¡Todo OK!</div>
+                </form>
+            </div>
+<pre>
+&lt;!-- HTML --&gt;
+&lt;form id="form-registro"&gt;
+    &lt;input type="password" id="pass1" required&gt;
+    &lt;input type="password" id="pass2" required&gt;
+    &lt;button type="submit"&gt;Registrar&lt;/button&gt;
+    &lt;p id="error-msg" style="color:red; display:none;"&gt;Las contraseñas no coinciden&lt;/p&gt;
+&lt;/form&gt;
+
+&lt;script&gt;
+// PEGAR DENTRO DEL $(document).ready()
+$("#form-registro").on("submit", function(e) {
+    let p1 = $("#pass1").val();
+    let p2 = $("#pass2").val();
+    
+    if (p1 !== p2) {
+        e.preventDefault(); // Evita que el formulario se envíe a otra página
+        $("#error-msg").slideDown(); // Muestra el mensaje rojo
+    }
+});
+&lt;/script&gt;
+</pre>
+
+            <h3>🔹 18. Canvas Avanzado: Gráfico Circular (Pie Chart)</h3>
+            <div class="demo-en-vivo">
+                <span class="demo-etiqueta">👇 Dibujado con Radianes (Math.PI) 👇</span>
+                <canvas id="demo-canvasPie" width="150" height="150" style="background:#fff; border-radius:50%; box-shadow:0 4px 10px rgba(0,0,0,0.1);"></canvas>
+            </div>
+<pre>
+&lt;!-- HTML --&gt;
+&lt;canvas id="canvasPie" width="200" height="200"&gt;&lt;/canvas&gt;
+
+&lt;!-- JS FUERA DE JQUERY --&gt;
+&lt;script&gt;
+  const ctxP = document.getElementById("canvasPie").getContext("2d");
+  
+  // Fórmula: arc(x, y, radio, anguloInicio, anguloFin)
+  // Math.PI es media vuelta (180 grados). Math.PI * 2 es vuelta entera (360)
+  
+  // Mitad Azul (0 a 180 grados)
+  ctxP.beginPath();
+  ctxP.moveTo(100, 100); // Mueve el lápiz al centro exacto
+  ctxP.arc(100, 100, 100, 0, Math.PI, false); 
+  ctxP.fillStyle = "#3498db";
+  ctxP.fill();
+
+  // Mitad Roja (180 a 360 grados)
+  ctxP.beginPath();
+  ctxP.moveTo(100, 100);
+  ctxP.arc(100, 100, 100, Math.PI, Math.PI * 2, false); 
+  ctxP.fillStyle = "#e74c3c";
+  ctxP.fill();
+&lt;/script&gt;
+</pre>
+
+        </div>
+    </section>
+
+    <div style="height: 100px;"></div>
+</main>
+
+<script>
+// ==========================================
+// SCRIPT PARA HACER FUNCIONAR LAS DEMOS EN VIVO
+// ==========================================
+$(document).ready(function() {
+    // Demo 4: Video
+    const vid = document.getElementById("demo-vid");
+    const barraP = document.getElementById("demo-barra-progreso");
+    const barraF = document.getElementById("demo-barra-fondo");
+    if(vid) {
+        vid.addEventListener("timeupdate", () => {
+            let porcentaje = (vid.currentTime / vid.duration) * 100;
+            barraP.style.width = porcentaje + "%";
+        });
+        barraF.addEventListener("click", (e) => {
+            let nuevoTiempo = (e.offsetX / barraF.offsetWidth) * vid.duration;
+            vid.currentTime = nuevoTiempo;
+        });
+    }
+
+    // Demo 5: Canvas
+    const canvasGraf = document.getElementById("demo-graf");
+    if(canvasGraf) {
+        const ctxGraf = canvasGraf.getContext("2d");
+        const ventas = [30, 80, 50, 100];
+        let posX = 15;
+        for (let i = 0; i < ventas.length; i++) {
+            let alto = ventas[i];
+            let posY = 150 - alto; 
+            ctxGraf.fillStyle = "#e74c3c";
+            ctxGraf.fillRect(posX, posY, 30, alto);
+            posX += 50; 
+        }
+    }
+
+    // Demo 7: Buscador
+    $("#demo-buscador").on("keyup", function() {
+        let v = $(this).val().toLowerCase(); 
+        $("#demo-lista li").filter(function() {
+            $(this).toggle($(this).text().toLowerCase().indexOf(v) > -1);
+        });
+    });
+
+    // Demo 8: Acordeon
+    $(".demo-titulo-acordeon").click(function() {
+        $(".demo-contenido-acordeon").slideUp();
+        $(this).next(".demo-contenido-acordeon").stop().slideToggle();
+    });
+    // Demo 9: Galeria
+    $(".demo-miniatura").click(function() {
+        $("#demo-foto-principal").attr("src", $(this).attr("src"));
+    });
+
+    // Demo 10: LocalStorage
+    if (localStorage.getItem("modo_demo") === "oscuro") {
+        $("#demo-caja-noche-local").addClass("demo-clase-oscura");
+    }
+    $("#demo-btn-noche-local").click(function() {
+        $("#demo-caja-noche-local").toggleClass("demo-clase-oscura");
+        if ($("#demo-caja-noche-local").hasClass("demo-clase-oscura")) {
+            localStorage.setItem("modo_demo", "oscuro");
+        } else {
+            localStorage.setItem("modo_demo", "claro");
+        }
+    });
+
+    // Demo 11: Scroll Subir
+    $("#demo-scroll-caja").scroll(function() {
+        if ($(this).scrollTop() > 50) {
+            $("#demo-btn-subir").fadeIn();
+        } else {
+            $("#demo-btn-subir").fadeOut();
+        }
+    });
+    $("#demo-btn-subir").click(function() {
+        $("#demo-scroll-caja").animate({ scrollTop: 0 }, "fast");
+    });
+
+    // Demo 12: Carrusel
+    const fotosDemo = [
+        "https://via.placeholder.com/300x150/f1c40f/000000?text=FOTO+1", 
+        "https://via.placeholder.com/300x150/9b59b6/ffffff?text=FOTO+2", 
+        "https://via.placeholder.com/300x150/34495e/ffffff?text=FOTO+3"
+    ];
+    let indiceDemo = 0;
+    setInterval(function() {
+        indiceDemo++;
+        if (indiceDemo >= fotosDemo.length) indiceDemo = 0;
+        $("#demo-carrusel").fadeOut(200, function() {
+            $(this).attr("src", fotosDemo[indiceDemo]).fadeIn(200);
+        });
+    }, 3000);
+
+    // Demo 13: Cuenta Atras
+    let tiempoDemo = 10;
+    let timerDemo = setInterval(function() {
+        tiempoDemo--;
+        $("#demo-reloj").text(tiempoDemo);
+        if (tiempoDemo <= 0) {
+            clearInterval(timerDemo);
+            $("#demo-reloj").text("¡TIEMPO AGOTADO!");
+        }
+    }, 1000);
+
+    // Demo 14: Canvas Teclado
+    const canvasJuego = document.getElementById("demo-lienzoJuego");
+    if(canvasJuego) {
+        const ctxJuego = canvasJuego.getContext("2d");
+        let dX = 85, dY = 85;
+        function dibujarJ() {
+            ctxJuego.clearRect(0, 0, 200, 200);
+            ctxJuego.fillStyle = "purple";
+            ctxJuego.fillRect(dX, dY, 30, 30);
+        }
+        canvasJuego.addEventListener("keydown", function(e) {
+            e.preventDefault(); // Evitar scroll de la pagina
+            if (e.key === "ArrowUp") dY -= 10;
+            if (e.key === "ArrowDown") dY += 10;
+            if (e.key === "ArrowLeft") dX -= 10;
+            if (e.key === "ArrowRight") dX += 10;
+            dibujarJ();
+        });
+        dibujarJ();
+    }
+
+    // Demo 15: Accesibilidad
+    let tamanoDemo = 16;
+    $("#demo-btn-aumentar").click(function() {
+        tamanoDemo += 2;
+        $("#demo-texto-acc").css("font-size", tamanoDemo + "px");
+    });
+    $("#demo-btn-reducir").click(function() {
+        tamanoDemo -= 2;
+        $("#demo-texto-acc").css("font-size", tamanoDemo + "px");
+    });
+
+    // Demo 17: Validacion Passwords
+    $("#demo-form-examen").on("submit", function(e) {
+        e.preventDefault(); 
+        let p1 = $("#demo-pass1").val();
+        let p2 = $("#demo-pass2").val();
+        if(p1 !== p2) {
+            $("#demo-error-msg").slideDown(); 
+            $("#demo-success-msg").slideUp();
+        } else {
+            $("#demo-error-msg").slideUp();
+            $("#demo-success-msg").slideDown();
+        }
+    });
+
+    // Demo 18: Canvas Pie Chart
+    const canvasPie = document.getElementById("demo-canvasPie");
+    if (canvasPie) {
+        const ctxP = canvasPie.getContext("2d");
+        ctxP.beginPath();
+        ctxP.moveTo(75, 75);
+        ctxP.arc(75, 75, 75, 0, Math.PI, false);
+        ctxP.fillStyle = "#3498db";
+        ctxP.fill();
+        ctxP.beginPath();
+        ctxP.moveTo(75, 75);
+        ctxP.arc(75, 75, 75, Math.PI, Math.PI * 2, false);
+        ctxP.fillStyle = "#e74c3c";
+        ctxP.fill();
+    }
+});
+
+// Demo 16: Drag and Drop (Fuera de document.ready por diseño inline events)
+function demoArrastrar(e) { e.dataTransfer.setData("demo_caja", e.target.id); }
+function demoPermitir(e) { e.preventDefault(); }
+function demoSoltar(e) {
+    e.preventDefault();
+    let id = e.dataTransfer.getData("demo_caja");
+    e.target.appendChild(document.getElementById(id));
+    e.target.style.borderStyle = "solid";
+    e.target.style.borderColor = "#28a745";
+}
+</script>
+</body>
+</html>

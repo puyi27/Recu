@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Simulacro Examen DIW</title>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+<style>
+  body { 
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; 
+      padding: 20px; 
+      background: #f4f4f9; 
+      color: #333;
+  }
+  h1 { text-align: center; color: #2c3e50; }
+  .ejercicio { 
+      background: white; 
+      padding: 25px; 
+      margin-bottom: 25px; 
+      border-radius: 8px; 
+      border-left: 6px solid #e74c3c; 
+      box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+  }
+  .solucion { 
+      display: none; 
+      background: #2d2d2d; 
+      color: #a6e22e; 
+      padding: 15px; 
+      margin-top: 15px; 
+      border-radius: 5px; 
+      font-family: Consolas, monospace;
+      white-space: pre-wrap;
+  }
+  .btn-sol { 
+      background: #34495e; 
+      color: white; 
+      border: none; 
+      padding: 8px 15px; 
+      border-radius: 4px; 
+      cursor: pointer; 
+      margin-top: 20px;
+      transition: background 0.3s;
+  }
+  .btn-sol:hover { background: #2c3e50; }
+  
+  /* =================================================== */
+  /* ESPACIO PARA TU CSS (EJERCICIO 1 y EJERCICIO 3)     */
+  /* =================================================== */
+  
+  #galeria-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 15px;
+  }
+  
+  .noche {
+      background-color: #222 !important;
+      color: #fff !important;
+  }
+</style>
+</head>
+<body>
+
+<h1>⏰ SIMULACRO DE EXAMEN (Tiempo: 45 min)</h1>
+<p style="text-align: center; font-size:1.1em;">
+    <strong>Instrucciones:</strong> Abre este archivo en VS Code y el navegador. <br>
+    Modifica el bloque <code>&lt;style&gt;</code> y el bloque <code>&lt;script&gt;</code> que hay vacíos usando tus chuletas.<br>
+    Pulsa "Ver Solución" <strong>solo</strong> para autocorregirte.
+</p>
+
+<!-- =================================================== -->
+<!-- EJERCICIO 1: CSS GRID -->
+<!-- =================================================== -->
+<div class="ejercicio">
+  <h2>Ejercicio 1: CSS Grid (2.5 ptos)</h2>
+  <p><strong>Tarea:</strong> Ve arriba a la etiqueta <code>&lt;style&gt;</code>. Selecciona el contenedor <code>#galeria-grid</code>. Usa <strong>CSS Grid</strong> para que las cajas formen un diseño adaptable (mínimo 200px de ancho y que se repartan el espacio sobrante). Deja un hueco (gap) de 15px entre cajas. <em>¡Sin usar media queries!</em></p>
+  
+  <div id="galeria-grid">
+    <div style="background: #e74c3c; height:100px; color:white; display:flex; align-items:center; justify-content:center; font-size:24px;">1</div>
+    <div style="background: #3498db; height:100px; color:white; display:flex; align-items:center; justify-content:center; font-size:24px;">2</div>
+    <div style="background: #2ecc71; height:100px; color:white; display:flex; align-items:center; justify-content:center; font-size:24px;">3</div>
+    <div style="background: #f1c40f; height:100px; color:white; display:flex; align-items:center; justify-content:center; font-size:24px;">4</div>
+  </div>
+  
+  <button class="btn-sol" onclick="$(this).next().slideToggle()">👁️ Ver Solución Ejercicio 1</button>
+  <div class="solucion">
+#galeria-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 15px;
+}
+  </div>
+</div>
+
+
+<!-- =================================================== -->
+<!-- EJERCICIO 2: VALIDACIÓN FORMULARIO (JQUERY) -->
+<!-- =================================================== -->
+<div class="ejercicio">
+  <h2>Ejercicio 2: Validación Formulario (2.5 ptos)</h2>
+  <p><strong>Tarea:</strong> Baja a la etiqueta <code>&lt;script&gt;</code>. Captura el evento <code>submit</code> del formulario. Evita que la página se recargue (pista: preventDefault). Si el campo de la clave está vacío, muestra (fadeIn) el texto de error. Si está relleno, escóndelo.</p>
+  
+  <form id="form-examen" style="padding:10px; border:1px solid #ccc;">
+    <input type="password" id="clave-acceso" placeholder="Mínimo 6 caracteres...">
+    <button type="submit" id="btn-enviar">Entrar</button>
+    <br><br>
+    <span id="error-texto" style="color:red; display:none; font-weight:bold;">❌ ¡La clave no puede estar vacía!</span>
+  </form>
+
+  <button class="btn-sol" onclick="$(this).next().slideToggle()">👁️ Ver Solución Ejercicio 2</button>
+  <div class="solucion">
+$("#form-examen").submit(function(e) {
+    e.preventDefault(); // Evita que la página parpadee o se recargue
+
+    let clave = $("#clave-acceso").val();
+    
+    if (clave === "") {
+        $("#error-texto").fadeIn();
+    } else {
+        $("#error-texto").fadeOut();
+        alert("¡Clave correcta!");
+    }
+});
+  </div>
+</div>
+
+
+<!-- =================================================== -->
+<!-- EJERCICIO 3: MANIPULACIÓN DOM / CLASES -->
+<!-- =================================================== -->
+<div class="ejercicio">
+  <h2>Ejercicio 3: Modo Noche / Manipulación de Clases (2.5 ptos)</h2>
+  <p><strong>Tarea:</strong> Crea la lógica en jQuery para que al pulsar el botón "Modo Noche", a este mismo div (id="caja-noche") se le añada o quite la clase CSS llamada <code>.noche</code> (esta clase deberás crearla en el <code>&lt;style&gt;</code> dándole fondo negro y color blanco). Pista: <code>toggleClass</code>.</p>
+  
+  <div id="caja-noche" style="padding:20px; border:1px solid #999; margin-bottom:10px; transition: 0.4s;">
+      Este texto cambiará a modo noche cuando pulses el botón.
+  </div>
+  <button id="btn-noche">Modo Noche</button>
+
+  <button class="btn-sol" onclick="$(this).next().slideToggle()">👁️ Ver Solución Ejercicio 3</button>
+  <div class="solucion">
+// EN LA ETIQUETA &lt;style&gt;
+.noche {
+    background-color: #222 !important;
+    color: #fff !important;
+}
+
+// EN LA ETIQUETA &lt;script&gt;
+$("#btn-noche").click(function() {
+    $("#caja-noche").toggleClass("noche");
+});
+  </div>
+</div>
+
+
+<!-- =================================================== -->
+<!-- EJERCICIO 4: API CANVAS -->
+<!-- =================================================== -->
+<div class="ejercicio">
+  <h2>Ejercicio 4: API Canvas (2.5 ptos)</h2>
+  <p><strong>Tarea:</strong> Usando Javascript Vanilla (sin jQuery), captura el canvas. Dibuja un rectángulo azul (fill) que empiece en la coordenada 20,20 y mida 100 de ancho y 50 de alto.</p>
+  
+  <canvas id="mi-canvas" width="300" height="150" style="border:2px dashed #95a5a6; background:#fff;"></canvas>
+
+  <button class="btn-sol" onclick="$(this).next().slideToggle()">👁️ Ver Solución Ejercicio 4</button>
+  <div class="solucion">
+let ctx = document.getElementById("mi-canvas").getContext("2d");
+
+ctx.fillStyle = "blue";
+ctx.fillRect(20, 20, 100, 50); // x, y, ancho, alto
+  </div>
+</div>
+
+
+<!-- =================================================== -->
+<!-- ESPACIO PARA TU JAVASCRIPT                          -->
+<!-- =================================================== -->
+<script>
+  // Recuerda meter la lógica de jQuery dentro del document ready
+  $(document).ready(function() {
+      
+      // Ejercicio 2: Validación Formulario
+      $("#form-examen").submit(function(e) {
+          e.preventDefault(); // Evita que la página parpadee o se recargue
+
+          let clave = $("#clave-acceso").val();
+          
+          if (clave === "") {
+              $("#error-texto").fadeIn();
+          } else {
+              $("#error-texto").fadeOut();
+              alert("¡Clave correcta!");
+          }
+      });
+
+      // Ejercicio 3: Toggle Class Modo Noche
+      $("#btn-noche").click(function() {
+          $("#caja-noche").toggleClass("noche");
+      });
+
+  });
+  
+  // Ejercicio 4: Canvas (Puede ir fuera del ready)
+  let ctx = document.getElementById("mi-canvas").getContext("2d");
+
+  ctx.fillStyle = "blue";
+  ctx.fillRect(20, 20, 100, 50); // x, y, ancho, alto
+</script>
+
+</body>
+</html>
